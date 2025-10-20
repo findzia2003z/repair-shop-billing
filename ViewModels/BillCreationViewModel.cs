@@ -161,6 +161,104 @@ namespace RepairShopBilling.ViewModels
             BillItems.Remove(item);
         }
 
+        public void AddServiceToBill(string serviceName, decimal price)
+        {
+            var billItem = new BillItem
+            {
+                Description = serviceName,
+                Quantity = 1,
+                UnitPrice = price
+            };
+
+            BillItems.Add(billItem);
+        }
+
+        public async Task ShowPriceInputDialog(string serviceName)
+        {
+            var app = Microsoft.UI.Xaml.Application.Current as App;
+            var dialog = new ContentDialog
+            {
+                Title = $"Enter Price for {serviceName}",
+                PrimaryButtonText = "Add",
+                CloseButtonText = "Cancel",
+                DefaultButton = ContentDialogButton.Primary,
+                XamlRoot = app?.MainWindow?.Content.XamlRoot
+            };
+
+            var stackPanel = new StackPanel { Spacing = 16 };
+
+            // Price Input
+            var priceLabel = new TextBlock 
+            { 
+                Text = "Price:", 
+                Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.Black),
+                FontSize = 14 
+            };
+            var priceTextBox = new TextBox 
+            { 
+                PlaceholderText = "Enter price (e.g., 25.00)",
+                MinWidth = 300
+            };
+
+            // Quantity Input
+            var quantityLabel = new TextBlock 
+            { 
+                Text = "Quantity:", 
+                Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.Black),
+                FontSize = 14 
+            };
+            var quantityTextBox = new TextBox 
+            { 
+                PlaceholderText = "Enter quantity (default: 1)",
+                Text = "1",
+                MinWidth = 300
+            };
+
+            stackPanel.Children.Add(priceLabel);
+            stackPanel.Children.Add(priceTextBox);
+            stackPanel.Children.Add(quantityLabel);
+            stackPanel.Children.Add(quantityTextBox);
+
+            dialog.Content = stackPanel;
+
+            // Validation and adding service
+            dialog.PrimaryButtonClick += (sender, args) =>
+            {
+                args.Cancel = true; // Prevent dialog from closing initially
+
+                if (!decimal.TryParse(priceTextBox.Text, out decimal price) || price <= 0)
+                {
+                    // TODO: Show validation error for price
+                    return;
+                }
+
+                if (!int.TryParse(quantityTextBox.Text, out int quantity) || quantity <= 0)
+                {
+                    quantity = 1; // Default to 1 if invalid
+                }
+
+                // Add the service with custom price
+                var billItem = new BillItem
+                {
+                    Description = serviceName,
+                    Quantity = quantity,
+                    UnitPrice = price
+                };
+
+                BillItems.Add(billItem);
+                args.Cancel = false; // Allow dialog to close
+            };
+
+            try
+            {
+                await dialog.ShowAsync();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error showing price input dialog: {ex.Message}");
+            }
+        }
+
         private void OnServiceSelected(object sender, RoutedEventArgs e)
         {
             if (sender is Button button && button.Tag is Service service)

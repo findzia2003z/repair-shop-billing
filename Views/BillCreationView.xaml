@@ -93,74 +93,336 @@
 
             <!-- Service Categories Section -->
             <Border Grid.Row="2" Style="{StaticResource BillCard}" Margin="0,0,0,20">
-                <StackPanel Spacing="16">
-                    <TextBlock 
-                        Text="Service Categories" 
-                        Foreground="{StaticResource WhiteTextBrush}"
-                        FontSize="18"
-                        FontWeight="SemiBold" />
-                    
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                    <StackPanel Spacing="16">
+                        <TextBlock 
+                            Text="Service Categories" 
+                            Foreground="{StaticResource WhiteTextBrush}"
+                            FontSize="18"
+                            FontWeight="SemiBold" />
                         
-                        <!-- First Row of Categories -->
-                        <Grid Grid.Row="0" Margin="0,0,0,12">
+                        <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
                             
-                            <Button Grid.Column="0" Style="{StaticResource RedAccentButton}" 
-                                    Content="HOURS" Margin="0,0,6,0"
-                                    Click="OnServiceCategoryClick" Tag="HOURS" />
-                            <Button Grid.Column="1" Style="{StaticResource RedAccentButton}" 
-                                    Content="EQUIPMENT" Margin="6,0,6,0"
-                                    Click="OnServiceCategoryClick" Tag="EQUIPMENT" />
-                            <Button Grid.Column="2" Style="{StaticResource RedAccentButton}" 
-                                    Content="WIN 11 PRO" Margin="6,0,6,0"
-                                    Click="OnServiceCategoryClick" Tag="WIN 11 PRO" />
-                            <Button Grid.Column="3" Style="{StaticResource RedAccentButton}" 
-                                    Content="OS X" Margin="6,0,6,0"
-                                    Click="OnServiceCategoryClick" Tag="OS X" />
-                            <Button Grid.Column="4" Style="{StaticResource RedAccentButton}" 
-                                    Content="DRIVERS" Margin="6,0,0,0"
-                                    Click="OnServiceCategoryClick" Tag="DRIVERS" />
-                        </Grid>
-                        
-                        <!-- Second Row of Categories -->
-                        <Grid Grid.Row="1">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
+                            <!-- Hours Section -->
+                            <StackPanel Grid.Column="0" Grid.Row="0" Margin="5">
+                                <Button Content="Hours" 
+                                       Background="#E53E3E" 
+                                       Foreground="White"
+                                       FontWeight="Bold"
+                                       FontSize="16"
+                                       Height="50"
+                                       HorizontalAlignment="Stretch"
+                                       Click="OnServiceClick"
+                                       Tag="Hours - Red|50"/>
+                                <Button Content="Hours" 
+                                       Background="#3182CE" 
+                                       Foreground="White"
+                                       FontWeight="Bold"
+                                       FontSize="16"
+                                       Height="50"
+                                       HorizontalAlignment="Stretch"
+                                       Margin="0,2,0,0"
+                                       Click="OnServiceClick"
+                                       Tag="Hours - Blue|75"/>
+                            </StackPanel>
                             
-                            <Button Grid.Column="0" Style="{StaticResource RedAccentButton}" 
-                                    Content="VHS CONVERT" Margin="0,0,6,0"
-                                    Click="OnServiceCategoryClick" Tag="VHS CONVERT" />
-                            <Button Grid.Column="1" Style="{StaticResource RedAccentButton}" 
-                                    Content="DATA REC." Margin="6,0,6,0"
-                                    Click="OnServiceCategoryClick" Tag="DATA REC." />
-                            <Button Grid.Column="2" Style="{StaticResource RedAccentButton}" 
-                                    Content="PHOTO PRINT" Margin="6,0,6,0"
-                                    Click="OnServiceCategoryClick" Tag="PHOTO PRINT" />
-                            <Button Grid.Column="3" Style="{StaticResource RedAccentButton}" 
-                                    Content="LASER" Margin="6,0,6,0"
-                                    Click="OnServiceCategoryClick" Tag="LASER" />
-                            <Button Grid.Column="4" Style="{StaticResource RedAccentButton}" 
-                                    Content="CUSTOM" Margin="6,0,0,0"
-                                    Click="OnServiceCategoryClick" Tag="CUSTOM" />
+                            <!-- VHS Convert Section -->
+                            <StackPanel Grid.Column="0" Grid.Row="1" Margin="5">
+                                <Button Content="VHS Convert" 
+                                       Background="#E53E3E" 
+                                       Foreground="White"
+                                       FontWeight="Bold"
+                                       FontSize="16"
+                                       Height="50"
+                                       HorizontalAlignment="Stretch"
+                                       Click="OnServiceClick"
+                                       Tag="VHS Convert - Red|10"/>
+                                <Button Content="VHS Convert" 
+                                       Background="#3182CE" 
+                                       Foreground="White"
+                                       FontWeight="Bold"
+                                       FontSize="16"
+                                       Height="50"
+                                       HorizontalAlignment="Stretch"
+                                       Margin="0,2,0,0"
+                                       Click="OnServiceClick"
+                                       Tag="VHS Convert - Blue|5"/>
+                            </StackPanel>
+                            
+                            <!-- Photo Print Section -->
+                            <StackPanel Grid.Column="0" Grid.Row="2" Margin="5">
+                                <Button Content="Photo Print" 
+                                       Background="#E53E3E" 
+                                       Foreground="White"
+                                       FontWeight="Bold"
+                                       FontSize="16"
+                                       Height="50"
+                                       HorizontalAlignment="Stretch"/>
+                                <StackPanel Background="Black" Margin="0,2,0,0">
+                                    <Button Content="B&amp;W" 
+                                           Background="Black" 
+                                           Foreground="White"
+                                           FontWeight="Bold"
+                                           FontSize="14"
+                                           Height="40"
+                                           HorizontalAlignment="Stretch"
+                                           BorderThickness="0"
+                                           Click="OnServiceClick"
+                                           Tag="Photo Print B&amp;W|20"/>
+                                    <Button Content="COLOR" 
+                                           Background="Black" 
+                                           Foreground="White"
+                                           FontWeight="Bold"
+                                           FontSize="14"
+                                           Height="40"
+                                           HorizontalAlignment="Stretch"
+                                           BorderThickness="0"
+                                           Click="OnServiceClick"
+                                           Tag="Photo Print Color|30"/>
+                                </StackPanel>
+                            </StackPanel>
+                            
+                            <!-- OS X Section -->
+                            <StackPanel Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Margin="5">
+                                <Button Content="OS X" 
+                                       Background="#E53E3E" 
+                                       Foreground="White"
+                                       FontWeight="Bold"
+                                       FontSize="16"
+                                       Height="50"
+                                       HorizontalAlignment="Stretch"/>
+                                <StackPanel Background="Black" Margin="0,2,0,0">
+                                    <Button Content="Big Sur 11 (20)" 
+                                           Background="Black" 
+                                           Foreground="White"
+                                           FontWeight="Bold"
+                                           FontSize="14"
+                                           Height="35"
+                                           HorizontalAlignment="Stretch"
+                                           BorderThickness="0"
+                                           Click="OnServiceClick"
+                                           Tag="Big Sur 11 (20)|30"/>
+                                    <Button Content="Monterey 12 (21)" 
+                                           Background="Black" 
+                                           Foreground="White"
+                                           FontWeight="Bold"
+                                           FontSize="14"
+                                           Height="35"
+                                           HorizontalAlignment="Stretch"
+                                           BorderThickness="0"
+                                           Click="OnServiceClick"
+                                           Tag="Monterey 12 (21)|30"/>
+                                    <Button Content="Ventura 13 (22)" 
+                                           Background="Black" 
+                                           Foreground="White"
+                                           FontWeight="Bold"
+                                           FontSize="14"
+                                           Height="35"
+                                           HorizontalAlignment="Stretch"
+                                           BorderThickness="0"
+                                           Click="OnServiceClick"
+                                           Tag="Ventura 13 (22)|30"/>
+                                    <Button Content="Sonoma 14 (23)" 
+                                           Background="Black" 
+                                           Foreground="White"
+                                           FontWeight="Bold"
+                                           FontSize="14"
+                                           Height="35"
+                                           HorizontalAlignment="Stretch"
+                                           BorderThickness="0"
+                                           Click="OnServiceClick"
+                                           Tag="Sonoma 14 (23)|30"/>
+                                    <Button Content="Sequoia 15 (24)" 
+                                           Background="Black" 
+                                           Foreground="White"
+                                           FontWeight="Bold"
+                                           FontSize="14"
+                                           Height="35"
+                                           HorizontalAlignment="Stretch"
+                                           BorderThickness="0"
+                                           Click="OnServiceClick"
+                                           Tag="Sequoia 15 (24)|30"/>
+                                    <Button Content="Tahoe 26 (25)" 
+                                           Background="Black" 
+                                           Foreground="White"
+                                           FontWeight="Bold"
+                                           FontSize="14"
+                                           Height="35"
+                                           HorizontalAlignment="Stretch"
+                                           BorderThickness="0"
+                                           Click="OnServiceClick"
+                                           Tag="Tahoe 26 (25)|30"/>
+                                </StackPanel>
+                            </StackPanel>
+                            
+                            <!-- Laser Section -->
+                            <StackPanel Grid.Column="1" Grid.Row="2" Margin="5">
+                                <Button Content="LASER" 
+                                       Background="#E53E3E" 
+                                       Foreground="White"
+                                       FontWeight="Bold"
+                                       FontSize="16"
+                                       Height="50"
+                                       HorizontalAlignment="Stretch"/>
+                                <StackPanel Background="Black" Margin="0,2,0,0">
+                                    <Button Content="Materials" 
+                                           Background="Black" 
+                                           Foreground="White"
+                                           FontWeight="Bold"
+                                           FontSize="14"
+                                           Height="35"
+                                           HorizontalAlignment="Stretch"
+                                           BorderThickness="0"
+                                           Click="OnEditablePriceServiceClick"
+                                           Tag="Materials"/>
+                                    <Button Content="Packaging" 
+                                           Background="Black" 
+                                           Foreground="White"
+                                           FontWeight="Bold"
+                                           FontSize="14"
+                                           Height="35"
+                                           HorizontalAlignment="Stretch"
+                                           BorderThickness="0"
+                                           Click="OnEditablePriceServiceClick"
+                                           Tag="Packaging"/>
+                                    <Button Content="Time Mark" 
+                                           Background="Black" 
+                                           Foreground="White"
+                                           FontWeight="Bold"
+                                           FontSize="14"
+                                           Height="35"
+                                           HorizontalAlignment="Stretch"
+                                           BorderThickness="0"
+                                           Click="OnEditablePriceServiceClick"
+                                           Tag="Time Mark"/>
+                                    <Button Content="Time Engrave" 
+                                           Background="Black" 
+                                           Foreground="White"
+                                           FontWeight="Bold"
+                                           FontSize="14"
+                                           Height="35"
+                                           HorizontalAlignment="Stretch"
+                                           BorderThickness="0"
+                                           Click="OnEditablePriceServiceClick"
+                                           Tag="Time Engrave"/>
+                                </StackPanel>
+                            </StackPanel>
+                            
+                            <!-- Equipment Section -->
+                            <StackPanel Grid.Column="2" Grid.Row="0" Grid.RowSpan="3" Margin="5">
+                                <Button Content="Equipment" 
+                                       Background="#E53E3E" 
+                                       Foreground="White"
+                                       FontWeight="Bold"
+                                       FontSize="16"
+                                       Height="50"
+                                       HorizontalAlignment="Stretch"/>
+                                <StackPanel Background="Black" Margin="0,2,0,0">
+                                    <Button Content="RAM" 
+                                           Background="Black" 
+                                           Foreground="White"
+                                           FontWeight="Bold"
+                                           FontSize="14"
+                                           Height="35"
+                                           HorizontalAlignment="Stretch"
+                                           BorderThickness="0"
+                                           Click="OnEditablePriceServiceClick"
+                                           Tag="RAM"/>
+                                    <Button Content="Laptop" 
+                                           Background="Black" 
+                                           Foreground="White"
+                                           FontWeight="Bold"
+                                           FontSize="14"
+                                           Height="35"
+                                           HorizontalAlignment="Stretch"
+                                           BorderThickness="0"
+                                           Click="OnEditablePriceServiceClick"
+                                           Tag="Laptop"/>
+                                    <Button Content="Desktop" 
+                                           Background="Black" 
+                                           Foreground="White"
+                                           FontWeight="Bold"
+                                           FontSize="14"
+                                           Height="35"
+                                           HorizontalAlignment="Stretch"
+                                           BorderThickness="0"
+                                           Click="OnEditablePriceServiceClick"
+                                           Tag="Desktop"/>
+                                    <Button Content="Modem" 
+                                           Background="Black" 
+                                           Foreground="White"
+                                           FontWeight="Bold"
+                                           FontSize="14"
+                                           Height="35"
+                                           HorizontalAlignment="Stretch"
+                                           BorderThickness="0"
+                                           Click="OnEditablePriceServiceClick"
+                                           Tag="Modem"/>
+                                    <Button Content="Router" 
+                                           Background="Black" 
+                                           Foreground="White"
+                                           FontWeight="Bold"
+                                           FontSize="14"
+                                           Height="35"
+                                           HorizontalAlignment="Stretch"
+                                           BorderThickness="0"
+                                           Click="OnEditablePriceServiceClick"
+                                           Tag="Router"/>
+                                    <Button Content="Monitor" 
+                                           Background="Black" 
+                                           Foreground="White"
+                                           FontWeight="Bold"
+                                           FontSize="14"
+                                           Height="35"
+                                           HorizontalAlignment="Stretch"
+                                           BorderThickness="0"
+                                           Click="OnEditablePriceServiceClick"
+                                           Tag="Monitor"/>
+                                    <Button Content="NVME" 
+                                           Background="Black" 
+                                           Foreground="White"
+                                           FontWeight="Bold"
+                                           FontSize="14"
+                                           Height="35"
+                                           HorizontalAlignment="Stretch"
+                                           BorderThickness="0"
+                                           Click="OnEditablePriceServiceClick"
+                                           Tag="NVME"/>
+                                    <Button Content="KB&amp;M" 
+                                           Background="Black" 
+                                           Foreground="White"
+                                           FontWeight="Bold"
+                                           FontSize="14"
+                                           Height="35"
+                                           HorizontalAlignment="Stretch"
+                                           BorderThickness="0"
+                                           Click="OnEditablePriceServiceClick"
+                                           Tag="KB&amp;M"/>
+                                    <Button Content="Sec. Camera" 
+                                           Background="Black" 
+                                           Foreground="White"
+                                           FontWeight="Bold"
+                                           FontSize="14"
+                                           Height="35"
+                                           HorizontalAlignment="Stretch"
+                                           BorderThickness="0"
+                                           Click="OnEditablePriceServiceClick"
+                                           Tag="Sec. Camera"/>
+                                </StackPanel>
+                            </StackPanel>
                         </Grid>
-                    </Grid>
-                </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
             </Border>
 
             <!-- Current Bill Section -->

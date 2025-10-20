@@ -508,49 +508,42 @@ public class DatabaseService : IDatabaseService
     {
         return new List<Service>
         {
-            // HOURS category
-            new Service { Name = "Labor Hour", Price = 75.00m, Category = "HOURS", IsActive = true },
+            // HOURS category - Fixed prices
+            new Service { Name = "Hours - Red", Price = 50.00m, Category = "HOURS", IsActive = true },
+            new Service { Name = "Hours - Blue", Price = 75.00m, Category = "HOURS", IsActive = true },
             
-            // EQUIPMENT category
-            new Service { Name = "RAM", Price = 50.00m, Category = "EQUIPMENT", IsActive = true },
-            new Service { Name = "Laptop", Price = 200.00m, Category = "EQUIPMENT", IsActive = true },
-            new Service { Name = "Desktop", Price = 150.00m, Category = "EQUIPMENT", IsActive = true },
-            new Service { Name = "Modem", Price = 80.00m, Category = "EQUIPMENT", IsActive = true },
-            new Service { Name = "Router", Price = 100.00m, Category = "EQUIPMENT", IsActive = true },
-            new Service { Name = "Monitor", Price = 120.00m, Category = "EQUIPMENT", IsActive = true },
-            new Service { Name = "NVME", Price = 90.00m, Category = "EQUIPMENT", IsActive = true },
-            new Service { Name = "KB&M", Price = 40.00m, Category = "EQUIPMENT", IsActive = true },
-            new Service { Name = "Sec. Camera", Price = 60.00m, Category = "EQUIPMENT", IsActive = true },
+            // VHS CONVERT category - Fixed prices
+            new Service { Name = "VHS Convert - Red", Price = 10.00m, Category = "VHS CONVERT", IsActive = true },
+            new Service { Name = "VHS Convert - Blue", Price = 5.00m, Category = "VHS CONVERT", IsActive = true },
             
-            // WIN 11 PRO category
-            new Service { Name = "Windows 11 Pro Installation", Price = 150.00m, Category = "WIN 11 PRO", IsActive = true },
+            // PHOTO PRINT category - Fixed prices
+            new Service { Name = "Photo Print B&W", Price = 20.00m, Category = "PHOTO PRINT", IsActive = true },
+            new Service { Name = "Photo Print Color", Price = 30.00m, Category = "PHOTO PRINT", IsActive = true },
             
-            // OS X category
-            new Service { Name = "Big Sur 11 (20)", Price = 100.00m, Category = "OS X", IsActive = true },
-            new Service { Name = "Monterey 12 (21)", Price = 100.00m, Category = "OS X", IsActive = true },
-            new Service { Name = "Ventura 13 (22)", Price = 100.00m, Category = "OS X", IsActive = true },
-            new Service { Name = "Sonoma 14 (23)", Price = 100.00m, Category = "OS X", IsActive = true },
-            new Service { Name = "Sequoia 15 (24)", Price = 100.00m, Category = "OS X", IsActive = true },
-            new Service { Name = "Tahoe 26 (25)", Price = 100.00m, Category = "OS X", IsActive = true },
+            // OS X category - All $30
+            new Service { Name = "Big Sur 11 (20)", Price = 30.00m, Category = "OS X", IsActive = true },
+            new Service { Name = "Monterey 12 (21)", Price = 30.00m, Category = "OS X", IsActive = true },
+            new Service { Name = "Ventura 13 (22)", Price = 30.00m, Category = "OS X", IsActive = true },
+            new Service { Name = "Sonoma 14 (23)", Price = 30.00m, Category = "OS X", IsActive = true },
+            new Service { Name = "Sequoia 15 (24)", Price = 30.00m, Category = "OS X", IsActive = true },
+            new Service { Name = "Tahoe 26 (25)", Price = 30.00m, Category = "OS X", IsActive = true },
             
-            // DRIVERS category
-            new Service { Name = "Driver Update", Price = 50.00m, Category = "DRIVERS", IsActive = true },
+            // LASER category - Editable prices (set to 0 for manual entry)
+            new Service { Name = "Materials", Price = 0.00m, Category = "LASER", IsActive = true },
+            new Service { Name = "Packaging", Price = 0.00m, Category = "LASER", IsActive = true },
+            new Service { Name = "Time Mark", Price = 0.00m, Category = "LASER", IsActive = true },
+            new Service { Name = "Time Engrave", Price = 0.00m, Category = "LASER", IsActive = true },
             
-            // VHS CONVERT category
-            new Service { Name = "VHS to Digital", Price = 25.00m, Category = "VHS CONVERT", IsActive = true },
-            
-            // DATA REC. category
-            new Service { Name = "Data Recovery", Price = 200.00m, Category = "DATA REC.", IsActive = true },
-            
-            // PHOTO PRINT category
-            new Service { Name = "B&W Print", Price = 0.50m, Category = "PHOTO PRINT", IsActive = true },
-            new Service { Name = "COLOR Print", Price = 1.00m, Category = "PHOTO PRINT", IsActive = true },
-            
-            // LASER category
-            new Service { Name = "Materials", Price = 10.00m, Category = "LASER", IsActive = true },
-            new Service { Name = "Packaging", Price = 5.00m, Category = "LASER", IsActive = true },
-            new Service { Name = "Time Mark", Price = 15.00m, Category = "LASER", IsActive = true },
-            new Service { Name = "Time Engrave", Price = 20.00m, Category = "LASER", IsActive = true }
+            // EQUIPMENT category - Editable prices (set to 0 for manual entry)
+            new Service { Name = "RAM", Price = 0.00m, Category = "EQUIPMENT", IsActive = true },
+            new Service { Name = "Laptop", Price = 0.00m, Category = "EQUIPMENT", IsActive = true },
+            new Service { Name = "Desktop", Price = 0.00m, Category = "EQUIPMENT", IsActive = true },
+            new Service { Name = "Modem", Price = 0.00m, Category = "EQUIPMENT", IsActive = true },
+            new Service { Name = "Router", Price = 0.00m, Category = "EQUIPMENT", IsActive = true },
+            new Service { Name = "Monitor", Price = 0.00m, Category = "EQUIPMENT", IsActive = true },
+            new Service { Name = "NVME", Price = 0.00m, Category = "EQUIPMENT", IsActive = true },
+            new Service { Name = "KB&M", Price = 0.00m, Category = "EQUIPMENT", IsActive = true },
+            new Service { Name = "Sec. Camera", Price = 0.00m, Category = "EQUIPMENT", IsActive = true }
         };
     }
 }

@@ -27,6 +27,27 @@ namespace RepairShopBilling.Views
             }
         }
 
+        private void OnServiceClick(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button button && button.Tag is string serviceInfo)
+            {
+                var parts = serviceInfo.Split('|');
+                if (parts.Length == 2 && decimal.TryParse(parts[1], out decimal price))
+                {
+                    var serviceName = parts[0];
+                    ViewModel.AddServiceToBill(serviceName, price);
+                }
+            }
+        }
+
+        private async void OnEditablePriceServiceClick(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button button && button.Tag is string serviceName)
+            {
+                await ViewModel.ShowPriceInputDialog(serviceName);
+            }
+        }
+
         private void OnRemoveItemClick(object sender, RoutedEventArgs e)
         {
             if (sender is Button button && button.Tag is BillItem item)

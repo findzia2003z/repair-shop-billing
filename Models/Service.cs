@@ -47,6 +47,11 @@ namespace RepairShopBilling.Models
             set => SetProperty(ref _isActive, value);
         }
 
+        /// <summary>
+        /// Indicates whether the price can be edited at runtime (true for services with Price = 0)
+        /// </summary>
+        public bool IsPriceEditable => Price == 0.00m;
+
         public Service()
         {
             IsActive = true;
