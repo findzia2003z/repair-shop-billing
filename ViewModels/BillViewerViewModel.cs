@@ -147,6 +147,14 @@ namespace RepairShopBilling.ViewModels
         }
 
         /// <summary>
+        /// Sets the current bill (used for preview functionality)
+        /// </summary>
+        public void SetCurrentBill(Bill bill)
+        {
+            SetBillForPreview(bill);
+        }
+
+        /// <summary>
         /// Refreshes the current bill from the database (if it's a saved bill)
         /// </summary>
         public async Task RefreshCurrentBillAsync()

@@ -29,16 +29,7 @@
                     Icon="List" />
             </NavigationView.MenuItems>
 
-            <NavigationView.Header>
-                <Grid Height="48">
-                    <TextBlock 
-                        x:Name="HeaderTextBlock"
-                        Text="Solid State Dave - Repair Shop Billing"
-                        Foreground="White"
-                        VerticalAlignment="Center"
-                        Margin="12,0,0,0" />
-                </Grid>
-            </NavigationView.Header>
+
 
             <Frame 
                 x:Name="ContentFrame"

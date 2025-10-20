@@ -25,15 +25,14 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <!-- Header -->
-            <TextBlock 
+            <!-- Header with Solid State Dave Logo -->
+            <Image 
                 Grid.Row="0"
-                Text="Create New Bill" 
-                Foreground="{StaticResource WhiteTextBrush}"
-                FontSize="24"
-                FontWeight="Bold"
+                Source="/Assets/Styles/Solid State Dave.png" 
+                Height="60"
                 Margin="0,0,0,20"
-                HorizontalAlignment="Left" />
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top" />
 
             <!-- Customer Information Section -->
             <Border Grid.Row="1" Style="{StaticResource BillCard}" Margin="0,0,0,20">
@@ -194,14 +193,19 @@
                             
                             <!-- OS X Section -->
                             <StackPanel Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Margin="5">
-                                <Button Content="OS X" 
+                                <Button x:Name="OSXHeaderButton"
+                                       Content="OS X ▼" 
                                        Background="#E53E3E" 
                                        Foreground="White"
                                        FontWeight="Bold"
                                        FontSize="16"
                                        Height="50"
-                                       HorizontalAlignment="Stretch"/>
-                                <StackPanel Background="Black" Margin="0,2,0,0">
+                                       HorizontalAlignment="Stretch"
+                                       Click="OnToggleOSXClick"/>
+                                <StackPanel x:Name="OSXSubPanel" 
+                                           Background="Black" 
+                                           Margin="0,2,0,0"
+                                           Visibility="Visible">
                                     <Button Content="Big Sur 11 (20)" 
                                            Background="Black" 
                                            Foreground="White"
@@ -267,14 +271,19 @@
                             
                             <!-- Laser Section -->
                             <StackPanel Grid.Column="1" Grid.Row="2" Margin="5">
-                                <Button Content="LASER" 
+                                <Button x:Name="LaserHeaderButton"
+                                       Content="LASER ▼" 
                                        Background="#E53E3E" 
                                        Foreground="White"
                                        FontWeight="Bold"
                                        FontSize="16"
                                        Height="50"
-                                       HorizontalAlignment="Stretch"/>
-                                <StackPanel Background="Black" Margin="0,2,0,0">
+                                       HorizontalAlignment="Stretch"
+                                       Click="OnToggleLaserClick"/>
+                                <StackPanel x:Name="LaserSubPanel" 
+                                           Background="Black" 
+                                           Margin="0,2,0,0"
+                                           Visibility="Visible">
                                     <Button Content="Materials" 
                                            Background="Black" 
                                            Foreground="White"
@@ -320,14 +329,19 @@
                             
                             <!-- Equipment Section -->
                             <StackPanel Grid.Column="2" Grid.Row="0" Grid.RowSpan="3" Margin="5">
-                                <Button Content="Equipment" 
+                                <Button x:Name="EquipmentHeaderButton"
+                                       Content="Equipment ▼" 
                                        Background="#E53E3E" 
                                        Foreground="White"
                                        FontWeight="Bold"
                                        FontSize="16"
                                        Height="50"
-                                       HorizontalAlignment="Stretch"/>
-                                <StackPanel Background="Black" Margin="0,2,0,0">
+                                       HorizontalAlignment="Stretch"
+                                       Click="OnToggleEquipmentClick"/>
+                                <StackPanel x:Name="EquipmentSubPanel" 
+                                           Background="Black" 
+                                           Margin="0,2,0,0"
+                                           Visibility="Visible">
                                     <Button Content="RAM" 
                                            Background="Black" 
                                            Foreground="White"

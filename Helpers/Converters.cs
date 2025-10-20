@@ -44,9 +44,9 @@ namespace RepairShopBilling.Helpers
         public object Convert(object value, Type targetType, object parameter, string language)
         {
             if (value is DateTime date)
-                return date.ToString("MMM dd, yyyy");
+                return date.ToString("M-dd-yy");
             if (value is DateTimeOffset dateOffset)
-                return dateOffset.ToString("MMM dd, yyyy");
+                return dateOffset.ToString("M-dd-yy");
             return value?.ToString() ?? "";
         }
 

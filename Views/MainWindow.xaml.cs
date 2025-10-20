@@ -83,19 +83,12 @@ namespace RepairShopBilling.Views
             try
             {
                 ContentFrame.Navigate(pageType);
-                UpdateHeaderText();
             }
             catch (Exception ex)
             {
                 // Handle navigation errors gracefully
                 System.Diagnostics.Debug.WriteLine($"Navigation failed: {ex.Message}");
             }
-        }
-
-        private void UpdateHeaderText()
-        {
-            string headerText = $"Solid State Dave - {ViewModel.CurrentViewTitle}";
-            HeaderTextBlock.Text = headerText;
         }
 
         public void NavigateToBillViewer(int billId = 0)

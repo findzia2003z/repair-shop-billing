@@ -7,6 +7,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
 using RepairShopBilling.Models;
 using RepairShopBilling.Services;
+using RepairShopBilling.Views;
 using Windows.UI.Text;
 
 namespace RepairShopBilling.ViewModels
@@ -33,15 +34,18 @@ namespace RepairShopBilling.ViewModels
         {
             _databaseService = databaseService ?? throw new ArgumentNullException(nameof(databaseService));
             BillItems = new ObservableCollection<BillItem>();
+            
+            SaveBillCommand = new RelayCommand(async () => await SaveBillAsync(), () => CanSaveBill);
+            PreviewBillCommand = new RelayCommand(PreviewBill, () => CanPreviewBill);
+            
             BillItems.CollectionChanged += (s, e) => 
             {
                 OnPropertyChanged(nameof(TotalAmount));
                 OnPropertyChanged(nameof(CanSaveBill));
                 OnPropertyChanged(nameof(CanPreviewBill));
+                ((RelayCommand)SaveBillCommand).RaiseCanExecuteChanged();
+                ((RelayCommand)PreviewBillCommand).RaiseCanExecuteChanged();
             };
-
-            SaveBillCommand = new RelayCommand(async () => await SaveBillAsync(), () => CanSaveBill);
-            PreviewBillCommand = new RelayCommand(PreviewBill, () => CanPreviewBill);
         }
 
         public string CustomerName
@@ -53,6 +57,8 @@ namespace RepairShopBilling.ViewModels
                 {
                     OnPropertyChanged(nameof(CanSaveBill));
                     OnPropertyChanged(nameof(CanPreviewBill));
+                    ((RelayCommand)SaveBillCommand).RaiseCanExecuteChanged();
+                    ((RelayCommand)PreviewBillCommand).RaiseCanExecuteChanged();
                 }
             }
         }
@@ -89,6 +95,7 @@ namespace RepairShopBilling.ViewModels
                     OnPropertyChanged(nameof(CanSaveBill));
                     OnPropertyChanged(nameof(CanPreviewBill));
                     ((RelayCommand)SaveBillCommand).RaiseCanExecuteChanged();
+                    ((RelayCommand)PreviewBillCommand).RaiseCanExecuteChanged();
                 }
             }
         }
@@ -363,9 +370,21 @@ namespace RepairShopBilling.ViewModels
                 Items = new ObservableCollection<BillItem>(BillItems)
             };
 
-            // TODO: Navigate to BillViewerView with the current bill
-            System.Diagnostics.Debug.WriteLine($"Preview bill for {CustomerName} with total {TotalAmount}");
+            // Store the bill for preview in a static location that BillViewerView can access
+            PreviewBillData = bill;
+
+            // Navigate to BillViewerView using the MainViewModel
+            var mainViewModel = MainWindow.GetMainViewModel();
+            if (mainViewModel != null)
+            {
+                mainViewModel.NavigateToBillViewer(0); // 0 for preview mode
+            }
         }
+
+        /// <summary>
+        /// Static property to hold preview bill data for navigation
+        /// </summary>
+        public static Bill? PreviewBillData { get; set; }
 
         private async Task ShowCustomServiceDialog()
         {

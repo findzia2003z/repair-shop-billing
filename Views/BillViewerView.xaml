@@ -5,21 +5,18 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:helpers="using:RepairShopBilling.Helpers"
     mc:Ignorable="d"
-    Background="{StaticResource DarkGreyBackgroundBrush}">
+    Background="Black">
 
     <Page.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Assets/Styles/AppStyles.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
+        <helpers:CurrencyConverter x:Key="CurrencyConverter" />
+        <helpers:ShortDateConverter x:Key="ShortDateConverter" />
     </Page.Resources>
 
     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-        <Grid Margin="40,20,40,40" MaxWidth="800">
+        <Grid Margin="20" MaxWidth="600">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -29,226 +26,21 @@
             </Grid.RowDefinitions>
 
             <!-- Header Section -->
-            <StackPanel Grid.Row="0" Margin="0,0,0,30">
-                <!-- Shop Name -->
-                <TextBlock 
-                    Text="Solid State Dave" 
-                    Foreground="{StaticResource WhiteTextBrush}"
-                    FontFamily="Segoe UI"
-                    FontSize="32"
-                    FontWeight="Bold"
-                    HorizontalAlignment="Center"
-                    Margin="0,0,0,20" />
-                
-                <!-- Bill Title -->
-                <TextBlock 
-                    Text="Service Invoice" 
-                    Foreground="{StaticResource LightGreyTextBrush}"
-                    FontFamily="Segoe UI"
-                    FontSize="18"
-                    FontWeight="SemiBold"
-                    HorizontalAlignment="Center"
-                    Margin="0,0,0,10" />
+            <StackPanel Grid.Row="0" Margin="0,20,0,30">
+                <!-- Company Logo -->
+                <Image Source="ms-appx:///Assets/Styles/Solid State Dave.png" 
+                       Height="80" 
+                       HorizontalAlignment="Center" 
+                       Stretch="Uniform" 
+                       Margin="0,0,0,10" />
             </StackPanel>
 
-            <!-- Customer Information Section -->
+            <!-- Customer Info Header -->
             <Border Grid.Row="1" 
-                    Background="{StaticResource LighterGreyBackgroundBrush}"
-                    CornerRadius="8"
-                    Padding="20"
-                    Margin="0,0,0,20">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    
-                    <!-- Customer Details -->
-                    <StackPanel Grid.Column="0" Spacing="8">
-                        <TextBlock 
-                            Text="Customer Information"
-                            Foreground="{StaticResource RedAccentBrush}"
-                            FontFamily="Segoe UI"
-                            FontSize="16"
-                            FontWeight="Bold"
-                            Margin="0,0,0,8" />
-                        
-                        <StackPanel Orientation="Horizontal" Spacing="8">
-                            <TextBlock 
-                                Text="Name:"
-                                Foreground="{StaticResource LightGreyTextBrush}"
-                                FontFamily="Segoe UI"
-                                FontSize="14"
-                                FontWeight="SemiBold"
-                                MinWidth="60" />
-                            <TextBlock 
-                                Text="{Binding CurrentBill.CustomerName}"
-                                Foreground="{StaticResource WhiteTextBrush}"
-                                FontFamily="Segoe UI"
-                                FontSize="14" />
-                        </StackPanel>
-                        
-                        <StackPanel Orientation="Horizontal" Spacing="8">
-                            <TextBlock 
-                                Text="Device:"
-                                Foreground="{StaticResource LightGreyTextBrush}"
-                                FontFamily="Segoe UI"
-                                FontSize="14"
-                                FontWeight="SemiBold"
-                                MinWidth="60" />
-                            <TextBlock 
-                                Text="{Binding CurrentBill.DeviceType}"
-                                Foreground="{StaticResource WhiteTextBrush}"
-                                FontFamily="Segoe UI"
-                                FontSize="14" />
-                        </StackPanel>
-                    </StackPanel>
-                    
-                    <!-- Bill Details -->
-                    <StackPanel Grid.Column="1" Spacing="8">
-                        <TextBlock 
-                            Text="Bill Information"
-                            Foreground="{StaticResource RedAccentBrush}"
-                            FontFamily="Segoe UI"
-                            FontSize="16"
-                            FontWeight="Bold"
-                            Margin="0,0,0,8" />
-                        
-                        <StackPanel Orientation="Horizontal" Spacing="8">
-                            <TextBlock 
-                                Text="Date:"
-                                Foreground="{StaticResource LightGreyTextBrush}"
-                                FontFamily="Segoe UI"
-                                FontSize="14"
-                                FontWeight="SemiBold"
-                                MinWidth="60" />
-                            <TextBlock 
-                                Text="{Binding CurrentBill.Date, Converter={StaticResource DateConverter}}"
-                                Foreground="{StaticResource WhiteTextBrush}"
-                                FontFamily="Segoe UI"
-                                FontSize="14" />
-                        </StackPanel>
-                        
-                        <StackPanel Orientation="Horizontal" Spacing="8">
-                            <TextBlock 
-                                Text="Bill #:"
-                                Foreground="{StaticResource LightGreyTextBrush}"
-                                FontFamily="Segoe UI"
-                                FontSize="14"
-                                FontWeight="SemiBold"
-                                MinWidth="60" />
-                            <TextBlock 
-                                Text="{Binding CurrentBill.BillId, Converter={StaticResource BillIdConverter}}"
-                                Foreground="{StaticResource WhiteTextBrush}"
-                                FontFamily="Segoe UI"
-                                FontSize="14" />
-                        </StackPanel>
-                    </StackPanel>
-                </Grid>
-            </Border>
-
-            <!-- Services Table Header -->
-            <Border Grid.Row="2" 
-                    Background="{StaticResource RedAccentBrush}"
+                    Background="#808080"
                     CornerRadius="8,8,0,0"
-                    Padding="0"
+                    Padding="25,15"
                     Margin="0,0,0,0">
-                <Grid Padding="20,12">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="3*" />
-                        <ColumnDefinition Width="1*" />
-                        <ColumnDefinition Width="1.5*" />
-                    </Grid.ColumnDefinitions>
-                    
-                    <TextBlock 
-                        Grid.Column="0"
-                        Text="Services"
-                        Foreground="{StaticResource WhiteTextBrush}"
-                        FontFamily="Segoe UI"
-                        FontSize="16"
-                        FontWeight="Bold"
-                        VerticalAlignment="Center" />
-                    
-                    <TextBlock 
-                        Grid.Column="1"
-                        Text="Amount"
-                        Foreground="{StaticResource WhiteTextBrush}"
-                        FontFamily="Segoe UI"
-                        FontSize="16"
-                        FontWeight="Bold"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center" />
-                    
-                    <TextBlock 
-                        Grid.Column="2"
-                        Text="Price"
-                        Foreground="{StaticResource WhiteTextBrush}"
-                        FontFamily="Segoe UI"
-                        FontSize="16"
-                        FontWeight="Bold"
-                        HorizontalAlignment="Right"
-                        VerticalAlignment="Center" />
-                </Grid>
-            </Border>
-
-            <!-- Services Table Content -->
-            <Border Grid.Row="3" 
-                    Background="{StaticResource LighterGreyBackgroundBrush}"
-                    CornerRadius="0,0,8,8"
-                    Padding="0"
-                    Margin="0,0,0,20">
-                <ItemsControl ItemsSource="{Binding CurrentBill.Items}" Padding="0">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <Border BorderBrush="{StaticResource LightGreyTextBrush}" 
-                                    BorderThickness="0,0,0,1" 
-                                    Padding="20,12">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="3*" />
-                                        <ColumnDefinition Width="1*" />
-                                        <ColumnDefinition Width="1.5*" />
-                                    </Grid.ColumnDefinitions>
-                                    
-                                    <TextBlock 
-                                        Grid.Column="0"
-                                        Text="{Binding Description}"
-                                        Foreground="{StaticResource WhiteTextBrush}"
-                                        FontFamily="Segoe UI"
-                                        FontSize="14"
-                                        TextWrapping="Wrap"
-                                        VerticalAlignment="Center" />
-                                    
-                                    <TextBlock 
-                                        Grid.Column="1"
-                                        Text="{Binding Quantity}"
-                                        Foreground="{StaticResource WhiteTextBrush}"
-                                        FontFamily="Segoe UI"
-                                        FontSize="14"
-                                        HorizontalAlignment="Center"
-                                        VerticalAlignment="Center" />
-                                    
-                                    <TextBlock 
-                                        Grid.Column="2"
-                                        Text="{Binding TotalPrice, Converter={StaticResource CurrencyConverter}}"
-                                        Foreground="{StaticResource WhiteTextBrush}"
-                                        FontFamily="Segoe UI"
-                                        FontSize="14"
-                                        HorizontalAlignment="Right"
-                                        VerticalAlignment="Center" />
-                                </Grid>
-                            </Border>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </Border>
-
-            <!-- Total Section -->
-            <Border Grid.Row="4" 
-                    Background="{StaticResource LighterGreyBackgroundBrush}"
-                    CornerRadius="8"
-                    Padding="20"
-                    Margin="0,0,0,30">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
@@ -257,8 +49,8 @@
                     
                     <TextBlock 
                         Grid.Column="0"
-                        Text="Total Amount:"
-                        Foreground="{StaticResource WhiteTextBrush}"
+                        Text="{x:Bind ViewModel.CurrentBill.CustomerName, Mode=OneWay}"
+                        Foreground="White"
                         FontFamily="Segoe UI"
                         FontSize="20"
                         FontWeight="Bold"
@@ -266,83 +58,244 @@
                     
                     <TextBlock 
                         Grid.Column="1"
-                        Text="{Binding CurrentBill.TotalAmount, Converter={StaticResource CurrencyConverter}}"
-                        Foreground="{StaticResource RedAccentBrush}"
+                        Text="{x:Bind ViewModel.CurrentBill.Date, Mode=OneWay, Converter={StaticResource ShortDateConverter}}"
+                        Foreground="White"
                         FontFamily="Segoe UI"
-                        FontSize="24"
+                        FontSize="20"
                         FontWeight="Bold"
                         VerticalAlignment="Center" />
                 </Grid>
             </Border>
 
-            <!-- Action Buttons -->
-            <StackPanel Grid.Row="5" 
-                        Orientation="Horizontal" 
-                        HorizontalAlignment="Center" 
-                        Spacing="20"
-                        Margin="0,0,0,30">
-                <Button 
-                    Content="Download PDF"
-                    Style="{StaticResource RedAccentButton}"
-                    Command="{Binding GeneratePdfCommand}"
-                    MinWidth="150" />
-                
-                <Button 
-                    Content="Share"
-                    Style="{StaticResource RedAccentButton}"
-                    Command="{Binding ShareBillCommand}"
-                    MinWidth="150" />
-            </StackPanel>
-
-            <!-- Footer Section -->
-            <StackPanel Grid.Row="6" 
-                        HorizontalAlignment="Center" 
-                        VerticalAlignment="Bottom"
-                        Spacing="12">
-                
-                <!-- Logo Placeholder -->
-                <Border 
-                    Width="80" 
-                    Height="80" 
-                    Background="{StaticResource LighterGreyBackgroundBrush}"
-                    CornerRadius="8"
-                    HorizontalAlignment="Center">
+            <!-- Services Table Header -->
+            <Border Grid.Row="2" 
+                    Background="#E53E3E"
+                    Padding="0"
+                    Margin="0,0,0,0">
+                <Grid Height="50">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+                    
+                    <!-- Vertical separators -->
+                    <Border Grid.Column="0" BorderBrush="Black" BorderThickness="0,0,1,0" />
+                    <Border Grid.Column="1" BorderBrush="Black" BorderThickness="0,0,1,0" />
+                    
                     <TextBlock 
-                        Text="LOGO"
-                        Foreground="{StaticResource LightGreyTextBrush}"
+                        Grid.Column="0"
+                        Text="Services"
+                        Foreground="Black"
                         FontFamily="Segoe UI"
-                        FontSize="12"
+                        FontSize="18"
+                        FontWeight="Bold"
+                        VerticalAlignment="Center"
+                        Margin="20,0" />
+                    
+                    <TextBlock 
+                        Grid.Column="1"
+                        Text="Amount"
+                        Foreground="Black"
+                        FontFamily="Segoe UI"
+                        FontSize="18"
                         FontWeight="Bold"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center" />
-                </Border>
-                
-                <!-- Thank You Message -->
-                <TextBlock 
-                    Text="Thank you for your business!"
-                    Foreground="{StaticResource WhiteTextBrush}"
-                    FontFamily="Segoe UI"
-                    FontSize="16"
-                    FontWeight="SemiBold"
-                    HorizontalAlignment="Center"
-                    Margin="0,8,0,0" />
-                
-                <!-- Contact Information -->
-                <StackPanel HorizontalAlignment="Center" Spacing="4">
+                    
                     <TextBlock 
-                        Text="www.solidstatedave.com"
-                        Foreground="{StaticResource LightGreyTextBrush}"
+                        Grid.Column="2"
+                        Text="Price"
+                        Foreground="Black"
                         FontFamily="Segoe UI"
-                        FontSize="14"
+                        FontSize="18"
+                        FontWeight="Bold"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center" />
+                </Grid>
+            </Border>
+
+            <!-- Services Table Content -->
+            <Border Grid.Row="3" 
+                    Background="White"
+                    Padding="0">
+                <StackPanel>
+                    <ItemsControl ItemsSource="{x:Bind ViewModel.CurrentBill.Items, Mode=OneWay}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border BorderBrush="#CCCCCC" 
+                                        BorderThickness="0,0,0,1" 
+                                        Background="White"
+                                        MinHeight="45">
+                                    <Grid Padding="20,12">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="3*" />
+                                            <ColumnDefinition Width="1*" />
+                                            <ColumnDefinition Width="1*" />
+                                        </Grid.ColumnDefinitions>
+                                        
+                                        <!-- Vertical separators -->
+                                        <Border Grid.Column="0" BorderBrush="#CCCCCC" BorderThickness="0,0,1,0" />
+                                        <Border Grid.Column="1" BorderBrush="#CCCCCC" BorderThickness="0,0,1,0" />
+                                        
+                                        <TextBlock 
+                                            Grid.Column="0"
+                                            Text="{Binding Description}"
+                                            Foreground="Black"
+                                            FontFamily="Segoe UI"
+                                            FontSize="16"
+                                            VerticalAlignment="Center"
+                                            Margin="0,0,10,0" />
+                                        
+                                        <TextBlock 
+                                            Grid.Column="1"
+                                            Text="{Binding Quantity}"
+                                            Foreground="Black"
+                                            FontFamily="Segoe UI"
+                                            FontSize="16"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center" />
+                                        
+                                        <TextBlock 
+                                            Grid.Column="2"
+                                            Text="{Binding TotalPrice, Converter={StaticResource CurrencyConverter}}"
+                                            Foreground="Black"
+                                            FontFamily="Segoe UI"
+                                            FontSize="16"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center" />
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    
+                    <!-- Total Row -->
+                    <Border Background="#808080" Height="60" CornerRadius="0,0,8,8">
+                        <Grid Padding="20,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="4*" />
+                                <ColumnDefinition Width="1*" />
+                            </Grid.ColumnDefinitions>
+                            
+                            <TextBlock 
+                                Grid.Column="0"
+                                Text="TOTAL"
+                                Foreground="White"
+                                FontFamily="Segoe UI"
+                                FontSize="24"
+                                FontWeight="Bold"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center" />
+                            
+                            <Border Grid.Column="1" Background="Black" Margin="8" CornerRadius="4">
+                                <TextBlock 
+                                    Text="{x:Bind ViewModel.CurrentBill.TotalAmount, Mode=OneWay, Converter={StaticResource CurrencyConverter}}"
+                                    Foreground="#E53E3E"
+                                    FontFamily="Segoe UI"
+                                    FontSize="24"
+                                    FontWeight="Bold"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center" />
+                            </Border>
+                        </Grid>
+                    </Border>
+                </StackPanel>
+            </Border>
+
+            <!-- Footer Section -->
+            <StackPanel Grid.Row="4" 
+                        HorizontalAlignment="Center" 
+                        Margin="0,40,0,0"
+                        Spacing="20">
+                
+                <!-- Brain Logo -->
+                <Image Source="ms-appx:///Assets/Styles/Logo.png" 
+                       Width="150" 
+                       Height="150" 
+                       HorizontalAlignment="Center"
+                       Stretch="Uniform" />
+                
+                <!-- Thank You Section -->
+                <StackPanel HorizontalAlignment="Center" Spacing="8">
+                    <!-- Download and Share Icons -->
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="40">
+                        <Image Source="ms-appx:///Assets/Styles/Download.png" 
+                               Width="50" 
+                               Height="50" 
+                               HorizontalAlignment="Center" 
+                               VerticalAlignment="Center"
+                               Stretch="Uniform" />
+                        
+                        <Image Source="ms-appx:///Assets/Styles/Share.png" 
+                               Width="50" 
+                               Height="50" 
+                               HorizontalAlignment="Center" 
+                               VerticalAlignment="Center"
+                               Stretch="Uniform" />
+                    </StackPanel>
+                    
+                    <TextBlock 
+                        Text="Thank You"
+                        Foreground="#E53E3E"
+                        FontFamily="Segoe UI"
+                        FontSize="24"
+                        FontWeight="Bold"
                         HorizontalAlignment="Center" />
                     
                     <TextBlock 
-                        Text="(555) 123-4567"
-                        Foreground="{StaticResource LightGreyTextBrush}"
+                        Text="Please Leave A Review On"
+                        Foreground="#E53E3E"
                         FontFamily="Segoe UI"
-                        FontSize="14"
+                        FontSize="18"
+                        HorizontalAlignment="Center" />
+                    
+                    <TextBlock 
+                        Text="Google Maps"
+                        Foreground="#E53E3E"
+                        FontFamily="Segoe UI"
+                        FontSize="18"
+                        FontWeight="Bold"
                         HorizontalAlignment="Center" />
                 </StackPanel>
+                
+                <!-- Contact Information -->
+                <Grid HorizontalAlignment="Stretch" 
+                      Margin="0,30,0,20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    
+                    <TextBlock 
+                        Grid.Column="0"
+                        Text="SolidStateDave.com"
+                        Foreground="White"
+                        FontFamily="Segoe UI"
+                        FontSize="20"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center" />
+                    
+                    <Border Grid.Column="1" 
+                           Background="#E53E3E" 
+                           CornerRadius="0,0,8,0"
+                           Padding="15,8">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <TextBlock 
+                                Text="📞"
+                                Foreground="White"
+                                FontSize="20"
+                                VerticalAlignment="Center" />
+                            <TextBlock 
+                                Text="908-442-3927"
+                                Foreground="White"
+                                FontFamily="Segoe UI"
+                                FontSize="20"
+                                FontWeight="Bold"
+                                VerticalAlignment="Center" />
+                        </StackPanel>
+                    </Border>
+                </Grid>
             </StackPanel>
         </Grid>
     </ScrollViewer>

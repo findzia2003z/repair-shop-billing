@@ -259,9 +259,10 @@ public class DatabaseService : IDatabaseService
                     SELECT last_insert_rowid();";
                     
                 using var billCommand = new SqliteCommand(insertBillQuery, connection, transaction);
-                billCommand.Parameters.AddWithValue("@customerId", bill.CustomerId);
+                // Set CustomerId to NULL if it's 0 or invalid to avoid foreign key constraint
+                billCommand.Parameters.AddWithValue("@customerId", bill.CustomerId > 0 ? (object)bill.CustomerId : DBNull.Value);
                 billCommand.Parameters.AddWithValue("@customerName", bill.CustomerName);
-                billCommand.Parameters.AddWithValue("@deviceType", bill.DeviceType);
+                billCommand.Parameters.AddWithValue("@deviceType", bill.DeviceType ?? string.Empty);
                 billCommand.Parameters.AddWithValue("@date", bill.Date.ToString("yyyy-MM-dd HH:mm:ss"));
                 billCommand.Parameters.AddWithValue("@totalAmount", bill.TotalAmount);
                 
@@ -280,9 +281,9 @@ public class DatabaseService : IDatabaseService
                     
                 using var billCommand = new SqliteCommand(updateBillQuery, connection, transaction);
                 billCommand.Parameters.AddWithValue("@billId", bill.BillId);
-                billCommand.Parameters.AddWithValue("@customerId", bill.CustomerId);
+                billCommand.Parameters.AddWithValue("@customerId", bill.CustomerId > 0 ? (object)bill.CustomerId : DBNull.Value);
                 billCommand.Parameters.AddWithValue("@customerName", bill.CustomerName);
-                billCommand.Parameters.AddWithValue("@deviceType", bill.DeviceType);
+                billCommand.Parameters.AddWithValue("@deviceType", bill.DeviceType ?? string.Empty);
                 billCommand.Parameters.AddWithValue("@date", bill.Date.ToString("yyyy-MM-dd HH:mm:ss"));
                 billCommand.Parameters.AddWithValue("@totalAmount", bill.TotalAmount);
                 

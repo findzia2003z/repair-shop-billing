@@ -48,6 +48,35 @@ namespace RepairShopBilling.Views
             }
         }
 
+        private void OnToggleOSXClick(object sender, RoutedEventArgs e)
+        {
+            ToggleSection(OSXSubPanel, OSXHeaderButton, "OS X");
+        }
+
+        private void OnToggleLaserClick(object sender, RoutedEventArgs e)
+        {
+            ToggleSection(LaserSubPanel, LaserHeaderButton, "LASER");
+        }
+
+        private void OnToggleEquipmentClick(object sender, RoutedEventArgs e)
+        {
+            ToggleSection(EquipmentSubPanel, EquipmentHeaderButton, "Equipment");
+        }
+
+        private void ToggleSection(StackPanel subPanel, Button headerButton, string sectionName)
+        {
+            if (subPanel.Visibility == Visibility.Visible)
+            {
+                subPanel.Visibility = Visibility.Collapsed;
+                headerButton.Content = $"{sectionName} ▶";
+            }
+            else
+            {
+                subPanel.Visibility = Visibility.Visible;
+                headerButton.Content = $"{sectionName} ▼";
+            }
+        }
+
         private void OnRemoveItemClick(object sender, RoutedEventArgs e)
         {
             if (sender is Button button && button.Tag is BillItem item)
