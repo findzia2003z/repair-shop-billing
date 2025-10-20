@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "RepairShopBilling (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "RepairShopBilling (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

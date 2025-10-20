@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Window
+    x:Class="RepairShopBilling.Views.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="#333333">
+        <NavigationView 
+            x:Name="MainNavigationView"
+            IsBackButtonVisible="Collapsed"
+            IsSettingsVisible="False"
+            PaneDisplayMode="Left"
+            SelectionChanged="NavigationView_SelectionChanged">
+            
+            <NavigationView.MenuItems>
+                <NavigationViewItem 
+                    x:Name="BillCreationNavItem"
+                    Content="Bill Creation" 
+                    Tag="BillCreation"
+                    Icon="Add" />
+                
+                <NavigationViewItem 
+                    x:Name="BillHistoryNavItem"
+                    Content="Bill History" 
+                    Tag="BillHistory"
+                    Icon="List" />
+            </NavigationView.MenuItems>
+
+            <NavigationView.Header>
+                <Grid Height="48">
+                    <TextBlock 
+                        x:Name="HeaderTextBlock"
+                        Text="Solid State Dave - Repair Shop Billing"
+                        Foreground="White"
+                        VerticalAlignment="Center"
+                        Margin="12,0,0,0" />
+                </Grid>
+            </NavigationView.Header>
+
+            <Frame 
+                x:Name="ContentFrame"
+                Margin="0,0,0,0" />
+                
+        </NavigationView>
+    </Grid>
+</Window>
