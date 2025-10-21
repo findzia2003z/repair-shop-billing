@@ -126,9 +126,8 @@
                                             Grid.Column="0"
                                             Text="{Binding Description}"
                                             Foreground="#333333"
-                                            FontFamily="Segoe UI"
+                                            FontFamily="{StaticResource EzraBoldFont}"
                                             FontSize="15"
-                                            FontWeight="Normal"
                                             VerticalAlignment="Center"
                                             Margin="20,10,10,10" />
                                         
@@ -136,9 +135,8 @@
                                             Grid.Column="2"
                                             Text="{Binding Quantity}"
                                             Foreground="#333333"
-                                            FontFamily="Segoe UI"
+                                            FontFamily="{StaticResource EzraBoldFont}"
                                             FontSize="15"
-                                            FontWeight="Normal"
                                             HorizontalAlignment="Center"
                                             VerticalAlignment="Center" />
                                         
@@ -146,9 +144,8 @@
                                             Grid.Column="4"
                                             Text="{Binding TotalPrice, Converter={StaticResource CurrencyConverter}}"
                                             Foreground="#333333"
-                                            FontFamily="Segoe UI"
+                                            FontFamily="{StaticResource EzraBoldFont}"
                                             FontSize="15"
-                                            FontWeight="Normal"
                                             HorizontalAlignment="Center"
                                             VerticalAlignment="Center" />
                                     </Grid>

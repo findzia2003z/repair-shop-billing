@@ -6,10 +6,43 @@ using System.Text;
 using PdfSharp.Pdf;
 using PdfSharp.Drawing;
 using PdfSharp.Quality;
+using PdfSharp.Fonts;
 using System.IO;
 
 namespace RepairShopBilling.Services
 {
+    /// <summary>
+    /// Font resolver for Ezra Bold font
+    /// </summary>
+    public class EzraFontResolver : IFontResolver
+    {
+        public byte[]? GetFont(string faceName)
+        {
+            try
+            {
+                var fontPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets", "Fonts", "Ezra Bold.otf");
+                if (File.Exists(fontPath))
+                {
+                    return File.ReadAllBytes(fontPath);
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"GetFont error: {ex.Message}");
+            }
+            return null;
+        }
+
+        public FontResolverInfo? ResolveTypeface(string familyName, bool bold, bool italic)
+        {
+            if (familyName.Equals("EzraCustom", StringComparison.OrdinalIgnoreCase))
+            {
+                return new FontResolverInfo("EzraCustom");
+            }
+            return PlatformFontResolver.ResolveTypeface(familyName, bold, italic);
+        }
+    }
+
     /// <summary>
     /// Service for generating PDF documents from bills matching the Bill Viewer design
     /// </summary>
@@ -21,6 +54,19 @@ namespace RepairShopBilling.Services
             if (PdfSharp.Capabilities.Build.IsCoreBuild)
             {
                 System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
+            }
+
+            // Set up font resolver
+            try
+            {
+                if (GlobalFontSettings.FontResolver == null)
+                {
+                    GlobalFontSettings.FontResolver = new EzraFontResolver();
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Font resolver setup error: {ex.Message}");
             }
         }
 
@@ -582,6 +628,20 @@ namespace RepairShopBilling.Services
         
         private double DrawTableItems(XGraphics gfx, List<BillItem> items, double startX, double currentY, double contentWidth, double rowHeight, XFont normalFont, XColor darkGray)
         {
+            // Use custom Ezra font with embedding
+            XFont itemFont;
+            try
+            {
+                var options = new XPdfFontOptions(PdfFontEncoding.Unicode, PdfFontEmbedding.Always);
+                itemFont = new XFont("EzraCustom", 11, XFontStyleEx.Regular, options);
+                System.Diagnostics.Debug.WriteLine("Successfully loaded EzraCustom font");
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Failed to load EzraCustom font: {ex.Message}");
+                itemFont = new XFont("Arial", 11, XFontStyleEx.Bold);
+            }
+            
             foreach (var item in items)
             {
                 var rowRect = new XRect(startX, currentY, contentWidth, rowHeight);
@@ -600,11 +660,11 @@ namespace RepairShopBilling.Services
                 
                 var textY = currentY + 7;
                 
-                gfx.DrawString(item.Description, normalFont, new XSolidBrush(darkGray),
+                gfx.DrawString(item.Description, itemFont, new XSolidBrush(darkGray),
                     new XRect(startX + 15, textY, contentWidth * 0.6 - 20, rowHeight), XStringFormats.TopLeft);
-                gfx.DrawString(item.Quantity.ToString(), normalFont, new XSolidBrush(darkGray),
+                gfx.DrawString(item.Quantity.ToString(), itemFont, new XSolidBrush(darkGray),
                     new XRect(startX + contentWidth * 0.6, textY, contentWidth * 0.2, rowHeight), XStringFormats.TopCenter);
-                gfx.DrawString($"${item.TotalPrice:F2}", normalFont, new XSolidBrush(darkGray),
+                gfx.DrawString($"${item.TotalPrice:F2}", itemFont, new XSolidBrush(darkGray),
                     new XRect(startX + contentWidth * 0.8, textY, contentWidth * 0.2, rowHeight), XStringFormats.TopCenter);
                 
                 currentY += rowHeight;
@@ -675,5 +735,7 @@ namespace RepairShopBilling.Services
             }
             catch { }
         }
+        
+
     }
 }

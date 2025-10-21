@@ -20,6 +20,9 @@
     <SolidColorBrush x:Key="InputBackgroundBrush" Color="{StaticResource InputBackground}" />
     <SolidColorBrush x:Key="InputTextBrush" Color="{StaticResource InputText}" />
 
+    <!-- Font Families -->
+    <FontFamily x:Key="EzraBoldFont">ms-appx:///Assets/Fonts/Ezra Bold.otf#Ezra</FontFamily>
+
     <!-- Button Styles -->
     <Style x:Key="RedAccentButton" TargetType="Button">
         <Setter Property="Background" Value="{StaticResource RedAccentBrush}" />

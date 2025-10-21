@@ -170,14 +170,27 @@ namespace RepairShopBilling.ViewModels
 
         public void AddServiceToBill(string serviceName, decimal price)
         {
-            var billItem = new BillItem
+            // Check if an item with the same description and price already exists
+            var existingItem = BillItems.FirstOrDefault(item => 
+                item.Description == serviceName && item.UnitPrice == price);
+            
+            if (existingItem != null)
             {
-                Description = serviceName,
-                Quantity = 1,
-                UnitPrice = price
-            };
+                // Increment quantity of existing item
+                existingItem.Quantity++;
+            }
+            else
+            {
+                // Add new item
+                var billItem = new BillItem
+                {
+                    Description = serviceName,
+                    Quantity = 1,
+                    UnitPrice = price
+                };
 
-            BillItems.Add(billItem);
+                BillItems.Add(billItem);
+            }
         }
 
         public async Task ShowPriceInputDialog(string serviceName)
