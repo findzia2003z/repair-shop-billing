@@ -424,14 +424,16 @@ namespace RepairShopBilling.ViewModels
         /// </summary>
         public static Bill? PreviewBillData { get; set; }
 
-        private async Task ShowCustomServiceDialog()
+        public async Task ShowCustomServiceDialog()
         {
+            var app = Microsoft.UI.Xaml.Application.Current as App;
             var dialog = new ContentDialog
             {
                 Title = "Add Custom Service",
                 PrimaryButtonText = "Add",
                 CloseButtonText = "Cancel",
-                DefaultButton = ContentDialogButton.Primary
+                DefaultButton = ContentDialogButton.Primary,
+                XamlRoot = app?.MainWindow?.Content.XamlRoot
             };
 
             var stackPanel = new StackPanel { Spacing = 16 };
@@ -462,10 +464,26 @@ namespace RepairShopBilling.ViewModels
                 MinWidth = 300
             };
 
+            // Quantity Input
+            var quantityLabel = new TextBlock 
+            { 
+                Text = "Quantity:", 
+                Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.Black),
+                FontSize = 14 
+            };
+            var quantityTextBox = new TextBox 
+            { 
+                PlaceholderText = "Enter quantity (default: 1)",
+                Text = "1",
+                MinWidth = 300
+            };
+
             stackPanel.Children.Add(nameLabel);
             stackPanel.Children.Add(nameTextBox);
             stackPanel.Children.Add(priceLabel);
             stackPanel.Children.Add(priceTextBox);
+            stackPanel.Children.Add(quantityLabel);
+            stackPanel.Children.Add(quantityTextBox);
 
             dialog.Content = stackPanel;
 
@@ -486,11 +504,16 @@ namespace RepairShopBilling.ViewModels
                     return;
                 }
 
+                if (!int.TryParse(quantityTextBox.Text, out int quantity) || quantity <= 0)
+                {
+                    quantity = 1; // Default to 1 if invalid
+                }
+
                 // Add the custom service
                 var billItem = new BillItem
                 {
                     Description = nameTextBox.Text.Trim(),
-                    Quantity = 1,
+                    Quantity = quantity,
                     UnitPrice = price
                 };
 

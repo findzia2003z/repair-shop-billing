@@ -110,6 +110,7 @@
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             
                             <!-- Hours Section -->
@@ -433,6 +434,18 @@
                                            Click="OnEditablePriceServiceClick"
                                            Tag="Sec. Camera|EQUIPMENT"/>
                                 </StackPanel>
+                            </StackPanel>
+                            
+                            <!-- CUSTOM Section -->
+                            <StackPanel Grid.Column="0" Grid.Row="3" Margin="5">
+                                <Button Content="CUSTOM" 
+                                       Background="#E53E3E" 
+                                       Foreground="White"
+                                       FontFamily="{StaticResource EzraBoldFont}"
+                                       FontSize="16"
+                                       Height="50"
+                                       HorizontalAlignment="Stretch"
+                                       Click="OnCustomServiceClick"/>
                             </StackPanel>
                         </Grid>
                     </StackPanel>

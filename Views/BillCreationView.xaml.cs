@@ -88,5 +88,10 @@ namespace RepairShopBilling.Views
                 ViewModel.RemoveBillItem(item);
             }
         }
+
+        private async void OnCustomServiceClick(object sender, RoutedEventArgs e)
+        {
+            await ViewModel.ShowCustomServiceDialog();
+        }
     }
 }
