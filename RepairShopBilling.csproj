@@ -40,9 +40,11 @@
         <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.4.231008000" />
         <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.2210.55" />
         <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.2428" />
-        <PackageReference Include="PDFsharp" Version="6.0.0" />
+        <PackageReference Include="PDFsharp" Version="6.1.1" />
 
         <Manifest Include="$(ApplicationManifest)" />
+
+        <PackageReference Include="System.Text.Encoding.CodePages" Version="9.0.10" />
     </ItemGroup>
 
     <!-- 
