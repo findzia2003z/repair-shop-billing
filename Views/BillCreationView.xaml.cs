@@ -32,19 +32,23 @@ namespace RepairShopBilling.Views
             if (sender is Button button && button.Tag is string serviceInfo)
             {
                 var parts = serviceInfo.Split('|');
-                if (parts.Length == 2 && decimal.TryParse(parts[1], out decimal price))
+                if (parts.Length >= 2 && decimal.TryParse(parts[1], out decimal price))
                 {
                     var serviceName = parts[0];
-                    ViewModel.AddServiceToBill(serviceName, price);
+                    var category = parts.Length > 2 ? parts[2] : "";
+                    ViewModel.AddServiceToBill(serviceName, price, category);
                 }
             }
         }
 
         private async void OnEditablePriceServiceClick(object sender, RoutedEventArgs e)
         {
-            if (sender is Button button && button.Tag is string serviceName)
+            if (sender is Button button && button.Tag is string serviceInfo)
             {
-                await ViewModel.ShowPriceInputDialog(serviceName);
+                var parts = serviceInfo.Split('|');
+                var serviceName = parts[0];
+                var category = parts.Length > 1 ? parts[1] : "";
+                await ViewModel.ShowPriceInputDialog(serviceName, category);
             }
         }
 

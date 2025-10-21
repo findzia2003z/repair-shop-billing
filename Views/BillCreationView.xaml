@@ -215,7 +215,7 @@
                                            HorizontalAlignment="Stretch"
                                            BorderThickness="0"
                                            Click="OnServiceClick"
-                                           Tag="Big Sur 11 (20)|30"/>
+                                           Tag="Big Sur 11 (20)|30|OS X"/>
                                     <Button Content="Monterey 12 (21)" 
                                            Background="Black" 
                                            Foreground="White"
@@ -225,7 +225,7 @@
                                            HorizontalAlignment="Stretch"
                                            BorderThickness="0"
                                            Click="OnServiceClick"
-                                           Tag="Monterey 12 (21)|30"/>
+                                           Tag="Monterey 12 (21)|30|OS X"/>
                                     <Button Content="Ventura 13 (22)" 
                                            Background="Black" 
                                            Foreground="White"
@@ -235,7 +235,7 @@
                                            HorizontalAlignment="Stretch"
                                            BorderThickness="0"
                                            Click="OnServiceClick"
-                                           Tag="Ventura 13 (22)|30"/>
+                                           Tag="Ventura 13 (22)|30|OS X"/>
                                     <Button Content="Sonoma 14 (23)" 
                                            Background="Black" 
                                            Foreground="White"
@@ -245,7 +245,7 @@
                                            HorizontalAlignment="Stretch"
                                            BorderThickness="0"
                                            Click="OnServiceClick"
-                                           Tag="Sonoma 14 (23)|30"/>
+                                           Tag="Sonoma 14 (23)|30|OS X"/>
                                     <Button Content="Sequoia 15 (24)" 
                                            Background="Black" 
                                            Foreground="White"
@@ -255,7 +255,7 @@
                                            HorizontalAlignment="Stretch"
                                            BorderThickness="0"
                                            Click="OnServiceClick"
-                                           Tag="Sequoia 15 (24)|30"/>
+                                           Tag="Sequoia 15 (24)|30|OS X"/>
                                     <Button Content="Tahoe 26 (25)" 
                                            Background="Black" 
                                            Foreground="White"
@@ -265,7 +265,7 @@
                                            HorizontalAlignment="Stretch"
                                            BorderThickness="0"
                                            Click="OnServiceClick"
-                                           Tag="Tahoe 26 (25)|30"/>
+                                           Tag="Tahoe 26 (25)|30|OS X"/>
                                 </StackPanel>
                             </StackPanel>
                             
@@ -293,7 +293,7 @@
                                            HorizontalAlignment="Stretch"
                                            BorderThickness="0"
                                            Click="OnEditablePriceServiceClick"
-                                           Tag="Materials"/>
+                                           Tag="Materials|LASER"/>
                                     <Button Content="Packaging" 
                                            Background="Black" 
                                            Foreground="White"
@@ -303,7 +303,7 @@
                                            HorizontalAlignment="Stretch"
                                            BorderThickness="0"
                                            Click="OnEditablePriceServiceClick"
-                                           Tag="Packaging"/>
+                                           Tag="Packaging|LASER"/>
                                     <Button Content="Time Mark" 
                                            Background="Black" 
                                            Foreground="White"
@@ -313,7 +313,7 @@
                                            HorizontalAlignment="Stretch"
                                            BorderThickness="0"
                                            Click="OnEditablePriceServiceClick"
-                                           Tag="Time Mark"/>
+                                           Tag="Time Mark|LASER"/>
                                     <Button Content="Time Engrave" 
                                            Background="Black" 
                                            Foreground="White"
@@ -323,7 +323,7 @@
                                            HorizontalAlignment="Stretch"
                                            BorderThickness="0"
                                            Click="OnEditablePriceServiceClick"
-                                           Tag="Time Engrave"/>
+                                           Tag="Time Engrave|LASER"/>
                                 </StackPanel>
                             </StackPanel>
                             
@@ -351,7 +351,7 @@
                                            HorizontalAlignment="Stretch"
                                            BorderThickness="0"
                                            Click="OnEditablePriceServiceClick"
-                                           Tag="RAM"/>
+                                           Tag="RAM|EQUIPMENT"/>
                                     <Button Content="Laptop" 
                                            Background="Black" 
                                            Foreground="White"
@@ -361,7 +361,7 @@
                                            HorizontalAlignment="Stretch"
                                            BorderThickness="0"
                                            Click="OnEditablePriceServiceClick"
-                                           Tag="Laptop"/>
+                                           Tag="Laptop|EQUIPMENT"/>
                                     <Button Content="Desktop" 
                                            Background="Black" 
                                            Foreground="White"
@@ -371,7 +371,7 @@
                                            HorizontalAlignment="Stretch"
                                            BorderThickness="0"
                                            Click="OnEditablePriceServiceClick"
-                                           Tag="Desktop"/>
+                                           Tag="Desktop|EQUIPMENT"/>
                                     <Button Content="Modem" 
                                            Background="Black" 
                                            Foreground="White"
@@ -381,7 +381,7 @@
                                            HorizontalAlignment="Stretch"
                                            BorderThickness="0"
                                            Click="OnEditablePriceServiceClick"
-                                           Tag="Modem"/>
+                                           Tag="Modem|EQUIPMENT"/>
                                     <Button Content="Router" 
                                            Background="Black" 
                                            Foreground="White"
@@ -391,7 +391,7 @@
                                            HorizontalAlignment="Stretch"
                                            BorderThickness="0"
                                            Click="OnEditablePriceServiceClick"
-                                           Tag="Router"/>
+                                           Tag="Router|EQUIPMENT"/>
                                     <Button Content="Monitor" 
                                            Background="Black" 
                                            Foreground="White"
@@ -401,7 +401,7 @@
                                            HorizontalAlignment="Stretch"
                                            BorderThickness="0"
                                            Click="OnEditablePriceServiceClick"
-                                           Tag="Monitor"/>
+                                           Tag="Monitor|EQUIPMENT"/>
                                     <Button Content="NVME" 
                                            Background="Black" 
                                            Foreground="White"
@@ -411,7 +411,7 @@
                                            HorizontalAlignment="Stretch"
                                            BorderThickness="0"
                                            Click="OnEditablePriceServiceClick"
-                                           Tag="NVME"/>
+                                           Tag="NVME|EQUIPMENT"/>
                                     <Button Content="KB&amp;M" 
                                            Background="Black" 
                                            Foreground="White"
@@ -421,7 +421,7 @@
                                            HorizontalAlignment="Stretch"
                                            BorderThickness="0"
                                            Click="OnEditablePriceServiceClick"
-                                           Tag="KB&amp;M"/>
+                                           Tag="KB&amp;M|EQUIPMENT"/>
                                     <Button Content="Sec. Camera" 
                                            Background="Black" 
                                            Foreground="White"
@@ -431,7 +431,7 @@
                                            HorizontalAlignment="Stretch"
                                            BorderThickness="0"
                                            Click="OnEditablePriceServiceClick"
-                                           Tag="Sec. Camera"/>
+                                           Tag="Sec. Camera|EQUIPMENT"/>
                                 </StackPanel>
                             </StackPanel>
                         </Grid>

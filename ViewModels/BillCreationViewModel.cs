@@ -168,11 +168,17 @@ namespace RepairShopBilling.ViewModels
             BillItems.Remove(item);
         }
 
-        public void AddServiceToBill(string serviceName, decimal price)
+        public void AddServiceToBill(string serviceName, decimal price, string category = "")
         {
+            // Add category prefix based on service category
+            string prefix = GetCategoryPrefix(category);
+            string description = string.IsNullOrEmpty(prefix) 
+                ? serviceName 
+                : $"{prefix} {serviceName}";
+
             // Check if an item with the same description and price already exists
             var existingItem = BillItems.FirstOrDefault(item => 
-                item.Description == serviceName && item.UnitPrice == price);
+                item.Description == description && item.UnitPrice == price);
             
             if (existingItem != null)
             {
@@ -184,7 +190,7 @@ namespace RepairShopBilling.ViewModels
                 // Add new item
                 var billItem = new BillItem
                 {
-                    Description = serviceName,
+                    Description = description,
                     Quantity = 1,
                     UnitPrice = price
                 };
@@ -193,7 +199,7 @@ namespace RepairShopBilling.ViewModels
             }
         }
 
-        public async Task ShowPriceInputDialog(string serviceName)
+        public async Task ShowPriceInputDialog(string serviceName, string category = "")
         {
             var app = Microsoft.UI.Xaml.Application.Current as App;
             var dialog = new ContentDialog
@@ -257,10 +263,16 @@ namespace RepairShopBilling.ViewModels
                     quantity = 1; // Default to 1 if invalid
                 }
 
+                // Add category prefix based on service category
+                string prefix = GetCategoryPrefix(category);
+                string description = string.IsNullOrEmpty(prefix) 
+                    ? serviceName 
+                    : $"{prefix} {serviceName}";
+
                 // Add the service with custom price
                 var billItem = new BillItem
                 {
-                    Description = serviceName,
+                    Description = description,
                     Quantity = quantity,
                     UnitPrice = price
                 };
@@ -283,9 +295,22 @@ namespace RepairShopBilling.ViewModels
         {
             if (sender is Button button && button.Tag is Service service)
             {
+                // Debug output
+                System.Diagnostics.Debug.WriteLine($"Service: {service.Name}, Category: '{service.Category}'");
+                
+                // Add category prefix based on service category
+                string prefix = GetCategoryPrefix(service.Category);
+                System.Diagnostics.Debug.WriteLine($"Prefix: '{prefix}'");
+                
+                string description = string.IsNullOrEmpty(prefix) 
+                    ? service.Name 
+                    : $"{prefix} {service.Name}";
+
+                System.Diagnostics.Debug.WriteLine($"Final description: '{description}'");
+
                 var billItem = new BillItem
                 {
-                    Description = service.Name,
+                    Description = description,
                     Quantity = 1,
                     UnitPrice = service.Price
                 };
@@ -502,6 +527,21 @@ namespace RepairShopBilling.ViewModels
         protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        /// <summary>
+        /// Gets the category prefix for a given service category
+        /// </summary>
+        private string GetCategoryPrefix(string category)
+        {
+            return category?.ToUpper() switch
+            {
+                "LASER" => "LZR",
+                "EQUIPMENT" => "EQP",
+                "OS" => "OS",
+                "OS X" => "OS",
+                _ => string.Empty
+            };
         }
     }
 
