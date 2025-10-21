@@ -69,7 +69,8 @@ namespace RepairShopBilling.Views
             {
                 "BillCreation" => BillCreationNavItem,
                 "BillHistory" => BillHistoryNavItem,
-                _ => BillCreationNavItem
+                "BillViewer" => null, // Don't select any nav item when viewing a bill
+                _ => null
             };
 
             if (itemToSelect != null && MainNavigationView.SelectedItem != itemToSelect)

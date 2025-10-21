@@ -20,33 +20,39 @@
         </ResourceDictionary>
     </Page.Resources>
 
-    <Grid Margin="20">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <!-- Header -->
-        <TextBlock 
-            Grid.Row="0"
-            Text="Bill History" 
-            Foreground="{StaticResource WhiteTextBrush}"
-            FontFamily="Segoe UI"
-            FontSize="24"
-            FontWeight="Bold"
-            Margin="0,0,0,20"
-            HorizontalAlignment="Left" />
+        <!-- Header Image -->
+        <Image Grid.Row="0"
+               Source="ms-appx:///Assets/Styles/PreviousBills.png"
+               HorizontalAlignment="Stretch"
+               VerticalAlignment="Top"
+               Stretch="Uniform"
+               MaxHeight="80"
+               Margin="0,0,0,20" />
 
         <!-- Search Bar -->
         <TextBox 
             Grid.Row="1"
             x:Name="SearchTextBox"
-            Style="{StaticResource SearchBox}"
             Text="{x:Bind ViewModel.SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-            PlaceholderText="Search by customer name..."
-            HorizontalAlignment="Stretch"
-            Margin="0,0,0,20" />
+            PlaceholderText="Search Name"
+            FontSize="18"
+            FontWeight="Bold"
+            Foreground="#E53E3E"
+            Background="White"
+            BorderThickness="0"
+            CornerRadius="8"
+            Padding="16,12"
+            HorizontalAlignment="Center"
+            Width="400"
+            TextAlignment="Center"
+            Margin="0,0,0,30" />
 
         <!-- Bills Grid -->
         <ScrollViewer Grid.Row="2" 
@@ -60,50 +66,55 @@
                 <GridView.ItemsPanel>
                     <ItemsPanelTemplate>
                         <ItemsWrapGrid Orientation="Horizontal" 
-                                       ItemWidth="300" 
-                                       ItemHeight="120"
-                                       HorizontalAlignment="Left" />
+                                       ItemWidth="256" 
+                                       ItemHeight="126"
+                                       MaximumRowsOrColumns="4"
+                                       HorizontalAlignment="Center" />
                     </ItemsPanelTemplate>
                 </GridView.ItemsPanel>
                 <GridView.ItemTemplate>
                     <DataTemplate x:DataType="models:Bill">
-                        <Button Style="{StaticResource BillCardButton}"
-                                Width="280"
-                                Height="100"
+                        <Button Background="Transparent"
+                                BorderThickness="0"
+                                Padding="0"
+                                Width="240"
+                                Height="110"
                                 Margin="8"
                                 Command="{Binding DataContext.SelectBillCommand, ElementName=BillsGridView}"
                                 CommandParameter="{x:Bind}">
-                            <Border Style="{StaticResource BillCard}"
-                                    Margin="0"
-                                    Padding="16">
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="*" />
-                                        <RowDefinition Height="Auto" />
-                                    </Grid.RowDefinitions>
-
+                            <Border Background="Black"
+                                    CornerRadius="12"
+                                    Padding="20,16">
+                                <StackPanel Spacing="4">
                                     <!-- Customer Name -->
-                                    <TextBlock Grid.Row="0"
-                                               Text="{x:Bind CustomerName}"
-                                               Style="{StaticResource BillCardCustomerName}" />
-
-                                    <!-- Device Type -->
-                                    <TextBlock Grid.Row="1"
-                                               Text="{x:Bind DeviceType}"
-                                               Style="{StaticResource BillCardDeviceType}" />
+                                    <TextBlock Text="{x:Bind CustomerName}"
+                                               Foreground="White"
+                                               FontFamily="{StaticResource EzraBoldFont}"
+                                               FontSize="18"
+                                               TextTrimming="CharacterEllipsis"
+                                               HorizontalAlignment="Center" />
 
                                     <!-- Date -->
-                                    <TextBlock Grid.Row="2"
-                                               Text="{x:Bind Date, Mode=OneWay, Converter={StaticResource ShortDateConverter}}"
-                                               Style="{StaticResource BillCardDate}" />
+                                    <TextBlock Text="{x:Bind Date, Mode=OneWay, Converter={StaticResource ShortDateConverter}}"
+                                               Foreground="#808080"
+                                               FontSize="14"
+                                               HorizontalAlignment="Center"
+                                               Margin="0,4,0,8" />
 
                                     <!-- Total Amount -->
-                                    <TextBlock Grid.Row="3"
-                                               Text="{x:Bind TotalAmount, Mode=OneWay, Converter={StaticResource CurrencyConverter}}"
-                                               Style="{StaticResource BillCardTotal}" />
-                                </Grid>
+                                    <StackPanel Orientation="Horizontal"
+                                                HorizontalAlignment="Center"
+                                                Spacing="8">
+                                        <TextBlock Text="Total:"
+                                                   Foreground="White"
+                                                   FontFamily="{StaticResource EzraBoldFont}"
+                                                   FontSize="16" />
+                                        <TextBlock Text="{x:Bind TotalAmount, Mode=OneWay, Converter={StaticResource CurrencyConverter}}"
+                                                   Foreground="#E53E3E"
+                                                   FontFamily="{StaticResource EzraBoldFont}"
+                                                   FontSize="16" />
+                                    </StackPanel>
+                                </StackPanel>
                             </Border>
                         </Button>
                     </DataTemplate>

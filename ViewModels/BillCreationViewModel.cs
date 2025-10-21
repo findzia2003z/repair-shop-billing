@@ -40,12 +40,41 @@ namespace RepairShopBilling.ViewModels
             
             BillItems.CollectionChanged += (s, e) => 
             {
+                // Unsubscribe from old items
+                if (e.OldItems != null)
+                {
+                    foreach (BillItem item in e.OldItems)
+                    {
+                        item.PropertyChanged -= BillItem_PropertyChanged;
+                    }
+                }
+                
+                // Subscribe to new items
+                if (e.NewItems != null)
+                {
+                    foreach (BillItem item in e.NewItems)
+                    {
+                        item.PropertyChanged += BillItem_PropertyChanged;
+                    }
+                }
+                
                 OnPropertyChanged(nameof(TotalAmount));
                 OnPropertyChanged(nameof(CanSaveBill));
                 OnPropertyChanged(nameof(CanPreviewBill));
                 ((RelayCommand)SaveBillCommand).RaiseCanExecuteChanged();
                 ((RelayCommand)PreviewBillCommand).RaiseCanExecuteChanged();
             };
+        }
+
+        private void BillItem_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            // When any bill item property changes, update the total
+            if (e.PropertyName == nameof(BillItem.TotalPrice) || 
+                e.PropertyName == nameof(BillItem.Quantity) || 
+                e.PropertyName == nameof(BillItem.UnitPrice))
+            {
+                OnPropertyChanged(nameof(TotalAmount));
+            }
         }
 
         public string CustomerName
@@ -565,6 +594,109 @@ namespace RepairShopBilling.ViewModels
                 "OS X" => "OS",
                 _ => string.Empty
             };
+        }
+
+        /// <summary>
+        /// Shows a dialog to edit an existing bill item
+        /// </summary>
+        public async Task ShowEditItemDialog(BillItem item)
+        {
+            var app = Microsoft.UI.Xaml.Application.Current as App;
+            var dialog = new ContentDialog
+            {
+                Title = "Edit Service",
+                PrimaryButtonText = "Save",
+                CloseButtonText = "Cancel",
+                DefaultButton = ContentDialogButton.Primary,
+                XamlRoot = app?.MainWindow?.Content.XamlRoot
+            };
+
+            var stackPanel = new StackPanel { Spacing = 16 };
+
+            // Service Name Input
+            var nameLabel = new TextBlock 
+            { 
+                Text = "Service Name:", 
+                Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.Black),
+                FontSize = 14 
+            };
+            var nameTextBox = new TextBox 
+            { 
+                Text = item.Description,
+                MinWidth = 300
+            };
+
+            // Price Input
+            var priceLabel = new TextBlock 
+            { 
+                Text = "Unit Price:", 
+                Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.Black),
+                FontSize = 14 
+            };
+            var priceTextBox = new TextBox 
+            { 
+                Text = item.UnitPrice.ToString("F2"),
+                MinWidth = 300
+            };
+
+            // Quantity Input
+            var quantityLabel = new TextBlock 
+            { 
+                Text = "Quantity:", 
+                Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.Black),
+                FontSize = 14 
+            };
+            var quantityTextBox = new TextBox 
+            { 
+                Text = item.Quantity.ToString(),
+                MinWidth = 300
+            };
+
+            stackPanel.Children.Add(nameLabel);
+            stackPanel.Children.Add(nameTextBox);
+            stackPanel.Children.Add(priceLabel);
+            stackPanel.Children.Add(priceTextBox);
+            stackPanel.Children.Add(quantityLabel);
+            stackPanel.Children.Add(quantityTextBox);
+
+            dialog.Content = stackPanel;
+
+            // Validation and updating
+            dialog.PrimaryButtonClick += (sender, args) =>
+            {
+                args.Cancel = true; // Prevent dialog from closing initially
+
+                if (string.IsNullOrWhiteSpace(nameTextBox.Text))
+                {
+                    return;
+                }
+
+                if (!decimal.TryParse(priceTextBox.Text, out decimal price) || price <= 0)
+                {
+                    return;
+                }
+
+                if (!int.TryParse(quantityTextBox.Text, out int quantity) || quantity <= 0)
+                {
+                    return;
+                }
+
+                // Update the item
+                item.Description = nameTextBox.Text.Trim();
+                item.UnitPrice = price;
+                item.Quantity = quantity;
+
+                args.Cancel = false; // Allow dialog to close
+            };
+
+            try
+            {
+                await dialog.ShowAsync();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error showing edit item dialog: {ex.Message}");
+            }
         }
     }
 

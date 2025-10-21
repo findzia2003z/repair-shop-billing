@@ -201,6 +201,19 @@
                    Stretch="Uniform" 
                    Margin="0,10,0,15" />
             
+            <!-- Back to Edit Button (only in preview mode) -->
+            <Button x:Name="BackToEditButton"
+                    Content="← Back to Edit"
+                    Background="#E53E3E"
+                    Foreground="White"
+                    FontSize="16"
+                    FontWeight="Bold"
+                    Padding="20,10"
+                    HorizontalAlignment="Center"
+                    Margin="0,10,0,20"
+                    Click="OnBackToEditClick"
+                    Visibility="{x:Bind ViewModel.IsPreviewMode, Mode=OneWay}" />
+            
             <!-- Download and Share Icons with Thank You Text -->
             <Grid HorizontalAlignment="Center" Margin="0,0,0,15">
                 <Grid.ColumnDefinitions>

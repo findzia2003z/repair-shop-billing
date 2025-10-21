@@ -492,6 +492,7 @@
                                         <ColumnDefinition Width="Auto" />
                                         <ColumnDefinition Width="Auto" />
                                         <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
                                     
                                     <TextBlock 
@@ -520,6 +521,20 @@
                                     
                                     <Button 
                                         Grid.Column="3"
+                                        Content="✎"
+                                        Background="Transparent"
+                                        Foreground="{StaticResource LightGreyTextBrush}"
+                                        BorderThickness="0"
+                                        FontSize="14"
+                                        Padding="8,4"
+                                        Margin="8,0,0,0"
+                                        VerticalAlignment="Center"
+                                        Click="OnEditItemClick"
+                                        Tag="{Binding}"
+                                        ToolTipService.ToolTip="Edit item" />
+                                    
+                                    <Button 
+                                        Grid.Column="4"
                                         Content="✕"
                                         Background="Transparent"
                                         Foreground="{StaticResource LightGreyTextBrush}"
@@ -529,7 +544,8 @@
                                         Margin="8,0,0,0"
                                         VerticalAlignment="Center"
                                         Click="OnRemoveItemClick"
-                                        Tag="{Binding}" />
+                                        Tag="{Binding}"
+                                        ToolTipService.ToolTip="Remove item" />
                                 </Grid>
                             </DataTemplate>
                         </ListView.ItemTemplate>

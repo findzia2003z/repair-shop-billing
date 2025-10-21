@@ -1,7 +1,9 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Navigation;
 using RepairShopBilling.ViewModels;
 using RepairShopBilling.Models;
+using System.Collections.ObjectModel;
 
 namespace RepairShopBilling.Views
 {
@@ -17,6 +19,36 @@ namespace RepairShopBilling.Views
             this.InitializeComponent();
             ViewModel = new BillCreationViewModel();
             this.DataContext = ViewModel;
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            
+            // Check if there's preview bill data to restore
+            if (BillCreationViewModel.PreviewBillData != null)
+            {
+                var bill = BillCreationViewModel.PreviewBillData;
+                
+                // Restore customer information
+                ViewModel.CustomerName = bill.CustomerName;
+                ViewModel.DeviceType = bill.DeviceType;
+                ViewModel.BillDate = new DateTimeOffset(bill.Date);
+                
+                // Restore bill items
+                ViewModel.BillItems.Clear();
+                foreach (var item in bill.Items)
+                {
+                    ViewModel.BillItems.Add(new BillItem
+                    {
+                        Description = item.Description,
+                        Quantity = item.Quantity,
+                        UnitPrice = item.UnitPrice
+                    });
+                }
+                
+                BillCreationViewModel.PreviewBillData = null; // Clear after use
+            }
         }
 
         private void OnServiceCategoryClick(object sender, RoutedEventArgs e)
@@ -92,6 +124,14 @@ namespace RepairShopBilling.Views
         private async void OnCustomServiceClick(object sender, RoutedEventArgs e)
         {
             await ViewModel.ShowCustomServiceDialog();
+        }
+
+        private async void OnEditItemClick(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button button && button.Tag is BillItem item)
+            {
+                await ViewModel.ShowEditItemDialog(item);
+            }
         }
     }
 }
