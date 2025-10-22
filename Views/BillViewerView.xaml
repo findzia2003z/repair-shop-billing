@@ -12,18 +12,20 @@
     <Page.Resources>
         <helpers:CurrencyConverter x:Key="CurrencyConverter" />
         <helpers:ShortDateConverter x:Key="ShortDateConverter" />
+        <helpers:InverseBoolToVisibilityConverter x:Key="InverseBoolToVisibilityConverter" />
     </Page.Resources>
 
-    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-        <StackPanel Margin="0" MaxWidth="650" HorizontalAlignment="Center">
-            
-            <!-- Company Logo at Top with Black Background -->
-            <Border Background="Black" Padding="0,12,0,12">
-                <Image Source="ms-appx:///Assets/Styles/Solid State Dave.png" 
-                       Height="38" 
-                       HorizontalAlignment="Center" 
-                       Stretch="Uniform" />
-            </Border>
+    <Grid>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+            <StackPanel Margin="0" MaxWidth="650" HorizontalAlignment="Center">
+                
+                <!-- Company Logo at Top with Black Background -->
+                <Border Background="Black" Padding="0,12,0,12">
+                    <Image Source="ms-appx:///Assets/Styles/Solid State Dave.png" 
+                           Height="38" 
+                           HorizontalAlignment="Center" 
+                           Stretch="Uniform" />
+                </Border>
 
             <!-- Bill Table Container -->
             <Border CornerRadius="12" Margin="0,0,0,20" BorderThickness="0">
@@ -66,8 +68,8 @@
                             </Grid.ColumnDefinitions>
                             
                             <!-- Vertical separators -->
-                            <Border Grid.Column="1" Background="Black" />
-                            <Border Grid.Column="3" Background="Black" />
+                            <Border Grid.Column="1" Background="#333333" />
+                            <Border Grid.Column="3" Background="#333333" />
                             
                             <TextBlock 
                                 Grid.Column="0"
@@ -119,8 +121,8 @@
                                         </Grid.ColumnDefinitions>
                                         
                                         <!-- Vertical separators -->
-                                        <Border Grid.Column="1" Background="#D0D0D0" />
-                                        <Border Grid.Column="3" Background="#D0D0D0" />
+                                        <Border Grid.Column="1" Background="#333333" />
+                                        <Border Grid.Column="3" Background="#333333" />
                                         
                                         <TextBlock 
                                             Grid.Column="0"
@@ -230,10 +232,64 @@
                         Margin="0"
                         VerticalAlignment="Center"
                         Command="{x:Bind ViewModel.GeneratePdfCommand}">
-                    <Image Source="ms-appx:///Assets/Styles/Download.png" 
-                           Width="100" 
-                           Height="100"
-                           Stretch="Uniform" />
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Grid Background="Transparent" RenderTransformOrigin="0.5,0.5">
+                                <Grid.RenderTransform>
+                                    <ScaleTransform x:Name="ScaleTransform" ScaleX="1" ScaleY="1" />
+                                </Grid.RenderTransform>
+                                <Image x:Name="IconImage"
+                                       Source="ms-appx:///Assets/Styles/Download.png" 
+                                       Width="100" 
+                                       Height="100"
+                                       Stretch="Uniform"
+                                       Opacity="1" />
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal">
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="ScaleTransform"
+                                                                 Storyboard.TargetProperty="ScaleX"
+                                                                 To="1.0" Duration="0:0:0.15" />
+                                                <DoubleAnimation Storyboard.TargetName="ScaleTransform"
+                                                                 Storyboard.TargetProperty="ScaleY"
+                                                                 To="1.0" Duration="0:0:0.15" />
+                                                <DoubleAnimation Storyboard.TargetName="IconImage"
+                                                                 Storyboard.TargetProperty="Opacity"
+                                                                 To="1.0" Duration="0:0:0.15" />
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="PointerOver">
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="ScaleTransform"
+                                                                 Storyboard.TargetProperty="ScaleX"
+                                                                 To="1.1" Duration="0:0:0.15" />
+                                                <DoubleAnimation Storyboard.TargetName="ScaleTransform"
+                                                                 Storyboard.TargetProperty="ScaleY"
+                                                                 To="1.1" Duration="0:0:0.15" />
+                                                <DoubleAnimation Storyboard.TargetName="IconImage"
+                                                                 Storyboard.TargetProperty="Opacity"
+                                                                 To="0.8" Duration="0:0:0.15" />
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Pressed">
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="ScaleTransform"
+                                                                 Storyboard.TargetProperty="ScaleX"
+                                                                 To="0.95" Duration="0:0:0.1" />
+                                                <DoubleAnimation Storyboard.TargetName="ScaleTransform"
+                                                                 Storyboard.TargetProperty="ScaleY"
+                                                                 To="0.95" Duration="0:0:0.1" />
+                                                <DoubleAnimation Storyboard.TargetName="IconImage"
+                                                                 Storyboard.TargetProperty="Opacity"
+                                                                 To="0.6" Duration="0:0:0.1" />
+                                            </Storyboard>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                            </Grid>
+                        </ControlTemplate>
+                    </Button.Template>
                 </Button>
                 
                 <!-- Thank You Text -->
@@ -275,10 +331,64 @@
                         Margin="0"
                         VerticalAlignment="Center"
                         Command="{x:Bind ViewModel.ShareBillCommand}">
-                    <Image Source="ms-appx:///Assets/Styles/Share.png" 
-                           Width="90" 
-                           Height="90"
-                           Stretch="Uniform" />
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Grid Background="Transparent" RenderTransformOrigin="0.5,0.5">
+                                <Grid.RenderTransform>
+                                    <ScaleTransform x:Name="ScaleTransform" ScaleX="1" ScaleY="1" />
+                                </Grid.RenderTransform>
+                                <Image x:Name="IconImage"
+                                       Source="ms-appx:///Assets/Styles/Share.png" 
+                                       Width="90" 
+                                       Height="90"
+                                       Stretch="Uniform"
+                                       Opacity="1" />
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal">
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="ScaleTransform"
+                                                                 Storyboard.TargetProperty="ScaleX"
+                                                                 To="1.0" Duration="0:0:0.15" />
+                                                <DoubleAnimation Storyboard.TargetName="ScaleTransform"
+                                                                 Storyboard.TargetProperty="ScaleY"
+                                                                 To="1.0" Duration="0:0:0.15" />
+                                                <DoubleAnimation Storyboard.TargetName="IconImage"
+                                                                 Storyboard.TargetProperty="Opacity"
+                                                                 To="1.0" Duration="0:0:0.15" />
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="PointerOver">
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="ScaleTransform"
+                                                                 Storyboard.TargetProperty="ScaleX"
+                                                                 To="1.1" Duration="0:0:0.15" />
+                                                <DoubleAnimation Storyboard.TargetName="ScaleTransform"
+                                                                 Storyboard.TargetProperty="ScaleY"
+                                                                 To="1.1" Duration="0:0:0.15" />
+                                                <DoubleAnimation Storyboard.TargetName="IconImage"
+                                                                 Storyboard.TargetProperty="Opacity"
+                                                                 To="0.8" Duration="0:0:0.15" />
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Pressed">
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="ScaleTransform"
+                                                                 Storyboard.TargetProperty="ScaleX"
+                                                                 To="0.95" Duration="0:0:0.1" />
+                                                <DoubleAnimation Storyboard.TargetName="ScaleTransform"
+                                                                 Storyboard.TargetProperty="ScaleY"
+                                                                 To="0.95" Duration="0:0:0.1" />
+                                                <DoubleAnimation Storyboard.TargetName="IconImage"
+                                                                 Storyboard.TargetProperty="Opacity"
+                                                                 To="0.6" Duration="0:0:0.1" />
+                                            </Storyboard>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                            </Grid>
+                        </ControlTemplate>
+                    </Button.Template>
                 </Button>
             </Grid>
             
@@ -289,6 +399,63 @@
                    Stretch="Fill"
                    Margin="0,10,0,0"
                    MaxWidth="650" />
-        </StackPanel>
-    </ScrollViewer>
+            </StackPanel>
+        </ScrollViewer>
+        
+        <!-- Back Button (Top Left) - Positioned above ScrollViewer -->
+        <Button x:Name="BackButton"
+                Content="← Back"
+                Background="#404040"
+                Foreground="White"
+                FontFamily="{StaticResource EzraBoldFont}"
+                FontSize="18"
+                BorderThickness="0"
+                Padding="20,12"
+                CornerRadius="8"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Margin="20,20,0,0"
+                Click="OnBackClick"
+                Visibility="{x:Bind ViewModel.IsPreviewMode, Mode=OneWay, Converter={StaticResource InverseBoolToVisibilityConverter}}">
+            <Button.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Border x:Name="RootBorder"
+                                        Background="{TemplateBinding Background}"
+                                        CornerRadius="8"
+                                        BorderThickness="0">
+                                    <ContentPresenter x:Name="ContentPresenter"
+                                                      Content="{TemplateBinding Content}"
+                                                      Padding="{TemplateBinding Padding}"
+                                                      HorizontalContentAlignment="Center"
+                                                      VerticalContentAlignment="Center" />
+                                    <VisualStateManager.VisualStateGroups>
+                                        <VisualStateGroup x:Name="CommonStates">
+                                            <VisualState x:Name="Normal" />
+                                            <VisualState x:Name="PointerOver">
+                                                <Storyboard>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootBorder" Storyboard.TargetProperty="Background">
+                                                        <DiscreteObjectKeyFrame KeyTime="0" Value="#E53E3E" />
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                            </VisualState>
+                                            <VisualState x:Name="Pressed">
+                                                <Storyboard>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootBorder" Storyboard.TargetProperty="Background">
+                                                        <DiscreteObjectKeyFrame KeyTime="0" Value="#CC0000" />
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                            </VisualState>
+                                        </VisualStateGroup>
+                                    </VisualStateManager.VisualStateGroups>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Button.Resources>
+        </Button>
+    </Grid>
 </Page>

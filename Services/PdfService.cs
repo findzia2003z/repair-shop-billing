@@ -613,9 +613,10 @@ namespace RepairShopBilling.Services
             var tableHeaderRect = new XRect(startX, currentY, contentWidth, 35);
             gfx.DrawRectangle(new XSolidBrush(redAccent), tableHeaderRect);
             
-            gfx.DrawLine(new XPen(black, 3), startX + contentWidth * 0.6, currentY,
+            var darkGray = XColor.FromArgb(51, 51, 51);
+            gfx.DrawLine(new XPen(darkGray, 2), startX + contentWidth * 0.6, currentY,
                 startX + contentWidth * 0.6, currentY + 35);
-            gfx.DrawLine(new XPen(black, 3), startX + contentWidth * 0.8, currentY,
+            gfx.DrawLine(new XPen(darkGray, 2), startX + contentWidth * 0.8, currentY,
                 startX + contentWidth * 0.8, currentY + 35);
             
             gfx.DrawString("Services", headerFont, XBrushes.Black,
@@ -647,10 +648,10 @@ namespace RepairShopBilling.Services
                 var rowRect = new XRect(startX, currentY, contentWidth, rowHeight);
                 gfx.DrawRectangle(XBrushes.White, rowRect);
                 
-                gfx.DrawLine(new XPen(XColor.FromArgb(208, 208, 208), 2),
+                gfx.DrawLine(new XPen(XColor.FromArgb(51, 51, 51), 2),
                     startX + contentWidth * 0.6, currentY,
                     startX + contentWidth * 0.6, currentY + rowHeight);
-                gfx.DrawLine(new XPen(XColor.FromArgb(208, 208, 208), 2),
+                gfx.DrawLine(new XPen(XColor.FromArgb(51, 51, 51), 2),
                     startX + contentWidth * 0.8, currentY,
                     startX + contentWidth * 0.8, currentY + rowHeight);
                 

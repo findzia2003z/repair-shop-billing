@@ -65,5 +65,15 @@ namespace RepairShopBilling.Views
                 mainViewModel.NavigateToBillCreation();
             }
         }
+
+        private void OnBackClick(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+        {
+            // Navigate back to Bill History
+            var mainViewModel = MainWindow.GetMainViewModel();
+            if (mainViewModel != null)
+            {
+                mainViewModel.NavigateToBillHistory();
+            }
+        }
     }
 }

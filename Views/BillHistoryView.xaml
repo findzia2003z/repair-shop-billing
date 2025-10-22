@@ -82,40 +82,64 @@
                                 Margin="8"
                                 Command="{Binding DataContext.SelectBillCommand, ElementName=BillsGridView}"
                                 CommandParameter="{x:Bind}">
-                            <Border Background="Black"
-                                    CornerRadius="12"
-                                    Padding="20,16">
-                                <StackPanel Spacing="4">
-                                    <!-- Customer Name -->
-                                    <TextBlock Text="{x:Bind CustomerName}"
-                                               Foreground="White"
-                                               FontFamily="{StaticResource EzraBoldFont}"
-                                               FontSize="18"
-                                               TextTrimming="CharacterEllipsis"
-                                               HorizontalAlignment="Center" />
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border x:Name="RootBorder"
+                                            Background="Black"
+                                            CornerRadius="12"
+                                            Padding="20,16">
+                                        <StackPanel Spacing="4">
+                                            <!-- Customer Name -->
+                                            <TextBlock Text="{Binding CustomerName}"
+                                                       Foreground="White"
+                                                       FontFamily="{StaticResource EzraBoldFont}"
+                                                       FontSize="18"
+                                                       TextTrimming="CharacterEllipsis"
+                                                       HorizontalAlignment="Center" />
 
-                                    <!-- Date -->
-                                    <TextBlock Text="{x:Bind Date, Mode=OneWay, Converter={StaticResource ShortDateConverter}}"
-                                               Foreground="#808080"
-                                               FontSize="14"
-                                               HorizontalAlignment="Center"
-                                               Margin="0,4,0,8" />
+                                            <!-- Date -->
+                                            <TextBlock Text="{Binding Date, Converter={StaticResource ShortDateConverter}}"
+                                                       Foreground="#808080"
+                                                       FontSize="14"
+                                                       HorizontalAlignment="Center"
+                                                       Margin="0,4,0,8" />
 
-                                    <!-- Total Amount -->
-                                    <StackPanel Orientation="Horizontal"
-                                                HorizontalAlignment="Center"
-                                                Spacing="8">
-                                        <TextBlock Text="Total:"
-                                                   Foreground="White"
-                                                   FontFamily="{StaticResource EzraBoldFont}"
-                                                   FontSize="16" />
-                                        <TextBlock Text="{x:Bind TotalAmount, Mode=OneWay, Converter={StaticResource CurrencyConverter}}"
-                                                   Foreground="#E53E3E"
-                                                   FontFamily="{StaticResource EzraBoldFont}"
-                                                   FontSize="16" />
-                                    </StackPanel>
-                                </StackPanel>
-                            </Border>
+                                            <!-- Total Amount -->
+                                            <StackPanel Orientation="Horizontal"
+                                                        HorizontalAlignment="Center"
+                                                        Spacing="8">
+                                                <TextBlock Text="Total:"
+                                                           Foreground="White"
+                                                           FontFamily="{StaticResource EzraBoldFont}"
+                                                           FontSize="16" />
+                                                <TextBlock Text="{Binding TotalAmount, Converter={StaticResource CurrencyConverter}}"
+                                                           Foreground="#E53E3E"
+                                                           FontFamily="{StaticResource EzraBoldFont}"
+                                                           FontSize="16" />
+                                            </StackPanel>
+                                        </StackPanel>
+                                        <VisualStateManager.VisualStateGroups>
+                                            <VisualStateGroup x:Name="CommonStates">
+                                                <VisualState x:Name="Normal" />
+                                                <VisualState x:Name="PointerOver">
+                                                    <Storyboard>
+                                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootBorder" Storyboard.TargetProperty="Background">
+                                                            <DiscreteObjectKeyFrame KeyTime="0" Value="#1A1A1A" />
+                                                        </ObjectAnimationUsingKeyFrames>
+                                                    </Storyboard>
+                                                </VisualState>
+                                                <VisualState x:Name="Pressed">
+                                                    <Storyboard>
+                                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootBorder" Storyboard.TargetProperty="Background">
+                                                            <DiscreteObjectKeyFrame KeyTime="0" Value="#2A2A2A" />
+                                                        </ObjectAnimationUsingKeyFrames>
+                                                    </Storyboard>
+                                                </VisualState>
+                                            </VisualStateGroup>
+                                        </VisualStateManager.VisualStateGroups>
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
                         </Button>
                     </DataTemplate>
                 </GridView.ItemTemplate>
