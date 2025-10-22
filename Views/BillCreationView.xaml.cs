@@ -25,10 +25,14 @@ namespace RepairShopBilling.Views
         {
             base.OnNavigatedTo(e);
             
+            System.Diagnostics.Debug.WriteLine($"BillCreationView: OnNavigatedTo - PreviewBillData is {(BillCreationViewModel.PreviewBillData != null ? "NOT NULL" : "NULL")}");
+            
             // Check if there's preview bill data to restore
             if (BillCreationViewModel.PreviewBillData != null)
             {
                 var bill = BillCreationViewModel.PreviewBillData;
+                
+                System.Diagnostics.Debug.WriteLine($"BillCreationView: Restoring bill data for {bill.CustomerName}");
                 
                 // Restore customer information
                 ViewModel.CustomerName = bill.CustomerName;

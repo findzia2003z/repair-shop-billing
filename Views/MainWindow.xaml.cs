@@ -34,9 +34,26 @@ namespace RepairShopBilling.Views
             {
                 string tag = selectedItem.Tag?.ToString();
                 
+                System.Diagnostics.Debug.WriteLine($"MainWindow: NavigationView_SelectionChanged to {tag}, CurrentView={ViewModel.CurrentView}, PreviewBillData is {(BillCreationViewModel.PreviewBillData != null ? "NOT NULL" : "NULL")}");
+                
+                // Don't navigate if we're already on the target page (prevents double navigation)
+                if ((tag == "BillCreation" && ViewModel.CurrentView == "BillCreation") ||
+                    (tag == "BillHistory" && ViewModel.CurrentView == "BillHistory"))
+                {
+                    System.Diagnostics.Debug.WriteLine("MainWindow: Already on target page, skipping navigation");
+                    return;
+                }
+                
                 switch (tag)
                 {
                     case "BillCreation":
+                        // Only clear preview data if we're currently viewing a bill
+                        // This allows "Back to Edit" to work, but clicking nav item clears the form
+                        if (ViewModel.CurrentView == "BillViewer")
+                        {
+                            System.Diagnostics.Debug.WriteLine("MainWindow: Clearing PreviewBillData because navigating from BillViewer");
+                            BillCreationViewModel.PreviewBillData = null;
+                        }
                         ViewModel.NavigateToBillCreation();
                         NavigateToPage(typeof(BillCreationView));
                         break;
@@ -50,6 +67,8 @@ namespace RepairShopBilling.Views
 
         private void OnViewModelViewChanged(string viewName)
         {
+            System.Diagnostics.Debug.WriteLine($"MainWindow: OnViewModelViewChanged to {viewName}, PreviewBillData is {(BillCreationViewModel.PreviewBillData != null ? "NOT NULL" : "NULL")}");
+            
             // Handle programmatic navigation from ViewModel
             Type pageType = viewName switch
             {
@@ -73,7 +92,8 @@ namespace RepairShopBilling.Views
                 _ => null
             };
 
-            if (itemToSelect != null && MainNavigationView.SelectedItem != itemToSelect)
+            // Always update the selected item, even if it's null (to deselect)
+            if (MainNavigationView.SelectedItem != itemToSelect)
             {
                 MainNavigationView.SelectedItem = itemToSelect;
             }

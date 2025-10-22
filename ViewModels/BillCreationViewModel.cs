@@ -392,7 +392,7 @@ namespace RepairShopBilling.ViewModels
                 var dialog = new ContentDialog()
                 {
                     Title = "Bill Saved",
-                    Content = $"Bill for {CustomerName} has been saved successfully.\nBill ID: {billId}",
+                    Content = $"Bill for {CustomerName} has been saved successfully.",
                     CloseButtonText = "OK",
                     XamlRoot = app?.MainWindow?.Content.XamlRoot
                 };
