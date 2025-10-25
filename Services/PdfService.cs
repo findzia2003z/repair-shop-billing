@@ -222,6 +222,10 @@ namespace RepairShopBilling.Services
         private void DrawFirstPage(XGraphics gfx, Bill bill, List<BillItem> items, double pageWidth, double pageHeight, 
             double startX, double contentWidth, double rowHeight, bool isOnlyPage)
         {
+            // Draw dark gray background for entire page (dark mode)
+            var darkBackground = XColor.FromArgb(51, 51, 51);
+            gfx.DrawRectangle(new XSolidBrush(darkBackground), 0, 0, pageWidth, pageHeight);
+            
             var currentY = 50.0;
             
             // Fonts
@@ -264,9 +268,9 @@ namespace RepairShopBilling.Services
             }
             else
             {
-                // Draw "Continued on next page"
+                // Draw "Continued on next page" in light gray
                 gfx.DrawString("(Continued on next page...)", new XFont("Arial", 10, XFontStyleEx.Italic),
-                    XBrushes.Gray, new XRect(startX, currentY + 10, contentWidth, 20), XStringFormats.Center);
+                    new XSolidBrush(XColor.FromArgb(200, 200, 200)), new XRect(startX, currentY + 10, contentWidth, 20), XStringFormats.Center);
             }
         }
         
@@ -276,6 +280,10 @@ namespace RepairShopBilling.Services
         private void DrawContinuationPage(XGraphics gfx, Bill bill, List<BillItem> items, double pageWidth, double pageHeight,
             double startX, double contentWidth, double rowHeight, bool isLastPage, int pageNumber)
         {
+            // Draw dark gray background for entire page (dark mode)
+            var darkBackground = XColor.FromArgb(51, 51, 51);
+            gfx.DrawRectangle(new XSolidBrush(darkBackground), 0, 0, pageWidth, pageHeight);
+            
             var currentY = 50.0;
             var normalFont = new XFont("Arial", 11, XFontStyleEx.Regular);
             var headerFont = new XFont("Arial", 16, XFontStyleEx.Bold);
@@ -284,8 +292,8 @@ namespace RepairShopBilling.Services
             var redAccent = XColor.FromArgb(229, 62, 62);
             var black = XColors.Black;
             
-            // Page number
-            gfx.DrawString($"Page {pageNumber}", new XFont("Arial", 10), XBrushes.Gray,
+            // Page number in light gray
+            gfx.DrawString($"Page {pageNumber}", new XFont("Arial", 10), new XSolidBrush(XColor.FromArgb(200, 200, 200)),
                 new XRect(0, 20, pageWidth, 20), XStringFormats.TopCenter);
             
             // Table Header
@@ -310,7 +318,7 @@ namespace RepairShopBilling.Services
             else
             {
                 gfx.DrawString("(Continued on next page...)", new XFont("Arial", 10, XFontStyleEx.Italic),
-                    XBrushes.Gray, new XRect(startX, currentY + 10, contentWidth, 20), XStringFormats.Center);
+                    new XSolidBrush(XColor.FromArgb(200, 200, 200)), new XRect(startX, currentY + 10, contentWidth, 20), XStringFormats.Center);
             }
         }
 
@@ -646,8 +654,10 @@ namespace RepairShopBilling.Services
             foreach (var item in items)
             {
                 var rowRect = new XRect(startX, currentY, contentWidth, rowHeight);
+                // Draw white background for table rows (like in the image)
                 gfx.DrawRectangle(XBrushes.White, rowRect);
                 
+                // Draw vertical separators in dark gray
                 gfx.DrawLine(new XPen(XColor.FromArgb(51, 51, 51), 2),
                     startX + contentWidth * 0.6, currentY,
                     startX + contentWidth * 0.6, currentY + rowHeight);
@@ -655,12 +665,14 @@ namespace RepairShopBilling.Services
                     startX + contentWidth * 0.8, currentY,
                     startX + contentWidth * 0.8, currentY + rowHeight);
                 
+                // Draw bottom border in light gray
                 gfx.DrawLine(new XPen(XColor.FromArgb(208, 208, 208), 1),
                     startX, currentY + rowHeight,
                     startX + contentWidth, currentY + rowHeight);
                 
                 var textY = currentY + 7;
                 
+                // Draw text in dark gray (not white) since background is white
                 gfx.DrawString(item.Description, itemFont, new XSolidBrush(darkGray),
                     new XRect(startX + 15, textY, contentWidth * 0.6 - 20, rowHeight), XStringFormats.TopLeft);
                 gfx.DrawString(item.Quantity.ToString(), itemFont, new XSolidBrush(darkGray),

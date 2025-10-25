@@ -8,15 +8,15 @@
   IgnorableNamespaces="uap rescap">
 
   <Identity
-    Name="0c49c448-8f0d-4546-93f5-769e1b4dea21"
-    Publisher="CN=User Name"
-    Version="1.0.0.0" />
+    Name="RepairShopBilling"
+    Publisher="CN=Zia Ur Rehman"
+    Version="1.0.1.0" />
 
   <mp:PhoneIdentity PhoneProductId="0c49c448-8f0d-4546-93f5-769e1b4dea21" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
-    <DisplayName>RepairShopBilling</DisplayName>
-    <PublisherDisplayName>User Name</PublisherDisplayName>
+    <DisplayName>Repair Shop Billing System</DisplayName>
+    <PublisherDisplayName>RepairShop</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 
