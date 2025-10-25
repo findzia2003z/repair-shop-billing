@@ -239,13 +239,13 @@ namespace RepairShopBilling.Services
             var redAccent = XColor.FromArgb(229, 62, 62);
             var black = XColors.Black;
             
-            // 1. Header Logo
+            // 1. Header Logo (black bar at top)
             DrawHeader(gfx, pageWidth, titleFont);
-            currentY = 80;
+            currentY = 60; // Position directly after header (no gap)
             
-            // 2. Customer Header
-            DrawCustomerHeader(gfx, bill, startX, currentY, contentWidth, headerFont, lightGray);
-            currentY += 40;
+            // 2. Customer Header (gray rounded bar with customer name and date)
+            DrawCustomerHeader(gfx, bill, pageWidth, currentY, headerFont, lightGray);
+            currentY += 50; // Space after customer header (40px bar + 10px gap before table)
             
             // 3. Table Header
             DrawTableHeader(gfx, startX, currentY, contentWidth, headerFont, redAccent, black);
@@ -585,9 +585,10 @@ namespace RepairShopBilling.Services
                 if (File.Exists(logoPath))
                 {
                     var logoImage = XImage.FromFile(logoPath);
-                    var logoHeight = 40;
+                    // Make logo smaller to match the design
+                    var logoHeight = 35;
                     var logoWidth = logoImage.PixelWidth * logoHeight / logoImage.PixelHeight;
-                    gfx.DrawImage(logoImage, (pageWidth - logoWidth) / 2, 10, logoWidth, logoHeight);
+                    gfx.DrawImage(logoImage, (pageWidth - logoWidth) / 2, 12, logoWidth, logoHeight);
                 }
                 else
                 {
@@ -602,18 +603,60 @@ namespace RepairShopBilling.Services
             }
         }
         
-        private void DrawCustomerHeader(XGraphics gfx, Bill bill, double startX, double currentY, double contentWidth, XFont headerFont, XColor lightGray)
+        private void DrawCustomerHeader(XGraphics gfx, Bill bill, double pageWidth, double currentY, XFont headerFont, XColor lightGray)
         {
-            var customerHeaderRect = new XRect(startX, currentY, contentWidth, 40);
-            gfx.DrawRoundedRectangle(new XPen(lightGray), new XSolidBrush(lightGray),
-                customerHeaderRect, new XSize(12, 12));
+            // Draw full-width gray bar with rounded bottom corners only (thinner bar)
+            var barHeight = 40.0;
+            var cornerRadius = 15.0;
             
-            gfx.DrawString(bill.CustomerName, headerFont, XBrushes.White,
-                new XRect(startX + 20, currentY + 10, contentWidth / 2, 40), XStringFormats.TopLeft);
+            // Create a path for rounded bottom corners only
+            var path = new XGraphicsPath();
+            path.AddLine(0, currentY, pageWidth, currentY); // Top edge (straight)
+            path.AddLine(pageWidth, currentY, pageWidth, currentY + barHeight - cornerRadius); // Right edge
+            path.AddArc(pageWidth - cornerRadius * 2, currentY + barHeight - cornerRadius * 2, 
+                cornerRadius * 2, cornerRadius * 2, 0, 90); // Bottom-right corner
+            path.AddLine(pageWidth - cornerRadius, currentY + barHeight, cornerRadius, currentY + barHeight); // Bottom edge
+            path.AddArc(0, currentY + barHeight - cornerRadius * 2, 
+                cornerRadius * 2, cornerRadius * 2, 90, 90); // Bottom-left corner
+            path.AddLine(0, currentY + barHeight - cornerRadius, 0, currentY); // Left edge
+            path.CloseFigure();
             
-            var dateStr = bill.Date.ToString("M-dd-yy");
-            gfx.DrawString(dateStr, headerFont, XBrushes.White,
-                new XRect(startX, currentY + 10, contentWidth - 20, 40), XStringFormats.TopRight);
+            gfx.DrawPath(new XPen(lightGray), new XSolidBrush(lightGray), path);
+            
+            // Use Ezra Extra Bold font for customer name and date (larger size)
+            XFont ezraFont;
+            try
+            {
+                var options = new XPdfFontOptions(PdfFontEncoding.Unicode, PdfFontEmbedding.Always);
+                ezraFont = new XFont("EzraCustom", 24, XFontStyleEx.Bold, options);
+            }
+            catch
+            {
+                ezraFont = new XFont("Arial", 24, XFontStyleEx.Bold);
+            }
+            
+            // Calculate vertical center position manually
+            // Font size is 24, so approximate text height is ~24-28 pixels
+            var fontSize = 24.0;
+            var textVerticalOffset = (barHeight - fontSize) / 2;
+            var textY = currentY + textVerticalOffset;
+            
+            // Measure the date text width to position customer name properly
+            var dateStr = bill.Date.ToString("M-d-yy");
+            var dateSize = gfx.MeasureString(dateStr, ezraFont);
+            var dateWidth = dateSize.Width;
+            
+            // Calculate available width for customer name (full width minus date width and margins)
+            var margin = 40.0; // Margin from edges
+            var availableWidth = pageWidth - dateWidth - (margin * 3); // 3 margins: left, middle, right
+            
+            // Draw customer name centered in the available space on the left
+            gfx.DrawString(bill.CustomerName, ezraFont, XBrushes.White,
+                new XRect(margin, textY, availableWidth, barHeight), XStringFormats.TopCenter);
+            
+            // Draw date on the right with margin
+            gfx.DrawString(dateStr, ezraFont, XBrushes.White,
+                new XRect(pageWidth - dateWidth - margin, textY, dateWidth, barHeight), XStringFormats.TopLeft);
         }
         
         private void DrawTableHeader(XGraphics gfx, double startX, double currentY, double contentWidth, XFont headerFont, XColor redAccent, XColor black)
