@@ -13,6 +13,8 @@
             IsBackButtonVisible="Collapsed"
             IsSettingsVisible="False"
             PaneDisplayMode="Left"
+            IsPaneToggleButtonVisible="False"
+            IsPaneOpen="False"
             SelectionChanged="NavigationView_SelectionChanged">
             
             <NavigationView.MenuItems>

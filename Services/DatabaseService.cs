@@ -510,12 +510,12 @@ public class DatabaseService : IDatabaseService
         return new List<Service>
         {
             // HOURS category - Fixed prices
-            new Service { Name = "Hours - Red", Price = 50.00m, Category = "HOURS", IsActive = true },
-            new Service { Name = "Hours - Blue", Price = 75.00m, Category = "HOURS", IsActive = true },
+            new Service { Name = "Hours - Residential", Price = 50.00m, Category = "HOURS", IsActive = true },
+            new Service { Name = "Hours - Business", Price = 75.00m, Category = "HOURS", IsActive = true },
             
             // VHS CONVERT category - Fixed prices
-            new Service { Name = "VHS Convert - Red", Price = 10.00m, Category = "VHS CONVERT", IsActive = true },
-            new Service { Name = "VHS Convert - Blue", Price = 5.00m, Category = "VHS CONVERT", IsActive = true },
+            new Service { Name = "VHS Convert - Small", Price = 10.00m, Category = "VHS CONVERT", IsActive = true },
+            new Service { Name = "VHS Convert - Bulk", Price = 5.00m, Category = "VHS CONVERT", IsActive = true },
             
             // PHOTO PRINT category - Fixed prices
             new Service { Name = "Photo Print B&W", Price = 20.00m, Category = "PHOTO PRINT", IsActive = true },
@@ -532,8 +532,8 @@ public class DatabaseService : IDatabaseService
             // LASER category - Editable prices (set to 0 for manual entry)
             new Service { Name = "Materials", Price = 0.00m, Category = "LASER", IsActive = true },
             new Service { Name = "Packaging", Price = 0.00m, Category = "LASER", IsActive = true },
-            new Service { Name = "Time Mark", Price = 0.00m, Category = "LASER", IsActive = true },
-            new Service { Name = "Time Engrave", Price = 0.00m, Category = "LASER", IsActive = true },
+            new Service { Name = "Time Marking", Price = 0.00m, Category = "LASER", IsActive = true },
+            new Service { Name = "Time Engraving", Price = 0.00m, Category = "LASER", IsActive = true },
             
             // EQUIPMENT category - Editable prices (set to 0 for manual entry)
             new Service { Name = "RAM", Price = 0.00m, Category = "EQUIPMENT", IsActive = true },

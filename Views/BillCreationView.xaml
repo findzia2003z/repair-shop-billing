@@ -40,8 +40,8 @@
                     <TextBlock 
                         Text="Customer Information" 
                         Foreground="{StaticResource WhiteTextBrush}"
-                        FontSize="18"
-                        FontWeight="SemiBold" />
+                        FontSize="28"
+                        FontFamily="{StaticResource EzraBoldFont}" />
                     
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -54,7 +54,8 @@
                             <TextBlock 
                                 Text="Customer Name" 
                                 Foreground="{StaticResource LightGreyTextBrush}"
-                                FontSize="14" />
+                                FontSize="22"
+                                FontFamily="{StaticResource EzraBoldFont}" />
                             <TextBox 
                                 x:Name="CustomerNameTextBox"
                                 Style="{StaticResource RoundedTextBox}"
@@ -66,7 +67,8 @@
                             <TextBlock 
                                 Text="Date" 
                                 Foreground="{StaticResource LightGreyTextBrush}"
-                                FontSize="14" />
+                                FontSize="22"
+                                FontFamily="{StaticResource EzraBoldFont}" />
                             <Border 
                                 Background="{StaticResource InputBackgroundBrush}"
                                 BorderBrush="{StaticResource LightGreyTextBrush}"
@@ -95,8 +97,8 @@
                         <TextBlock 
                             Text="Service Categories" 
                             Foreground="{StaticResource WhiteTextBrush}"
-                            FontSize="18"
-                            FontWeight="SemiBold" />
+                            FontSize="28"
+                            FontFamily="{StaticResource EzraBoldFont}" />
                         
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -116,22 +118,22 @@
                                 <Button Content="Hours" 
                                        Background="#E53E3E" 
                                        Foreground="White"
-                                       FontFamily="ms-appx:///Assets/Fonts/Ezra Bold.otf#Ezra"
-                                       FontSize="16"
+                                       FontFamily="{StaticResource EzraBoldFont}"
+                                       FontSize="22"
                                        Height="50"
                                        HorizontalAlignment="Stretch"
                                        Click="OnServiceClick"
-                                       Tag="Hours - Red|50"/>
+                                       Tag="Hours - Residential|50"/>
                                 <Button Content="Hours" 
                                        Background="#3182CE" 
                                        Foreground="White"
-                                       FontFamily="ms-appx:///Assets/Fonts/Ezra Bold.otf#Ezra"
-                                       FontSize="16"
+                                       FontFamily="{StaticResource EzraBoldFont}"
+                                       FontSize="22"
                                        Height="50"
                                        HorizontalAlignment="Stretch"
                                        Margin="0,2,0,0"
                                        Click="OnServiceClick"
-                                       Tag="Hours - Blue|75"/>
+                                       Tag="Hours - Business|75"/>
                             </StackPanel>
                             
                             <!-- VHS Convert Section -->
@@ -140,21 +142,21 @@
                                        Background="#E53E3E" 
                                        Foreground="White"
                                        FontFamily="{StaticResource EzraBoldFont}"
-                                       FontSize="16"
+                                       FontSize="22"
                                        Height="50"
                                        HorizontalAlignment="Stretch"
                                        Click="OnServiceClick"
-                                       Tag="VHS Convert - Red|10"/>
+                                       Tag="VHS Convert - Small|10"/>
                                 <Button Content="VHS Convert" 
                                        Background="#3182CE" 
                                        Foreground="White"
                                        FontFamily="{StaticResource EzraBoldFont}"
-                                       FontSize="16"
+                                       FontSize="22"
                                        Height="50"
                                        HorizontalAlignment="Stretch"
                                        Margin="0,2,0,0"
                                        Click="OnServiceClick"
-                                       Tag="VHS Convert - Blue|5"/>
+                                       Tag="VHS Convert - Bulk|5"/>
                             </StackPanel>
                             
                             <!-- Photo Print Section -->
@@ -163,7 +165,7 @@
                                        Background="#E53E3E" 
                                        Foreground="White"
                                        FontFamily="{StaticResource EzraBoldFont}"
-                                       FontSize="16"
+                                       FontSize="22"
                                        Height="50"
                                        HorizontalAlignment="Stretch"/>
                                 <StackPanel Background="Black" Margin="0,2,0,0">
@@ -171,7 +173,7 @@
                                            Background="Black" 
                                            Foreground="White"
                                            FontFamily="{StaticResource EzraBoldFont}"
-                                           FontSize="14"
+                                           FontSize="20"
                                            Height="40"
                                            HorizontalAlignment="Stretch"
                                            BorderThickness="0"
@@ -181,7 +183,7 @@
                                            Background="Black" 
                                            Foreground="White"
                                            FontFamily="{StaticResource EzraBoldFont}"
-                                           FontSize="14"
+                                           FontSize="20"
                                            Height="40"
                                            HorizontalAlignment="Stretch"
                                            BorderThickness="0"
@@ -193,14 +195,13 @@
                             <!-- OS X Section -->
                             <StackPanel Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Margin="5">
                                 <Button x:Name="OSXHeaderButton"
-                                       Content="OS X ▼" 
+                                       Content="OS X" 
                                        Background="#E53E3E" 
                                        Foreground="White"
                                        FontFamily="{StaticResource EzraBoldFont}"
-                                       FontSize="16"
+                                       FontSize="22"
                                        Height="50"
-                                       HorizontalAlignment="Stretch"
-                                       Click="OnToggleOSXClick"/>
+                                       HorizontalAlignment="Stretch"/>
                                 <StackPanel x:Name="OSXSubPanel" 
                                            Background="Black" 
                                            Margin="0,2,0,0"
@@ -209,7 +210,7 @@
                                            Background="Black" 
                                            Foreground="White"
                                            FontFamily="{StaticResource EzraBoldFont}"
-                                           FontSize="14"
+                                           FontSize="20"
                                            Height="35"
                                            HorizontalAlignment="Stretch"
                                            BorderThickness="0"
@@ -219,7 +220,7 @@
                                            Background="Black" 
                                            Foreground="White"
                                            FontFamily="{StaticResource EzraBoldFont}"
-                                           FontSize="14"
+                                           FontSize="20"
                                            Height="35"
                                            HorizontalAlignment="Stretch"
                                            BorderThickness="0"
@@ -229,7 +230,7 @@
                                            Background="Black" 
                                            Foreground="White"
                                            FontFamily="{StaticResource EzraBoldFont}"
-                                           FontSize="14"
+                                           FontSize="20"
                                            Height="35"
                                            HorizontalAlignment="Stretch"
                                            BorderThickness="0"
@@ -239,7 +240,7 @@
                                            Background="Black" 
                                            Foreground="White"
                                            FontFamily="{StaticResource EzraBoldFont}"
-                                           FontSize="14"
+                                           FontSize="20"
                                            Height="35"
                                            HorizontalAlignment="Stretch"
                                            BorderThickness="0"
@@ -249,7 +250,7 @@
                                            Background="Black" 
                                            Foreground="White"
                                            FontFamily="{StaticResource EzraBoldFont}"
-                                           FontSize="14"
+                                           FontSize="20"
                                            Height="35"
                                            HorizontalAlignment="Stretch"
                                            BorderThickness="0"
@@ -259,7 +260,7 @@
                                            Background="Black" 
                                            Foreground="White"
                                            FontFamily="{StaticResource EzraBoldFont}"
-                                           FontSize="14"
+                                           FontSize="20"
                                            Height="35"
                                            HorizontalAlignment="Stretch"
                                            BorderThickness="0"
@@ -271,14 +272,13 @@
                             <!-- Laser Section -->
                             <StackPanel Grid.Column="1" Grid.Row="2" Margin="5">
                                 <Button x:Name="LaserHeaderButton"
-                                       Content="LASER ▼" 
+                                       Content="LASER" 
                                        Background="#E53E3E" 
                                        Foreground="White"
                                        FontFamily="{StaticResource EzraBoldFont}"
-                                       FontSize="16"
+                                       FontSize="22"
                                        Height="50"
-                                       HorizontalAlignment="Stretch"
-                                       Click="OnToggleLaserClick"/>
+                                       HorizontalAlignment="Stretch"/>
                                 <StackPanel x:Name="LaserSubPanel" 
                                            Background="Black" 
                                            Margin="0,2,0,0"
@@ -287,7 +287,7 @@
                                            Background="Black" 
                                            Foreground="White"
                                            FontFamily="{StaticResource EzraBoldFont}"
-                                           FontSize="14"
+                                           FontSize="20"
                                            Height="35"
                                            HorizontalAlignment="Stretch"
                                            BorderThickness="0"
@@ -297,75 +297,158 @@
                                            Background="Black" 
                                            Foreground="White"
                                            FontFamily="{StaticResource EzraBoldFont}"
-                                           FontSize="14"
+                                           FontSize="20"
                                            Height="35"
                                            HorizontalAlignment="Stretch"
                                            BorderThickness="0"
                                            Click="OnEditablePriceServiceClick"
                                            Tag="Packaging|LASER"/>
-                                    <Button Content="Time Mark" 
+                                    <Button Content="Time Marking" 
                                            Background="Black" 
                                            Foreground="White"
                                            FontFamily="{StaticResource EzraBoldFont}"
-                                           FontSize="14"
+                                           FontSize="20"
                                            Height="35"
                                            HorizontalAlignment="Stretch"
                                            BorderThickness="0"
                                            Click="OnEditablePriceServiceClick"
-                                           Tag="Time Mark|LASER"/>
-                                    <Button Content="Time Engrave" 
+                                           Tag="Time Marking|LASER"/>
+                                    <Button Content="Time Engraving" 
                                            Background="Black" 
                                            Foreground="White"
                                            FontFamily="{StaticResource EzraBoldFont}"
-                                           FontSize="14"
+                                           FontSize="20"
                                            Height="35"
                                            HorizontalAlignment="Stretch"
                                            BorderThickness="0"
                                            Click="OnEditablePriceServiceClick"
-                                           Tag="Time Engrave|LASER"/>
+                                           Tag="Time Engraving|LASER"/>
+                                    <Button Content="Add-Ons" 
+                                           Background="Black" 
+                                           Foreground="White"
+                                           FontFamily="{StaticResource EzraBoldFont}"
+                                           FontSize="20"
+                                           Height="35"
+                                           HorizontalAlignment="Stretch"
+                                           BorderThickness="0"
+                                           Click="OnEditablePriceServiceClick"
+                                           Tag="Add-Ons|LASER"/>
                                 </StackPanel>
                             </StackPanel>
                             
                             <!-- Equipment Section -->
                             <StackPanel Grid.Column="2" Grid.Row="0" Grid.RowSpan="3" Margin="5">
                                 <Button x:Name="EquipmentHeaderButton"
-                                       Content="Equipment ▼" 
+                                       Content="Equipment" 
                                        Background="#E53E3E" 
                                        Foreground="White"
                                        FontFamily="{StaticResource EzraBoldFont}"
-                                       FontSize="16"
+                                       FontSize="22"
                                        Height="50"
-                                       HorizontalAlignment="Stretch"
-                                       Click="OnToggleEquipmentClick"/>
+                                       HorizontalAlignment="Stretch"/>
                                 <StackPanel x:Name="EquipmentSubPanel" 
                                            Background="Black" 
                                            Margin="0,2,0,0"
                                            Visibility="Visible">
-                                    <Button Content="RAM" 
-                                           Background="Black" 
-                                           Foreground="White"
-                                           FontFamily="{StaticResource EzraBoldFont}"
-                                           FontSize="14"
-                                           Height="35"
-                                           HorizontalAlignment="Stretch"
-                                           BorderThickness="0"
-                                           Click="OnEditablePriceServiceClick"
-                                           Tag="RAM|EQUIPMENT"/>
-                                    <Button Content="Laptop" 
-                                           Background="Black" 
-                                           Foreground="White"
-                                           FontFamily="{StaticResource EzraBoldFont}"
-                                           FontSize="14"
-                                           Height="35"
-                                           HorizontalAlignment="Stretch"
-                                           BorderThickness="0"
-                                           Click="OnEditablePriceServiceClick"
-                                           Tag="Laptop|EQUIPMENT"/>
+                                    <StackPanel>
+                                        <Button x:Name="RAMHeaderButton"
+                                               Content="RAM" 
+                                               Background="Black" 
+                                               Foreground="White"
+                                               FontFamily="{StaticResource EzraBoldFont}"
+                                               FontSize="20"
+                                               Height="35"
+                                               HorizontalAlignment="Stretch"
+                                               BorderThickness="0"
+                                               Click="OnToggleRAMClick"/>
+                                        <StackPanel x:Name="RAMSubPanel"
+                                                   Background="#1a1a1a"
+                                                   Visibility="Collapsed"
+                                                   Margin="10,0,0,0">
+                                            <Button Content="8GB" 
+                                                   Background="#1a1a1a" 
+                                                   Foreground="White"
+                                                   FontFamily="{StaticResource EzraBoldFont}"
+                                                   FontSize="18"
+                                                   Height="30"
+                                                   HorizontalAlignment="Stretch"
+                                                   BorderThickness="0"
+                                                   Click="OnEditablePriceServiceClick"
+                                                   Tag="RAM 8GB|EQUIPMENT"/>
+                                            <Button Content="16GB" 
+                                                   Background="#1a1a1a" 
+                                                   Foreground="White"
+                                                   FontFamily="{StaticResource EzraBoldFont}"
+                                                   FontSize="18"
+                                                   Height="30"
+                                                   HorizontalAlignment="Stretch"
+                                                   BorderThickness="0"
+                                                   Click="OnEditablePriceServiceClick"
+                                                   Tag="RAM 16GB|EQUIPMENT"/>
+                                            <Button Content="32GB" 
+                                                   Background="#1a1a1a" 
+                                                   Foreground="White"
+                                                   FontFamily="{StaticResource EzraBoldFont}"
+                                                   FontSize="18"
+                                                   Height="30"
+                                                   HorizontalAlignment="Stretch"
+                                                   BorderThickness="0"
+                                                   Click="OnEditablePriceServiceClick"
+                                                   Tag="RAM 32GB|EQUIPMENT"/>
+                                            <Button Content="64GB" 
+                                                   Background="#1a1a1a" 
+                                                   Foreground="White"
+                                                   FontFamily="{StaticResource EzraBoldFont}"
+                                                   FontSize="18"
+                                                   Height="30"
+                                                   HorizontalAlignment="Stretch"
+                                                   BorderThickness="0"
+                                                   Click="OnEditablePriceServiceClick"
+                                                   Tag="RAM 64GB|EQUIPMENT"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                    <StackPanel>
+                                        <Button x:Name="LaptopHeaderButton"
+                                               Content="Laptop" 
+                                               Background="Black" 
+                                               Foreground="White"
+                                               FontFamily="{StaticResource EzraBoldFont}"
+                                               FontSize="20"
+                                               Height="35"
+                                               HorizontalAlignment="Stretch"
+                                               BorderThickness="0"
+                                               Click="OnToggleLaptopClick"/>
+                                        <StackPanel x:Name="LaptopSubPanel"
+                                                   Background="#1a1a1a"
+                                                   Visibility="Collapsed"
+                                                   Margin="10,0,0,0">
+                                            <Button Content="14-inch" 
+                                                   Background="#1a1a1a" 
+                                                   Foreground="White"
+                                                   FontFamily="{StaticResource EzraBoldFont}"
+                                                   FontSize="18"
+                                                   Height="30"
+                                                   HorizontalAlignment="Stretch"
+                                                   BorderThickness="0"
+                                                   Click="OnEditablePriceServiceClick"
+                                                   Tag="Laptop 14-inch|EQUIPMENT"/>
+                                            <Button Content="15.6-inch" 
+                                                   Background="#1a1a1a" 
+                                                   Foreground="White"
+                                                   FontFamily="{StaticResource EzraBoldFont}"
+                                                   FontSize="18"
+                                                   Height="30"
+                                                   HorizontalAlignment="Stretch"
+                                                   BorderThickness="0"
+                                                   Click="OnEditablePriceServiceClick"
+                                                   Tag="Laptop 15.6-inch|EQUIPMENT"/>
+                                        </StackPanel>
+                                    </StackPanel>
                                     <Button Content="Desktop" 
                                            Background="Black" 
                                            Foreground="White"
                                            FontFamily="{StaticResource EzraBoldFont}"
-                                           FontSize="14"
+                                           FontSize="20"
                                            Height="35"
                                            HorizontalAlignment="Stretch"
                                            BorderThickness="0"
@@ -375,7 +458,7 @@
                                            Background="Black" 
                                            Foreground="White"
                                            FontFamily="{StaticResource EzraBoldFont}"
-                                           FontSize="14"
+                                           FontSize="20"
                                            Height="35"
                                            HorizontalAlignment="Stretch"
                                            BorderThickness="0"
@@ -385,37 +468,121 @@
                                            Background="Black" 
                                            Foreground="White"
                                            FontFamily="{StaticResource EzraBoldFont}"
-                                           FontSize="14"
+                                           FontSize="20"
                                            Height="35"
                                            HorizontalAlignment="Stretch"
                                            BorderThickness="0"
                                            Click="OnEditablePriceServiceClick"
                                            Tag="Router|EQUIPMENT"/>
-                                    <Button Content="Monitor" 
-                                           Background="Black" 
-                                           Foreground="White"
-                                           FontFamily="{StaticResource EzraBoldFont}"
-                                           FontSize="14"
-                                           Height="35"
-                                           HorizontalAlignment="Stretch"
-                                           BorderThickness="0"
-                                           Click="OnEditablePriceServiceClick"
-                                           Tag="Monitor|EQUIPMENT"/>
-                                    <Button Content="NVME" 
-                                           Background="Black" 
-                                           Foreground="White"
-                                           FontFamily="{StaticResource EzraBoldFont}"
-                                           FontSize="14"
-                                           Height="35"
-                                           HorizontalAlignment="Stretch"
-                                           BorderThickness="0"
-                                           Click="OnEditablePriceServiceClick"
-                                           Tag="NVME|EQUIPMENT"/>
+                                    <StackPanel>
+                                        <Button x:Name="MonitorHeaderButton"
+                                               Content="Monitor" 
+                                               Background="Black" 
+                                               Foreground="White"
+                                               FontFamily="{StaticResource EzraBoldFont}"
+                                               FontSize="20"
+                                               Height="35"
+                                               HorizontalAlignment="Stretch"
+                                               BorderThickness="0"
+                                               Click="OnToggleMonitorClick"/>
+                                        <StackPanel x:Name="MonitorSubPanel"
+                                                   Background="#1a1a1a"
+                                                   Visibility="Collapsed"
+                                                   Margin="10,0,0,0">
+                                            <Button Content="21-inch" 
+                                                   Background="#1a1a1a" 
+                                                   Foreground="White"
+                                                   FontFamily="{StaticResource EzraBoldFont}"
+                                                   FontSize="18"
+                                                   Height="30"
+                                                   HorizontalAlignment="Stretch"
+                                                   BorderThickness="0"
+                                                   Click="OnEditablePriceServiceClick"
+                                                   Tag="Monitor 21-inch|EQUIPMENT"/>
+                                            <Button Content="27-inch" 
+                                                   Background="#1a1a1a" 
+                                                   Foreground="White"
+                                                   FontFamily="{StaticResource EzraBoldFont}"
+                                                   FontSize="18"
+                                                   Height="30"
+                                                   HorizontalAlignment="Stretch"
+                                                   BorderThickness="0"
+                                                   Click="OnEditablePriceServiceClick"
+                                                   Tag="Monitor 27-inch|EQUIPMENT"/>
+                                            <Button Content="32-inch" 
+                                                   Background="#1a1a1a" 
+                                                   Foreground="White"
+                                                   FontFamily="{StaticResource EzraBoldFont}"
+                                                   FontSize="18"
+                                                   Height="30"
+                                                   HorizontalAlignment="Stretch"
+                                                   BorderThickness="0"
+                                                   Click="OnEditablePriceServiceClick"
+                                                   Tag="Monitor 32-inch|EQUIPMENT"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                    <StackPanel>
+                                        <Button x:Name="NVMEHeaderButton"
+                                               Content="NVME" 
+                                               Background="Black" 
+                                               Foreground="White"
+                                               FontFamily="{StaticResource EzraBoldFont}"
+                                               FontSize="20"
+                                               Height="35"
+                                               HorizontalAlignment="Stretch"
+                                               BorderThickness="0"
+                                               Click="OnToggleNVMEClick"/>
+                                        <StackPanel x:Name="NVMESubPanel"
+                                                   Background="#1a1a1a"
+                                                   Visibility="Collapsed"
+                                                   Margin="10,0,0,0">
+                                            <Button Content="128GB" 
+                                                   Background="#1a1a1a" 
+                                                   Foreground="White"
+                                                   FontFamily="{StaticResource EzraBoldFont}"
+                                                   FontSize="18"
+                                                   Height="30"
+                                                   HorizontalAlignment="Stretch"
+                                                   BorderThickness="0"
+                                                   Click="OnEditablePriceServiceClick"
+                                                   Tag="NVME 128GB|EQUIPMENT"/>
+                                            <Button Content="256GB" 
+                                                   Background="#1a1a1a" 
+                                                   Foreground="White"
+                                                   FontFamily="{StaticResource EzraBoldFont}"
+                                                   FontSize="18"
+                                                   Height="30"
+                                                   HorizontalAlignment="Stretch"
+                                                   BorderThickness="0"
+                                                   Click="OnEditablePriceServiceClick"
+                                                   Tag="NVME 256GB|EQUIPMENT"/>
+                                            <Button Content="500GB" 
+                                                   Background="#1a1a1a" 
+                                                   Foreground="White"
+                                                   FontFamily="{StaticResource EzraBoldFont}"
+                                                   FontSize="18"
+                                                   Height="30"
+                                                   HorizontalAlignment="Stretch"
+                                                   BorderThickness="0"
+                                                   Click="OnEditablePriceServiceClick"
+                                                   Tag="NVME 500GB|EQUIPMENT"/>
+                                            <Button Content="1TB" 
+                                                   Background="#1a1a1a" 
+                                                   Foreground="White"
+                                                   FontFamily="{StaticResource EzraBoldFont}"
+                                                   FontSize="18"
+                                                   Height="30"
+                                                   HorizontalAlignment="Stretch"
+                                                   BorderThickness="0"
+                                                   Click="OnEditablePriceServiceClick"
+                                                   Tag="NVME 1TB|EQUIPMENT"/>
+                                        </StackPanel>
+                                    </StackPanel>
                                     <Button Content="KB&amp;M" 
                                            Background="Black" 
                                            Foreground="White"
                                            FontFamily="{StaticResource EzraBoldFont}"
-                                           FontSize="14"
+                                           FontSize="20"
                                            Height="35"
                                            HorizontalAlignment="Stretch"
                                            BorderThickness="0"
@@ -425,7 +592,7 @@
                                            Background="Black" 
                                            Foreground="White"
                                            FontFamily="{StaticResource EzraBoldFont}"
-                                           FontSize="14"
+                                           FontSize="20"
                                            Height="35"
                                            HorizontalAlignment="Stretch"
                                            BorderThickness="0"
@@ -440,7 +607,7 @@
                                        Background="#E53E3E" 
                                        Foreground="White"
                                        FontFamily="{StaticResource EzraBoldFont}"
-                                       FontSize="16"
+                                       FontSize="22"
                                        Height="50"
                                        HorizontalAlignment="Stretch"
                                        Click="OnCustomServiceClick"/>
@@ -463,14 +630,14 @@
                             Grid.Column="0"
                             Text="Current Bill" 
                             Foreground="{StaticResource WhiteTextBrush}"
-                            FontSize="18"
-                            FontWeight="SemiBold" />
+                            FontSize="28"
+                            FontFamily="{StaticResource EzraBoldFont}" />
                         
                         <TextBlock 
                             Grid.Column="1"
                             Text="{x:Bind ViewModel.TotalAmount, Mode=OneWay}"
                             Foreground="{StaticResource RedAccentBrush}"
-                            FontSize="18"
+                            FontSize="28"
                             FontFamily="{StaticResource EzraBoldFont}" />
                     </Grid>
                     
@@ -497,14 +664,16 @@
                                         Grid.Column="0"
                                         Text="{Binding Description}"
                                         Foreground="{StaticResource WhiteTextBrush}"
-                                        FontSize="14"
+                                        FontSize="22"
+                                        FontFamily="{StaticResource EzraBoldFont}"
                                         VerticalAlignment="Center" />
                                     
                                     <TextBlock 
                                         Grid.Column="1"
                                         Text="{Binding Quantity}"
                                         Foreground="{StaticResource LightGreyTextBrush}"
-                                        FontSize="14"
+                                        FontSize="22"
+                                        FontFamily="{StaticResource EzraBoldFont}"
                                         Margin="16,0"
                                         VerticalAlignment="Center" />
                                     
@@ -512,7 +681,7 @@
                                         Grid.Column="2"
                                         Text="{Binding TotalPrice, Converter={StaticResource CurrencyConverter}}"
                                         Foreground="{StaticResource RedAccentBrush}"
-                                        FontSize="14"
+                                        FontSize="22"
                                         FontFamily="{StaticResource EzraBoldFont}"
                                         Margin="16,0"
                                         VerticalAlignment="Center" />
@@ -576,3 +745,6 @@
         </Grid>
     </ScrollViewer>
 </Page>
+
+
+

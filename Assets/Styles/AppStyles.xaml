@@ -8,8 +8,6 @@
     <Color x:Key="RedAccent">#FF0000</Color>
     <Color x:Key="WhiteText">#FFFFFF</Color>
     <Color x:Key="LightGreyText">#CCCCCC</Color>
-    <Color x:Key="InputBackground">#FFFFFF</Color>
-    <Color x:Key="InputText">#000000</Color>
 
     <!-- Brush Resources -->
     <SolidColorBrush x:Key="DarkGreyBackgroundBrush" Color="{StaticResource DarkGreyBackground}" />
@@ -17,8 +15,10 @@
     <SolidColorBrush x:Key="RedAccentBrush" Color="{StaticResource RedAccent}" />
     <SolidColorBrush x:Key="WhiteTextBrush" Color="{StaticResource WhiteText}" />
     <SolidColorBrush x:Key="LightGreyTextBrush" Color="{StaticResource LightGreyText}" />
-    <SolidColorBrush x:Key="InputBackgroundBrush" Color="{StaticResource InputBackground}" />
-    <SolidColorBrush x:Key="InputTextBrush" Color="{StaticResource InputText}" />
+    
+    <!-- Theme-aware Input Brushes -->
+    <SolidColorBrush x:Key="InputBackgroundBrush" Color="{ThemeResource TextControlBackground}" />
+    <SolidColorBrush x:Key="InputTextBrush" Color="{ThemeResource TextControlForeground}" />
 
     <!-- Font Families -->
     <FontFamily x:Key="EzraBoldFont">ms-appx:///Assets/Fonts/Ezra Bold.otf#Ezra</FontFamily>

@@ -294,9 +294,21 @@ namespace RepairShopBilling.ViewModels
 
                 // Add category prefix based on service category
                 string prefix = GetCategoryPrefix(category);
-                string description = string.IsNullOrEmpty(prefix) 
-                    ? serviceName 
-                    : $"{prefix} {serviceName}";
+                string description;
+                
+                // Special handling for Time Marking and Time Engraving - add "Per Hour"
+                if (serviceName == "Time Marking" || serviceName == "Time Engraving")
+                {
+                    description = string.IsNullOrEmpty(prefix) 
+                        ? $"{serviceName}: Per Hour" 
+                        : $"{prefix} {serviceName}: Per Hour";
+                }
+                else
+                {
+                    description = string.IsNullOrEmpty(prefix) 
+                        ? serviceName 
+                        : $"{prefix} {serviceName}";
+                }
 
                 // Add the service with custom price
                 var billItem = new BillItem
@@ -317,6 +329,127 @@ namespace RepairShopBilling.ViewModels
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine($"Error showing price input dialog: {ex.Message}");
+            }
+        }
+
+        /// <summary>
+        /// Shows a dialog to input material name and price for laser materials or add-ons
+        /// </summary>
+        public async Task ShowMaterialInputDialog(string category = "", string serviceType = "Materials")
+        {
+            var app = Microsoft.UI.Xaml.Application.Current as App;
+            
+            string dialogTitle = serviceType == "Add-Ons" ? "Enter Laser Add-On Details" : "Enter Laser Material Details";
+            string labelText = serviceType == "Add-Ons" ? "Add-On Name:" : "Material Name:";
+            string placeholderText = serviceType == "Add-Ons" 
+                ? "Enter add-on (e.g., Pin Backs, Magnets)" 
+                : "Enter material (e.g., Slate, Plastic, Titanium)";
+            
+            var dialog = new ContentDialog
+            {
+                Title = dialogTitle,
+                PrimaryButtonText = "Add",
+                CloseButtonText = "Cancel",
+                DefaultButton = ContentDialogButton.Primary,
+                XamlRoot = app?.MainWindow?.Content.XamlRoot
+            };
+
+            var stackPanel = new StackPanel { Spacing = 16 };
+
+            // Material/Add-On Name Input
+            var materialLabel = new TextBlock 
+            { 
+                Text = labelText, 
+                Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.Black),
+                FontSize = 14 
+            };
+            var materialTextBox = new TextBox 
+            { 
+                PlaceholderText = placeholderText,
+                MinWidth = 300
+            };
+
+            // Price Input
+            var priceLabel = new TextBlock 
+            { 
+                Text = "Price:", 
+                Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.Black),
+                FontSize = 14 
+            };
+            var priceTextBox = new TextBox 
+            { 
+                PlaceholderText = "Enter price (e.g., 25.00)",
+                MinWidth = 300
+            };
+
+            // Quantity Input
+            var quantityLabel = new TextBlock 
+            { 
+                Text = "Quantity:", 
+                Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.Black),
+                FontSize = 14 
+            };
+            var quantityTextBox = new TextBox 
+            { 
+                PlaceholderText = "Enter quantity (default: 1)",
+                Text = "1",
+                MinWidth = 300
+            };
+
+            stackPanel.Children.Add(materialLabel);
+            stackPanel.Children.Add(materialTextBox);
+            stackPanel.Children.Add(priceLabel);
+            stackPanel.Children.Add(priceTextBox);
+            stackPanel.Children.Add(quantityLabel);
+            stackPanel.Children.Add(quantityTextBox);
+
+            dialog.Content = stackPanel;
+
+            // Validation and adding service
+            dialog.PrimaryButtonClick += (sender, args) =>
+            {
+                args.Cancel = true; // Prevent dialog from closing initially
+
+                if (string.IsNullOrWhiteSpace(materialTextBox.Text))
+                {
+                    // TODO: Show validation error for material name
+                    return;
+                }
+
+                if (!decimal.TryParse(priceTextBox.Text, out decimal price) || price <= 0)
+                {
+                    // TODO: Show validation error for price
+                    return;
+                }
+
+                if (!int.TryParse(quantityTextBox.Text, out int quantity) || quantity <= 0)
+                {
+                    quantity = 1; // Default to 1 if invalid
+                }
+
+                // Add category prefix
+                string prefix = GetCategoryPrefix(category);
+                string description = $"{prefix} {serviceType}: {materialTextBox.Text}";
+
+                // Add the service with custom material and price
+                var billItem = new BillItem
+                {
+                    Description = description,
+                    Quantity = quantity,
+                    UnitPrice = price
+                };
+
+                BillItems.Add(billItem);
+                args.Cancel = false; // Allow dialog to close
+            };
+
+            try
+            {
+                await dialog.ShowAsync();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error showing material input dialog: {ex.Message}");
             }
         }
 
@@ -588,7 +721,7 @@ namespace RepairShopBilling.ViewModels
         {
             return category?.ToUpper() switch
             {
-                "LASER" => "LZR",
+                "LASER" => "Laser",
                 "EQUIPMENT" => "EQP",
                 "OS" => "OS",
                 "OS X" => "OS",

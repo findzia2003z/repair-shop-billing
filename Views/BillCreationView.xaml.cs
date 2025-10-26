@@ -84,7 +84,16 @@ namespace RepairShopBilling.Views
                 var parts = serviceInfo.Split('|');
                 var serviceName = parts[0];
                 var category = parts.Length > 1 ? parts[1] : "";
-                await ViewModel.ShowPriceInputDialog(serviceName, category);
+                
+                // Special handling for Materials and Add-Ons - show custom input dialog
+                if (serviceName == "Materials" || serviceName == "Add-Ons")
+                {
+                    await ViewModel.ShowMaterialInputDialog(category, serviceName);
+                }
+                else
+                {
+                    await ViewModel.ShowPriceInputDialog(serviceName, category);
+                }
             }
         }
 
@@ -101,6 +110,54 @@ namespace RepairShopBilling.Views
         private void OnToggleEquipmentClick(object sender, RoutedEventArgs e)
         {
             ToggleSection(EquipmentSubPanel, EquipmentHeaderButton, "Equipment");
+        }
+
+        private void OnToggleRAMClick(object sender, RoutedEventArgs e)
+        {
+            if (RAMSubPanel.Visibility == Visibility.Visible)
+            {
+                RAMSubPanel.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                RAMSubPanel.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void OnToggleLaptopClick(object sender, RoutedEventArgs e)
+        {
+            if (LaptopSubPanel.Visibility == Visibility.Visible)
+            {
+                LaptopSubPanel.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                LaptopSubPanel.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void OnToggleMonitorClick(object sender, RoutedEventArgs e)
+        {
+            if (MonitorSubPanel.Visibility == Visibility.Visible)
+            {
+                MonitorSubPanel.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                MonitorSubPanel.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void OnToggleNVMEClick(object sender, RoutedEventArgs e)
+        {
+            if (NVMESubPanel.Visibility == Visibility.Visible)
+            {
+                NVMESubPanel.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                NVMESubPanel.Visibility = Visibility.Visible;
+            }
         }
 
         private void ToggleSection(StackPanel subPanel, Button headerButton, string sectionName)
