@@ -628,16 +628,16 @@ namespace RepairShopBilling.Services
             try
             {
                 var options = new XPdfFontOptions(PdfFontEncoding.Unicode, PdfFontEmbedding.Always);
-                ezraFont = new XFont("EzraCustom", 24, XFontStyleEx.Bold, options);
+                ezraFont = new XFont("EzraCustom", 20, XFontStyleEx.Bold, options);
             }
             catch
             {
-                ezraFont = new XFont("Arial", 24, XFontStyleEx.Bold);
+                ezraFont = new XFont("Arial", 20, XFontStyleEx.Bold);
             }
             
             // Calculate vertical center position manually
-            // Font size is 24, so approximate text height is ~24-28 pixels
-            var fontSize = 24.0;
+            // Font size is 20, so approximate text height is ~20-24 pixels
+            var fontSize = 20.0;
             var textVerticalOffset = (barHeight - fontSize) / 2;
             var textY = currentY + textVerticalOffset;
             
