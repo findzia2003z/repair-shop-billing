@@ -262,9 +262,8 @@ namespace RepairShopBilling.Services
                 
                 currentY = DrawLogo(gfx, currentY, pageWidth);
                 DrawThankYou(gfx, currentY, pageWidth, redAccent);
-                currentY += 90;
                 
-                DrawFooter(gfx, startX, currentY, contentWidth, redAccent);
+                DrawFooter(gfx, pageWidth, pageHeight, redAccent);
             }
             else
             {
@@ -311,9 +310,8 @@ namespace RepairShopBilling.Services
                 
                 currentY = DrawLogo(gfx, currentY, pageWidth);
                 DrawThankYou(gfx, currentY, pageWidth, redAccent);
-                currentY += 90;
                 
-                DrawFooter(gfx, startX, currentY, contentWidth, redAccent);
+                DrawFooter(gfx, pageWidth, pageHeight, redAccent);
             }
             else
             {
@@ -764,36 +762,40 @@ namespace RepairShopBilling.Services
         private void DrawTotal(XGraphics gfx, Bill bill, double startX, double currentY, double contentWidth, XColor lightGray, XColor redAccent)
         {
             var cornerRadius = 12.0;
-            var totalRowRect = new XRect(startX, currentY, contentWidth, 45);
+            var totalBarHeight = 30.0; // Thinner bar to match text size
+            var totalRowRect = new XRect(startX, currentY, contentWidth, totalBarHeight);
             
             // Draw the gray section (left 60% with rounded bottom-left corner)
             var grayPath = new XGraphicsPath();
             grayPath.AddLine(startX, currentY, startX + contentWidth * 0.6, currentY); // Top edge
-            grayPath.AddLine(startX + contentWidth * 0.6, currentY, startX + contentWidth * 0.6, currentY + 45); // Right edge
-            grayPath.AddLine(startX + contentWidth * 0.6, currentY + 45, startX + cornerRadius, currentY + 45); // Bottom edge
-            grayPath.AddArc(startX, currentY + 45 - cornerRadius * 2, cornerRadius * 2, cornerRadius * 2, 90, 90); // Bottom-left corner
-            grayPath.AddLine(startX, currentY + 45 - cornerRadius, startX, currentY); // Left edge
+            grayPath.AddLine(startX + contentWidth * 0.6, currentY, startX + contentWidth * 0.6, currentY + totalBarHeight); // Right edge
+            grayPath.AddLine(startX + contentWidth * 0.6, currentY + totalBarHeight, startX + cornerRadius, currentY + totalBarHeight); // Bottom edge
+            grayPath.AddArc(startX, currentY + totalBarHeight - cornerRadius * 2, cornerRadius * 2, cornerRadius * 2, 90, 90); // Bottom-left corner
+            grayPath.AddLine(startX, currentY + totalBarHeight - cornerRadius, startX, currentY); // Left edge
             grayPath.CloseFigure();
             gfx.DrawPath(XPens.Transparent, new XSolidBrush(lightGray), grayPath);
             
             // Draw the black section (right 40% with rounded bottom-right corner)
             var blackPath = new XGraphicsPath();
             blackPath.AddLine(startX + contentWidth * 0.6, currentY, startX + contentWidth, currentY); // Top edge
-            blackPath.AddLine(startX + contentWidth, currentY, startX + contentWidth, currentY + 45 - cornerRadius); // Right edge
-            blackPath.AddArc(startX + contentWidth - cornerRadius * 2, currentY + 45 - cornerRadius * 2, cornerRadius * 2, cornerRadius * 2, 0, 90); // Bottom-right corner
-            blackPath.AddLine(startX + contentWidth - cornerRadius, currentY + 45, startX + contentWidth * 0.6, currentY + 45); // Bottom edge
-            blackPath.AddLine(startX + contentWidth * 0.6, currentY + 45, startX + contentWidth * 0.6, currentY); // Left edge
+            blackPath.AddLine(startX + contentWidth, currentY, startX + contentWidth, currentY + totalBarHeight - cornerRadius); // Right edge
+            blackPath.AddArc(startX + contentWidth - cornerRadius * 2, currentY + totalBarHeight - cornerRadius * 2, cornerRadius * 2, cornerRadius * 2, 0, 90); // Bottom-right corner
+            blackPath.AddLine(startX + contentWidth - cornerRadius, currentY + totalBarHeight, startX + contentWidth * 0.6, currentY + totalBarHeight); // Bottom edge
+            blackPath.AddLine(startX + contentWidth * 0.6, currentY + totalBarHeight, startX + contentWidth * 0.6, currentY); // Left edge
             blackPath.CloseFigure();
             gfx.DrawPath(XPens.Transparent, XBrushes.Black, blackPath);
             
+            // Calculate vertical center for text
+            var textVerticalOffset = (totalBarHeight - 18) / 2; // Font size is ~18-19
+            
             // Draw "TOTAL" text in the gray section
             gfx.DrawString("TOTAL", new XFont("Arial", 18, XFontStyleEx.Bold), XBrushes.White,
-                new XRect(startX, currentY + 12, contentWidth * 0.6, 45), XStringFormats.TopCenter);
+                new XRect(startX, currentY + textVerticalOffset, contentWidth * 0.6, totalBarHeight), XStringFormats.TopCenter);
             
             // Draw total amount in the black section - size 19 and bold
             gfx.DrawString($"${bill.TotalAmount:F2}", new XFont("Arial", 19, XFontStyleEx.Bold),
                 new XSolidBrush(redAccent),
-                new XRect(startX + contentWidth * 0.6, currentY + 12, contentWidth * 0.4, 45), XStringFormats.TopCenter);
+                new XRect(startX + contentWidth * 0.6, currentY + textVerticalOffset, contentWidth * 0.4, totalBarHeight), XStringFormats.TopCenter);
         }
         
         private double DrawLogo(XGraphics gfx, double currentY, double pageWidth)
@@ -804,9 +806,10 @@ namespace RepairShopBilling.Services
                 if (File.Exists(brainLogoPath))
                 {
                     var brainImage = XImage.FromFile(brainLogoPath);
-                    var brainSize = 120;
-                    gfx.DrawImage(brainImage, (pageWidth - brainSize) / 2, currentY, brainSize, brainSize);
-                    return currentY + brainSize + 10;
+                    var brainWidth = 250; // Increased width
+                    var brainHeight = 180; // Keep height
+                    gfx.DrawImage(brainImage, (pageWidth - brainWidth) / 2, currentY, brainWidth, brainHeight);
+                    return currentY + brainHeight + 20; // Increased spacing after logo
                 }
             }
             catch { }
@@ -815,6 +818,9 @@ namespace RepairShopBilling.Services
         
         private void DrawThankYou(XGraphics gfx, double currentY, double pageWidth, XColor redAccent)
         {
+            // Add extra spacing to move text down
+            currentY += 20;
+            
             gfx.DrawString("Thank You", new XFont("Arial", 20, XFontStyleEx.Bold),
                 new XSolidBrush(redAccent),
                 new XRect(0, currentY, pageWidth, 30), XStringFormats.TopCenter);
@@ -828,7 +834,7 @@ namespace RepairShopBilling.Services
                 new XRect(0, currentY, pageWidth, 30), XStringFormats.TopCenter);
         }
         
-        private void DrawFooter(XGraphics gfx, double startX, double currentY, double contentWidth, XColor redAccent)
+        private void DrawFooter(XGraphics gfx, double pageWidth, double pageHeight, XColor redAccent)
         {
             try
             {
@@ -836,9 +842,12 @@ namespace RepairShopBilling.Services
                 if (File.Exists(footerPath))
                 {
                     var footerImage = XImage.FromFile(footerPath);
-                    var footerWidth = contentWidth;
+                    // Calculate footer height to maintain aspect ratio
+                    var footerWidth = pageWidth; // Full width edge to edge
                     var footerHeight = footerImage.PixelHeight * footerWidth / footerImage.PixelWidth;
-                    gfx.DrawImage(footerImage, startX, currentY, footerWidth, footerHeight);
+                    // Position at bottom of page
+                    var footerY = pageHeight - footerHeight;
+                    gfx.DrawImage(footerImage, 0, footerY, footerWidth, footerHeight);
                 }
             }
             catch { }
