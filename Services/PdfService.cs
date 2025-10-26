@@ -605,8 +605,8 @@ namespace RepairShopBilling.Services
         
         private void DrawCustomerHeader(XGraphics gfx, Bill bill, double pageWidth, double currentY, XFont headerFont, XColor lightGray)
         {
-            // Draw full-width gray bar with rounded bottom corners only (thinner bar)
-            var barHeight = 40.0;
+            // Draw full-width gray bar with rounded bottom corners only - height matches text size
+            var barHeight = 30.0;
             var cornerRadius = 15.0;
             
             // Create a path for rounded bottom corners only
