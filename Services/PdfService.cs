@@ -170,7 +170,7 @@ namespace RepairShopBilling.Services
             const double margin = 30;
             const double contentWidth = 552; // Wider table (pageWidth - 2*margin)
             const double startX = margin;
-            const double rowHeight = 25;
+            const double rowHeight = 32;
             const int maxRowsPerPage = 20; // Maximum rows that fit on first page
             const int maxRowsPerContinuationPage = 28; // More rows on continuation pages
             
@@ -258,7 +258,7 @@ namespace RepairShopBilling.Services
             if (isOnlyPage)
             {
                 DrawTotal(gfx, bill, startX, currentY, contentWidth, lightGray, redAccent);
-                currentY += 65;
+                currentY += 45; // Reduced from 65 to 45 to move logo up
                 
                 currentY = DrawLogo(gfx, currentY, pageWidth);
                 DrawThankYou(gfx, currentY, pageWidth, redAccent);
@@ -306,7 +306,7 @@ namespace RepairShopBilling.Services
             if (isLastPage)
             {
                 DrawTotal(gfx, bill, startX, currentY, contentWidth, lightGray, redAccent);
-                currentY += 65;
+                currentY += 45; // Reduced from 65 to 45 to move logo up
                 
                 currentY = DrawLogo(gfx, currentY, pageWidth);
                 DrawThankYou(gfx, currentY, pageWidth, redAccent);
@@ -694,13 +694,13 @@ namespace RepairShopBilling.Services
             try
             {
                 var options = new XPdfFontOptions(PdfFontEncoding.Unicode, PdfFontEmbedding.Always);
-                itemFont = new XFont("EzraCustom", 11, XFontStyleEx.Regular, options);
+                itemFont = new XFont("EzraCustom", 14, XFontStyleEx.Regular, options);
                 System.Diagnostics.Debug.WriteLine("Successfully loaded EzraCustom font");
             }
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine($"Failed to load EzraCustom font: {ex.Message}");
-                itemFont = new XFont("Arial", 11, XFontStyleEx.Bold);
+                itemFont = new XFont("Arial", 14, XFontStyleEx.Bold);
             }
             
             // Minimum 10 rows should always be displayed
@@ -806,10 +806,10 @@ namespace RepairShopBilling.Services
                 if (File.Exists(brainLogoPath))
                 {
                     var brainImage = XImage.FromFile(brainLogoPath);
-                    var brainWidth = 250; // Increased width
-                    var brainHeight = 180; // Keep height
+                    var brainWidth = 200; // Reduced from 250 to 200
+                    var brainHeight = 150; // Reduced from 180 to 150
                     gfx.DrawImage(brainImage, (pageWidth - brainWidth) / 2, currentY, brainWidth, brainHeight);
-                    return currentY + brainHeight + 20; // Increased spacing after logo
+                    return currentY + brainHeight + 10; // Reduced spacing to move up
                 }
             }
             catch { }
@@ -818,8 +818,8 @@ namespace RepairShopBilling.Services
         
         private void DrawThankYou(XGraphics gfx, double currentY, double pageWidth, XColor redAccent)
         {
-            // Add extra spacing to move text down
-            currentY += 20;
+            // Reduced spacing to move text up
+            currentY += 5;
             
             gfx.DrawString("Thank You", new XFont("Arial", 20, XFontStyleEx.Bold),
                 new XSolidBrush(redAccent),
