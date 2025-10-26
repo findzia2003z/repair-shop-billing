@@ -705,22 +705,21 @@ namespace RepairShopBilling.Services
                 itemFont = new XFont("Arial", 11, XFontStyleEx.Bold);
             }
             
-            var isFirstRow = true;
-            var isLastRow = false;
-            var itemCount = items.Count;
+            // Minimum 10 rows should always be displayed
+            const int minRows = 10;
+            var totalRows = Math.Max(items.Count, minRows);
             
             var startYForSeparators = currentY; // Remember where items start
             
-            for (int i = 0; i < itemCount; i++)
+            for (int i = 0; i < totalRows; i++)
             {
-                var item = items[i];
-                isLastRow = (i == itemCount - 1);
+                var isLastRow = (i == totalRows - 1);
                 
                 var rowRect = new XRect(startX, currentY, contentWidth, rowHeight);
-                // Draw white background for table rows (like in the image)
+                // Draw white background for table rows
                 gfx.DrawRectangle(XBrushes.White, rowRect);
                 
-                // Draw bottom border in light gray (not on last row, as it will have rounded corners)
+                // Draw bottom border in light gray (not on last row)
                 if (!isLastRow)
                 {
                     gfx.DrawLine(new XPen(XColor.FromArgb(208, 208, 208), 1),
@@ -730,20 +729,24 @@ namespace RepairShopBilling.Services
                 
                 var textY = currentY + 7;
                 
-                // Draw text in dark gray (not white) since background is white
-                gfx.DrawString(item.Description, itemFont, new XSolidBrush(darkGray),
-                    new XRect(startX + 15, textY, contentWidth * 0.6 - 20, rowHeight), XStringFormats.TopLeft);
-                gfx.DrawString(item.Quantity.ToString(), itemFont, new XSolidBrush(darkGray),
-                    new XRect(startX + contentWidth * 0.6, textY, contentWidth * 0.2, rowHeight), XStringFormats.TopCenter);
-                gfx.DrawString($"${item.TotalPrice:F2}", itemFont, new XSolidBrush(darkGray),
-                    new XRect(startX + contentWidth * 0.8, textY, contentWidth * 0.2, rowHeight), XStringFormats.TopCenter);
+                // Draw text only if there's an actual item for this row
+                if (i < items.Count)
+                {
+                    var item = items[i];
+                    gfx.DrawString(item.Description, itemFont, new XSolidBrush(darkGray),
+                        new XRect(startX + 15, textY, contentWidth * 0.6 - 20, rowHeight), XStringFormats.TopLeft);
+                    gfx.DrawString(item.Quantity.ToString(), itemFont, new XSolidBrush(darkGray),
+                        new XRect(startX + contentWidth * 0.6, textY, contentWidth * 0.2, rowHeight), XStringFormats.TopCenter);
+                    gfx.DrawString($"${item.TotalPrice:F2}", itemFont, new XSolidBrush(darkGray),
+                        new XRect(startX + contentWidth * 0.8, textY, contentWidth * 0.2, rowHeight), XStringFormats.TopCenter);
+                }
+                // Empty rows remain blank
                 
                 currentY += rowHeight;
-                isFirstRow = false;
             }
             
             // Draw vertical separators AFTER all rows - full height
-            if (itemCount > 0)
+            if (totalRows > 0)
             {
                 var separatorPen = new XPen(XColor.FromArgb(51, 51, 51), 2);
                 
@@ -787,8 +790,8 @@ namespace RepairShopBilling.Services
             gfx.DrawString("TOTAL", new XFont("Arial", 18, XFontStyleEx.Bold), XBrushes.White,
                 new XRect(startX, currentY + 12, contentWidth * 0.6, 45), XStringFormats.TopCenter);
             
-            // Draw total amount in the black section
-            gfx.DrawString($"${bill.TotalAmount:F2}", new XFont("Arial", 16, XFontStyleEx.Bold),
+            // Draw total amount in the black section - size 19 and bold
+            gfx.DrawString($"${bill.TotalAmount:F2}", new XFont("Arial", 19, XFontStyleEx.Bold),
                 new XSolidBrush(redAccent),
                 new XRect(startX + contentWidth * 0.6, currentY + 12, contentWidth * 0.4, 45), XStringFormats.TopCenter);
         }
