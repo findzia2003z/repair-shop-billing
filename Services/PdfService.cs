@@ -167,9 +167,9 @@ namespace RepairShopBilling.Services
         {
             const double pageWidth = 612;
             const double pageHeight = 792;
-            const double margin = 50;
-            const double contentWidth = 500;
-            const double startX = (pageWidth - contentWidth) / 2;
+            const double margin = 30;
+            const double contentWidth = 552; // Wider table (pageWidth - 2*margin)
+            const double startX = margin;
             const double rowHeight = 25;
             const int maxRowsPerPage = 20; // Maximum rows that fit on first page
             const int maxRowsPerContinuationPage = 28; // More rows on continuation pages
@@ -661,8 +661,19 @@ namespace RepairShopBilling.Services
         
         private void DrawTableHeader(XGraphics gfx, double startX, double currentY, double contentWidth, XFont headerFont, XColor redAccent, XColor black)
         {
+            var cornerRadius = 12.0;
             var tableHeaderRect = new XRect(startX, currentY, contentWidth, 35);
-            gfx.DrawRectangle(new XSolidBrush(redAccent), tableHeaderRect);
+            
+            // Draw rounded rectangle for header
+            var path = new XGraphicsPath();
+            path.AddArc(startX, currentY, cornerRadius * 2, cornerRadius * 2, 180, 90); // Top-left
+            path.AddArc(startX + contentWidth - cornerRadius * 2, currentY, cornerRadius * 2, cornerRadius * 2, 270, 90); // Top-right
+            path.AddLine(startX + contentWidth, currentY + cornerRadius, startX + contentWidth, currentY + 35); // Right edge
+            path.AddLine(startX + contentWidth, currentY + 35, startX, currentY + 35); // Bottom edge
+            path.AddLine(startX, currentY + 35, startX, currentY + cornerRadius); // Left edge
+            path.CloseFigure();
+            
+            gfx.DrawPath(XPens.Transparent, new XSolidBrush(redAccent), path);
             
             var darkGray = XColor.FromArgb(51, 51, 51);
             gfx.DrawLine(new XPen(darkGray, 2), startX + contentWidth * 0.6, currentY,
@@ -694,24 +705,28 @@ namespace RepairShopBilling.Services
                 itemFont = new XFont("Arial", 11, XFontStyleEx.Bold);
             }
             
-            foreach (var item in items)
+            var isFirstRow = true;
+            var isLastRow = false;
+            var itemCount = items.Count;
+            
+            var startYForSeparators = currentY; // Remember where items start
+            
+            for (int i = 0; i < itemCount; i++)
             {
+                var item = items[i];
+                isLastRow = (i == itemCount - 1);
+                
                 var rowRect = new XRect(startX, currentY, contentWidth, rowHeight);
                 // Draw white background for table rows (like in the image)
                 gfx.DrawRectangle(XBrushes.White, rowRect);
                 
-                // Draw vertical separators in dark gray
-                gfx.DrawLine(new XPen(XColor.FromArgb(51, 51, 51), 2),
-                    startX + contentWidth * 0.6, currentY,
-                    startX + contentWidth * 0.6, currentY + rowHeight);
-                gfx.DrawLine(new XPen(XColor.FromArgb(51, 51, 51), 2),
-                    startX + contentWidth * 0.8, currentY,
-                    startX + contentWidth * 0.8, currentY + rowHeight);
-                
-                // Draw bottom border in light gray
-                gfx.DrawLine(new XPen(XColor.FromArgb(208, 208, 208), 1),
-                    startX, currentY + rowHeight,
-                    startX + contentWidth, currentY + rowHeight);
+                // Draw bottom border in light gray (not on last row, as it will have rounded corners)
+                if (!isLastRow)
+                {
+                    gfx.DrawLine(new XPen(XColor.FromArgb(208, 208, 208), 1),
+                        startX, currentY + rowHeight,
+                        startX + contentWidth, currentY + rowHeight);
+                }
                 
                 var textY = currentY + 7;
                 
@@ -724,21 +739,55 @@ namespace RepairShopBilling.Services
                     new XRect(startX + contentWidth * 0.8, textY, contentWidth * 0.2, rowHeight), XStringFormats.TopCenter);
                 
                 currentY += rowHeight;
+                isFirstRow = false;
             }
+            
+            // Draw vertical separators AFTER all rows - full height
+            if (itemCount > 0)
+            {
+                var separatorPen = new XPen(XColor.FromArgb(51, 51, 51), 2);
+                
+                gfx.DrawLine(separatorPen,
+                    startX + contentWidth * 0.6, startYForSeparators,
+                    startX + contentWidth * 0.6, currentY);
+                gfx.DrawLine(separatorPen,
+                    startX + contentWidth * 0.8, startYForSeparators,
+                    startX + contentWidth * 0.8, currentY);
+            }
+            
             return currentY;
         }
         
         private void DrawTotal(XGraphics gfx, Bill bill, double startX, double currentY, double contentWidth, XColor lightGray, XColor redAccent)
         {
+            var cornerRadius = 12.0;
             var totalRowRect = new XRect(startX, currentY, contentWidth, 45);
-            gfx.DrawRoundedRectangle(new XPen(lightGray), new XSolidBrush(lightGray),
-                totalRowRect, new XSize(0, 12));
             
+            // Draw the gray section (left 60% with rounded bottom-left corner)
+            var grayPath = new XGraphicsPath();
+            grayPath.AddLine(startX, currentY, startX + contentWidth * 0.6, currentY); // Top edge
+            grayPath.AddLine(startX + contentWidth * 0.6, currentY, startX + contentWidth * 0.6, currentY + 45); // Right edge
+            grayPath.AddLine(startX + contentWidth * 0.6, currentY + 45, startX + cornerRadius, currentY + 45); // Bottom edge
+            grayPath.AddArc(startX, currentY + 45 - cornerRadius * 2, cornerRadius * 2, cornerRadius * 2, 90, 90); // Bottom-left corner
+            grayPath.AddLine(startX, currentY + 45 - cornerRadius, startX, currentY); // Left edge
+            grayPath.CloseFigure();
+            gfx.DrawPath(XPens.Transparent, new XSolidBrush(lightGray), grayPath);
+            
+            // Draw the black section (right 40% with rounded bottom-right corner)
+            var blackPath = new XGraphicsPath();
+            blackPath.AddLine(startX + contentWidth * 0.6, currentY, startX + contentWidth, currentY); // Top edge
+            blackPath.AddLine(startX + contentWidth, currentY, startX + contentWidth, currentY + 45 - cornerRadius); // Right edge
+            blackPath.AddArc(startX + contentWidth - cornerRadius * 2, currentY + 45 - cornerRadius * 2, cornerRadius * 2, cornerRadius * 2, 0, 90); // Bottom-right corner
+            blackPath.AddLine(startX + contentWidth - cornerRadius, currentY + 45, startX + contentWidth * 0.6, currentY + 45); // Bottom edge
+            blackPath.AddLine(startX + contentWidth * 0.6, currentY + 45, startX + contentWidth * 0.6, currentY); // Left edge
+            blackPath.CloseFigure();
+            gfx.DrawPath(XPens.Transparent, XBrushes.Black, blackPath);
+            
+            // Draw "TOTAL" text in the gray section
             gfx.DrawString("TOTAL", new XFont("Arial", 18, XFontStyleEx.Bold), XBrushes.White,
                 new XRect(startX, currentY + 12, contentWidth * 0.6, 45), XStringFormats.TopCenter);
             
-            var totalBoxRect = new XRect(startX + contentWidth * 0.6, currentY, contentWidth * 0.4, 45);
-            gfx.DrawRectangle(XBrushes.Black, totalBoxRect);
+            // Draw total amount in the black section
             gfx.DrawString($"${bill.TotalAmount:F2}", new XFont("Arial", 16, XFontStyleEx.Bold),
                 new XSolidBrush(redAccent),
                 new XRect(startX + contentWidth * 0.6, currentY + 12, contentWidth * 0.4, 45), XStringFormats.TopCenter);
