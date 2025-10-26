@@ -719,10 +719,10 @@ namespace RepairShopBilling.Services
                 // Draw white background for table rows
                 gfx.DrawRectangle(XBrushes.White, rowRect);
                 
-                // Draw bottom border in light gray (not on last row)
+                // Draw bottom border with same style as column separators (not on last row)
                 if (!isLastRow)
                 {
-                    gfx.DrawLine(new XPen(XColor.FromArgb(208, 208, 208), 1),
+                    gfx.DrawLine(new XPen(XColor.FromArgb(51, 51, 51), 2),
                         startX, currentY + rowHeight,
                         startX + contentWidth, currentY + rowHeight);
                 }
