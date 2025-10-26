@@ -92,7 +92,7 @@
         <Setter Property="FontSize" Value="14" />
         <Setter Property="Padding" Value="12,8" />
         <Setter Property="MinHeight" Value="36" />
-        <Setter Property="CornerRadius" Value="4" />
+        <Setter Property="CornerRadius" Value="8" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="BorderBrush" Value="{StaticResource LightGreyTextBrush}" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
@@ -106,7 +106,7 @@
         <Setter Property="FontSize" Value="14" />
         <Setter Property="Padding" Value="12,8" />
         <Setter Property="MinHeight" Value="36" />
-        <Setter Property="CornerRadius" Value="4" />
+        <Setter Property="CornerRadius" Value="8" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="BorderBrush" Value="{StaticResource LightGreyTextBrush}" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />

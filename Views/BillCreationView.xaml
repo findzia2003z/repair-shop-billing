@@ -48,11 +48,9 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="20" />
                             <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="20" />
-                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         
-                        <StackPanel Grid.Column="0" Spacing="8">
+                        <StackPanel Grid.Column="0" Spacing="8" VerticalAlignment="Top">
                             <TextBlock 
                                 Text="Customer Name" 
                                 Foreground="{StaticResource LightGreyTextBrush}"
@@ -64,27 +62,27 @@
                                 Text="{x:Bind ViewModel.CustomerName, Mode=TwoWay}" />
                         </StackPanel>
                         
-                        <StackPanel Grid.Column="2" Spacing="8">
-                            <TextBlock 
-                                Text="Device Type" 
-                                Foreground="{StaticResource LightGreyTextBrush}"
-                                FontSize="14" />
-                            <TextBox 
-                                x:Name="DeviceTypeTextBox"
-                                Style="{StaticResource RoundedTextBox}"
-                                PlaceholderText="e.g., Laptop, Desktop, Phone"
-                                Text="{x:Bind ViewModel.DeviceType, Mode=TwoWay}" />
-                        </StackPanel>
-                        
-                        <StackPanel Grid.Column="4" Spacing="8">
+                        <StackPanel Grid.Column="2" Spacing="8" VerticalAlignment="Top">
                             <TextBlock 
                                 Text="Date" 
                                 Foreground="{StaticResource LightGreyTextBrush}"
                                 FontSize="14" />
-                            <DatePicker 
-                                x:Name="BillDatePicker"
-                                Style="{StaticResource RoundedDatePicker}"
-                                Date="{x:Bind ViewModel.BillDate, Mode=TwoWay}" />
+                            <Border 
+                                Background="{StaticResource InputBackgroundBrush}"
+                                BorderBrush="{StaticResource LightGreyTextBrush}"
+                                BorderThickness="1"
+                                CornerRadius="8"
+                                Padding="0,2,0,2"
+                                MinHeight="36"
+                                Margin="0,0,0,0">
+                                <DatePicker 
+                                    x:Name="BillDatePicker"
+                                    Date="{x:Bind ViewModel.BillDate, Mode=TwoWay}"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Center"
+                                    Background="Transparent"
+                                    BorderThickness="0" />
+                            </Border>
                         </StackPanel>
                     </Grid>
                 </StackPanel>
