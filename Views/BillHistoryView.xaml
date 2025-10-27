@@ -42,8 +42,8 @@
             x:Name="SearchTextBox"
             Text="{x:Bind ViewModel.SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             PlaceholderText="Search Name"
-            FontSize="18"
-            FontWeight="Bold"
+            FontFamily="{StaticResource EzraExtraBoldFont}"
+            FontSize="20"
             Foreground="#E53E3E"
             Background="White"
             BorderThickness="0"
@@ -67,7 +67,7 @@
                     <ItemsPanelTemplate>
                         <ItemsWrapGrid Orientation="Horizontal" 
                                        ItemWidth="256" 
-                                       ItemHeight="126"
+                                       ItemHeight="150"
                                        MaximumRowsOrColumns="4"
                                        HorizontalAlignment="Center" />
                     </ItemsPanelTemplate>
@@ -78,7 +78,7 @@
                                 BorderThickness="0"
                                 Padding="0"
                                 Width="240"
-                                Height="110"
+                                Height="134"
                                 Margin="8"
                                 Command="{Binding DataContext.SelectBillCommand, ElementName=BillsGridView}"
                                 CommandParameter="{x:Bind}">
@@ -87,22 +87,23 @@
                                     <Border x:Name="RootBorder"
                                             Background="Black"
                                             CornerRadius="12"
-                                            Padding="20,16">
-                                        <StackPanel Spacing="4">
+                                            Padding="20,18">
+                                        <StackPanel Spacing="6">
                                             <!-- Customer Name -->
                                             <TextBlock Text="{Binding CustomerName}"
                                                        Foreground="White"
-                                                       FontFamily="{StaticResource EzraBoldFont}"
-                                                       FontSize="18"
+                                                       FontFamily="{StaticResource EzraExtraBoldFont}"
+                                                       FontSize="22"
                                                        TextTrimming="CharacterEllipsis"
                                                        HorizontalAlignment="Center" />
 
                                             <!-- Date -->
                                             <TextBlock Text="{Binding Date, Converter={StaticResource ShortDateConverter}}"
                                                        Foreground="#808080"
-                                                       FontSize="18"
+                                                       FontFamily="{StaticResource EzraExtraBoldFont}"
+                                                       FontSize="20"
                                                        HorizontalAlignment="Center"
-                                                       Margin="0,4,0,8" />
+                                                       Margin="0,2,0,4" />
 
                                             <!-- Total Amount -->
                                             <StackPanel Orientation="Horizontal"
@@ -110,12 +111,12 @@
                                                         Spacing="8">
                                                 <TextBlock Text="Total:"
                                                            Foreground="White"
-                                                           FontFamily="{StaticResource EzraBoldFont}"
-                                                           FontSize="16" />
+                                                           FontFamily="{StaticResource EzraExtraBoldFont}"
+                                                           FontSize="20" />
                                                 <TextBlock Text="{Binding TotalAmount, Converter={StaticResource CurrencyConverter}}"
                                                            Foreground="#E53E3E"
-                                                           FontFamily="{StaticResource EzraBoldFont}"
-                                                           FontSize="16" />
+                                                           FontFamily="{StaticResource EzraExtraBoldFont}"
+                                                           FontSize="20" />
                                             </StackPanel>
                                         </StackPanel>
                                         <VisualStateManager.VisualStateGroups>

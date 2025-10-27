@@ -518,8 +518,13 @@ public class DatabaseService : IDatabaseService
             new Service { Name = "VHS Convert - Bulk", Price = 5.00m, Category = "VHS CONVERT", IsActive = true },
             
             // PHOTO PRINT category - Fixed prices
-            new Service { Name = "Photo Print B&W", Price = 20.00m, Category = "PHOTO PRINT", IsActive = true },
-            new Service { Name = "Photo Print Color", Price = 30.00m, Category = "PHOTO PRINT", IsActive = true },
+            new Service { Name = "Photo Print: B&W", Price = 20.00m, Category = "PHOTO PRINT", IsActive = true },
+            new Service { Name = "Photo Print: Color", Price = 30.00m, Category = "PHOTO PRINT", IsActive = true },
+            
+            // GENERAL SERVICES category - Fixed prices
+            new Service { Name = "Windows 11 Pro", Price = 30.00m, Category = "GENERAL", IsActive = true },
+            new Service { Name = "Driver Updates", Price = 20.00m, Category = "GENERAL", IsActive = true },
+            new Service { Name = "Data Recovery", Price = 50.00m, Category = "GENERAL", IsActive = true },
             
             // OS X category - All $30
             new Service { Name = "Big Sur 11 (20)", Price = 30.00m, Category = "OS X", IsActive = true },

@@ -110,86 +110,131 @@
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             
-                            <!-- Hours Section -->
-                            <StackPanel Grid.Column="0" Grid.Row="0" Margin="5">
-                                <Button Content="Hours" 
-                                       Background="#E53E3E" 
-                                       Foreground="White"
-                                       FontFamily="{StaticResource EzraBoldFont}"
-                                       FontSize="22"
-                                       Height="50"
-                                       HorizontalAlignment="Stretch"
-                                       Click="OnServiceClick"
-                                       Tag="Hours - Residential|50"/>
-                                <Button Content="Hours" 
-                                       Background="#3182CE" 
-                                       Foreground="White"
-                                       FontFamily="{StaticResource EzraBoldFont}"
-                                       FontSize="22"
-                                       Height="50"
-                                       HorizontalAlignment="Stretch"
-                                       Margin="0,2,0,0"
-                                       Click="OnServiceClick"
-                                       Tag="Hours - Business|75"/>
-                            </StackPanel>
-                            
-                            <!-- VHS Convert Section -->
-                            <StackPanel Grid.Column="0" Grid.Row="1" Margin="5">
-                                <Button Content="VHS Convert" 
-                                       Background="#E53E3E" 
-                                       Foreground="White"
-                                       FontFamily="{StaticResource EzraBoldFont}"
-                                       FontSize="22"
-                                       Height="50"
-                                       HorizontalAlignment="Stretch"
-                                       Click="OnServiceClick"
-                                       Tag="VHS Convert - Small|10"/>
-                                <Button Content="VHS Convert" 
-                                       Background="#3182CE" 
-                                       Foreground="White"
-                                       FontFamily="{StaticResource EzraBoldFont}"
-                                       FontSize="22"
-                                       Height="50"
-                                       HorizontalAlignment="Stretch"
-                                       Margin="0,2,0,0"
-                                       Click="OnServiceClick"
-                                       Tag="VHS Convert - Bulk|5"/>
-                            </StackPanel>
-                            
-                            <!-- Photo Print Section -->
-                            <StackPanel Grid.Column="0" Grid.Row="2" Margin="5">
-                                <Button Content="Photo Print" 
-                                       Background="#E53E3E" 
-                                       Foreground="White"
-                                       FontFamily="{StaticResource EzraBoldFont}"
-                                       FontSize="22"
-                                       Height="50"
-                                       HorizontalAlignment="Stretch"/>
-                                <StackPanel Background="Black" Margin="0,2,0,0">
-                                    <Button Content="B&amp;W" 
-                                           Background="Black" 
+                            <!-- First Column - All Services Stacked -->
+                            <StackPanel Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" Margin="5" Spacing="5">
+                                <!-- Hours Section -->
+                                <StackPanel>
+                                    <Button Content="Hours" 
+                                           Background="#E53E3E" 
                                            Foreground="White"
                                            FontFamily="{StaticResource EzraBoldFont}"
-                                           FontSize="20"
-                                           Height="40"
+                                           FontSize="22"
+                                           Height="50"
                                            HorizontalAlignment="Stretch"
-                                           BorderThickness="0"
                                            Click="OnServiceClick"
-                                           Tag="Photo Print B&amp;W|20"/>
-                                    <Button Content="COLOR" 
-                                           Background="Black" 
+                                           Tag="Hours - Residential|50"/>
+                                    <Button Content="Hours" 
+                                           Background="#3182CE" 
                                            Foreground="White"
                                            FontFamily="{StaticResource EzraBoldFont}"
-                                           FontSize="20"
-                                           Height="40"
+                                           FontSize="22"
+                                           Height="50"
                                            HorizontalAlignment="Stretch"
-                                           BorderThickness="0"
+                                           Margin="0,2,0,0"
                                            Click="OnServiceClick"
-                                           Tag="Photo Print Color|30"/>
+                                           Tag="Hours - Business|75"/>
                                 </StackPanel>
+                                
+                                <!-- VHS Convert Section -->
+                                <StackPanel>
+                                    <Button Content="VHS Convert" 
+                                           Background="#E53E3E" 
+                                           Foreground="White"
+                                           FontFamily="{StaticResource EzraBoldFont}"
+                                           FontSize="22"
+                                           Height="50"
+                                           HorizontalAlignment="Stretch"
+                                           Click="OnServiceClick"
+                                           Tag="VHS Convert - Small|10"/>
+                                    <Button Content="VHS Convert" 
+                                           Background="#3182CE" 
+                                           Foreground="White"
+                                           FontFamily="{StaticResource EzraBoldFont}"
+                                           FontSize="22"
+                                           Height="50"
+                                           HorizontalAlignment="Stretch"
+                                           Margin="0,2,0,0"
+                                           Click="OnServiceClick"
+                                           Tag="VHS Convert - Bulk|5"/>
+                                </StackPanel>
+                                
+                                <!-- Photo Print Section -->
+                                <StackPanel>
+                                    <Button Content="Photo Print" 
+                                           Background="#E53E3E" 
+                                           Foreground="White"
+                                           FontFamily="{StaticResource EzraBoldFont}"
+                                           FontSize="22"
+                                           Height="50"
+                                           HorizontalAlignment="Stretch"/>
+                                    <StackPanel Background="Black" Margin="0,2,0,0">
+                                        <Button Content="B&amp;W" 
+                                               Background="Black" 
+                                               Foreground="White"
+                                               FontFamily="{StaticResource EzraBoldFont}"
+                                               FontSize="20"
+                                               Height="40"
+                                               HorizontalAlignment="Stretch"
+                                               BorderThickness="0"
+                                               Click="OnServiceClick"
+                                               Tag="Photo Print: B&amp;W|20"/>
+                                        <Button Content="COLOR" 
+                                               Background="Black" 
+                                               Foreground="White"
+                                               FontFamily="{StaticResource EzraBoldFont}"
+                                               FontSize="20"
+                                               Height="40"
+                                               HorizontalAlignment="Stretch"
+                                               BorderThickness="0"
+                                               Click="OnServiceClick"
+                                               Tag="Photo Print: Color|30"/>
+                                    </StackPanel>
+                                </StackPanel>
+                                
+                                <!-- CUSTOM Section -->
+                                <Button Content="CUSTOM" 
+                                       Background="#E53E3E" 
+                                       Foreground="White"
+                                       FontFamily="{StaticResource EzraBoldFont}"
+                                       FontSize="22"
+                                       Height="50"
+                                       HorizontalAlignment="Stretch"
+                                       Click="OnCustomServiceClick"/>
+                                
+                                <!-- Windows 11 Pro -->
+                                <Button Content="Windows 11 Pro" 
+                                       Background="#E53E3E" 
+                                       Foreground="White"
+                                       FontFamily="{StaticResource EzraBoldFont}"
+                                       FontSize="22"
+                                       Height="50"
+                                       HorizontalAlignment="Stretch"
+                                       Click="OnServiceClick"
+                                       Tag="Windows 11 Pro|30"/>
+                                
+                                <!-- Driver Updates -->
+                                <Button Content="Driver Updates" 
+                                       Background="#E53E3E" 
+                                       Foreground="White"
+                                       FontFamily="{StaticResource EzraBoldFont}"
+                                       FontSize="22"
+                                       Height="50"
+                                       HorizontalAlignment="Stretch"
+                                       Click="OnServiceClick"
+                                       Tag="Driver Updates|20"/>
+                                
+                                <!-- Data Recovery -->
+                                <Button Content="Data Recovery" 
+                                       Background="#E53E3E" 
+                                       Foreground="White"
+                                       FontFamily="{StaticResource EzraBoldFont}"
+                                       FontSize="22"
+                                       Height="50"
+                                       HorizontalAlignment="Stretch"
+                                       Click="OnServiceClick"
+                                       Tag="Data Recovery|50"/>
                             </StackPanel>
                             
                             <!-- OS X Section -->
@@ -601,17 +646,7 @@
                                 </StackPanel>
                             </StackPanel>
                             
-                            <!-- CUSTOM Section -->
-                            <StackPanel Grid.Column="0" Grid.Row="3" Margin="5">
-                                <Button Content="CUSTOM" 
-                                       Background="#E53E3E" 
-                                       Foreground="White"
-                                       FontFamily="{StaticResource EzraBoldFont}"
-                                       FontSize="22"
-                                       Height="50"
-                                       HorizontalAlignment="Stretch"
-                                       Click="OnCustomServiceClick"/>
-                            </StackPanel>
+
                         </Grid>
                     </StackPanel>
                 </ScrollViewer>
