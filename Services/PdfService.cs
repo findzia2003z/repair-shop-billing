@@ -171,8 +171,8 @@ namespace RepairShopBilling.Services
             const double contentWidth = 552; // Wider table (pageWidth - 2*margin)
             const double startX = margin;
             const double rowHeight = 32;
-            const int maxRowsPerPage = 20; // Maximum rows that fit on first page
-            const int maxRowsPerContinuationPage = 28; // More rows on continuation pages
+            const int maxRowsPerPage = 12; // Maximum rows that fit on first page (reduced to account for header, customer info, total, logo, footer)
+            const int maxRowsPerContinuationPage = 22; // More rows on continuation pages
             
             // Split items into pages
             var itemsPerPage = new List<List<BillItem>>();
@@ -674,9 +674,9 @@ namespace RepairShopBilling.Services
             gfx.DrawPath(XPens.Transparent, new XSolidBrush(redAccent), path);
             
             var darkGray = XColor.FromArgb(51, 51, 51);
-            gfx.DrawLine(new XPen(darkGray, 2), startX + contentWidth * 0.6, currentY,
+            gfx.DrawLine(new XPen(darkGray, 3), startX + contentWidth * 0.6, currentY,
                 startX + contentWidth * 0.6, currentY + 35);
-            gfx.DrawLine(new XPen(darkGray, 2), startX + contentWidth * 0.8, currentY,
+            gfx.DrawLine(new XPen(darkGray, 3), startX + contentWidth * 0.8, currentY,
                 startX + contentWidth * 0.8, currentY + 35);
             
             gfx.DrawString("Services", headerFont, XBrushes.Black,
@@ -720,7 +720,7 @@ namespace RepairShopBilling.Services
                 // Draw bottom border with same style as column separators (not on last row)
                 if (!isLastRow)
                 {
-                    gfx.DrawLine(new XPen(XColor.FromArgb(51, 51, 51), 2),
+                    gfx.DrawLine(new XPen(XColor.FromArgb(51, 51, 51), 5),
                         startX, currentY + rowHeight,
                         startX + contentWidth, currentY + rowHeight);
                 }
@@ -746,7 +746,7 @@ namespace RepairShopBilling.Services
             // Draw vertical separators AFTER all rows - full height
             if (totalRows > 0)
             {
-                var separatorPen = new XPen(XColor.FromArgb(51, 51, 51), 2);
+                var separatorPen = new XPen(XColor.FromArgb(51, 51, 51), 3);
                 
                 gfx.DrawLine(separatorPen,
                     startX + contentWidth * 0.6, startYForSeparators,

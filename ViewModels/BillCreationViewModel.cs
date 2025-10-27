@@ -246,7 +246,7 @@ namespace RepairShopBilling.ViewModels
             var priceLabel = new TextBlock 
             { 
                 Text = "Price:", 
-                Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.Black),
+                Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.White),
                 FontSize = 14 
             };
             var priceTextBox = new TextBox 
@@ -259,7 +259,7 @@ namespace RepairShopBilling.ViewModels
             var quantityLabel = new TextBlock 
             { 
                 Text = "Quantity:", 
-                Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.Black),
+                Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.White),
                 FontSize = 14 
             };
             var quantityTextBox = new TextBox 
@@ -360,7 +360,7 @@ namespace RepairShopBilling.ViewModels
             var materialLabel = new TextBlock 
             { 
                 Text = labelText, 
-                Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.Black),
+                Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.White),
                 FontSize = 14 
             };
             var materialTextBox = new TextBox 
@@ -373,7 +373,7 @@ namespace RepairShopBilling.ViewModels
             var priceLabel = new TextBlock 
             { 
                 Text = "Price:", 
-                Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.Black),
+                Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.White),
                 FontSize = 14 
             };
             var priceTextBox = new TextBox 
@@ -386,7 +386,7 @@ namespace RepairShopBilling.ViewModels
             var quantityLabel = new TextBlock 
             { 
                 Text = "Quantity:", 
-                Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.Black),
+                Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.White),
                 FontSize = 14 
             };
             var quantityTextBox = new TextBox 
@@ -604,7 +604,7 @@ namespace RepairShopBilling.ViewModels
             var nameLabel = new TextBlock 
             { 
                 Text = "Service Name:", 
-                Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.Black),
+                Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.White),
                 FontSize = 14 
             };
             var nameTextBox = new TextBox 
@@ -617,7 +617,7 @@ namespace RepairShopBilling.ViewModels
             var priceLabel = new TextBlock 
             { 
                 Text = "Price:", 
-                Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.Black),
+                Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.White),
                 FontSize = 14 
             };
             var priceTextBox = new TextBox 
@@ -630,7 +630,7 @@ namespace RepairShopBilling.ViewModels
             var quantityLabel = new TextBlock 
             { 
                 Text = "Quantity:", 
-                Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.Black),
+                Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.White),
                 FontSize = 14 
             };
             var quantityTextBox = new TextBox 
@@ -750,7 +750,7 @@ namespace RepairShopBilling.ViewModels
             var nameLabel = new TextBlock 
             { 
                 Text = "Service Name:", 
-                Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.Black),
+                Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.White),
                 FontSize = 14 
             };
             var nameTextBox = new TextBox 
@@ -763,7 +763,7 @@ namespace RepairShopBilling.ViewModels
             var priceLabel = new TextBlock 
             { 
                 Text = "Unit Price:", 
-                Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.Black),
+                Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.White),
                 FontSize = 14 
             };
             var priceTextBox = new TextBox 
@@ -776,7 +776,7 @@ namespace RepairShopBilling.ViewModels
             var quantityLabel = new TextBlock 
             { 
                 Text = "Quantity:", 
-                Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.Black),
+                Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.White),
                 FontSize = 14 
             };
             var quantityTextBox = new TextBox 
