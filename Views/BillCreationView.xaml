@@ -128,28 +128,38 @@
                                            Tag="Hours - Business|75"/>
                                 </StackPanel>
                                 
-                                <!-- VHS Convert Section -->
-                                <StackPanel>
-                                    <Button Content="VHS Convert" 
-                                           Background="#E53E3E" 
-                                           Foreground="White"
-                                           FontFamily="{StaticResource EzraBoldFont}"
-                                           FontSize="22"
-                                           Height="50"
-                                           HorizontalAlignment="Stretch"
-                                           Click="OnServiceClick"
-                                           Tag="VHS Convert - Small|10"/>
-                                    <Button Content="VHS Convert" 
-                                           Background="#3182CE" 
-                                           Foreground="White"
-                                           FontFamily="{StaticResource EzraBoldFont}"
-                                           FontSize="22"
-                                           Height="50"
-                                           HorizontalAlignment="Stretch"
-                                           Margin="0,2,0,0"
-                                           Click="OnServiceClick"
-                                           Tag="VHS Convert - Bulk|5"/>
-                                </StackPanel>
+                                <!-- Windows 11 Pro -->
+                                <Button Content="Windows 11 Pro" 
+                                       Background="#E53E3E" 
+                                       Foreground="White"
+                                       FontFamily="{StaticResource EzraBoldFont}"
+                                       FontSize="22"
+                                       Height="50"
+                                       HorizontalAlignment="Stretch"
+                                       Click="OnServiceClick"
+                                       Tag="Windows 11 Pro|30"/>
+                                
+                                <!-- Driver Updates -->
+                                <Button Content="Driver Updates" 
+                                       Background="#E53E3E" 
+                                       Foreground="White"
+                                       FontFamily="{StaticResource EzraBoldFont}"
+                                       FontSize="22"
+                                       Height="50"
+                                       HorizontalAlignment="Stretch"
+                                       Click="OnServiceClick"
+                                       Tag="Driver Updates|20"/>
+                                
+                                <!-- Data Recovery -->
+                                <Button Content="Data Recovery" 
+                                       Background="#E53E3E" 
+                                       Foreground="White"
+                                       FontFamily="{StaticResource EzraBoldFont}"
+                                       FontSize="22"
+                                       Height="50"
+                                       HorizontalAlignment="Stretch"
+                                       Click="OnServiceClick"
+                                       Tag="Data Recovery|50"/>
                                 
                                 <!-- Photo Print Section -->
                                 <StackPanel>
@@ -183,49 +193,6 @@
                                                Tag="Photo Print: Color|30"/>
                                     </StackPanel>
                                 </StackPanel>
-                                
-                                <!-- CUSTOM Section -->
-                                <Button Content="CUSTOM" 
-                                       Background="#E53E3E" 
-                                       Foreground="White"
-                                       FontFamily="{StaticResource EzraBoldFont}"
-                                       FontSize="22"
-                                       Height="50"
-                                       HorizontalAlignment="Stretch"
-                                       Click="OnCustomServiceClick"/>
-                                
-                                <!-- Windows 11 Pro -->
-                                <Button Content="Windows 11 Pro" 
-                                       Background="#E53E3E" 
-                                       Foreground="White"
-                                       FontFamily="{StaticResource EzraBoldFont}"
-                                       FontSize="22"
-                                       Height="50"
-                                       HorizontalAlignment="Stretch"
-                                       Click="OnServiceClick"
-                                       Tag="Windows 11 Pro|30"/>
-                                
-                                <!-- Driver Updates -->
-                                <Button Content="Driver Updates" 
-                                       Background="#E53E3E" 
-                                       Foreground="White"
-                                       FontFamily="{StaticResource EzraBoldFont}"
-                                       FontSize="22"
-                                       Height="50"
-                                       HorizontalAlignment="Stretch"
-                                       Click="OnServiceClick"
-                                       Tag="Driver Updates|20"/>
-                                
-                                <!-- Data Recovery -->
-                                <Button Content="Data Recovery" 
-                                       Background="#E53E3E" 
-                                       Foreground="White"
-                                       FontFamily="{StaticResource EzraBoldFont}"
-                                       FontSize="22"
-                                       Height="50"
-                                       HorizontalAlignment="Stretch"
-                                       Click="OnServiceClick"
-                                       Tag="Data Recovery|50"/>
                             </StackPanel>
                             
                             <!-- OS X Section -->
@@ -303,10 +270,8 @@
                                            Click="OnServiceClick"
                                            Tag="Tahoe 26 (25)|30|OS X"/>
                                 </StackPanel>
-                            </StackPanel>
-                            
-                            <!-- Laser Section -->
-                            <StackPanel Grid.Column="1" Grid.Row="2" Margin="5">
+                                
+                                <!-- Laser Section -->
                                 <Button x:Name="LaserHeaderButton"
                                        Content="LASER" 
                                        Background="#E53E3E" 
@@ -314,7 +279,8 @@
                                        FontFamily="{StaticResource EzraBoldFont}"
                                        FontSize="22"
                                        Height="50"
-                                       HorizontalAlignment="Stretch"/>
+                                       HorizontalAlignment="Stretch"
+                                       Margin="0,5,0,0"/>
                                 <StackPanel x:Name="LaserSubPanel" 
                                            Background="Black" 
                                            Margin="0,2,0,0"
@@ -370,6 +336,17 @@
                                            Click="OnEditablePriceServiceClick"
                                            Tag="Add-Ons|LASER"/>
                                 </StackPanel>
+                                
+                                <!-- CUSTOM Section -->
+                                <Button Content="CUSTOM" 
+                                       Background="#E53E3E" 
+                                       Foreground="White"
+                                       FontFamily="{StaticResource EzraBoldFont}"
+                                       FontSize="22"
+                                       Height="50"
+                                       HorizontalAlignment="Stretch"
+                                       Margin="0,5,0,0"
+                                       Click="OnCustomServiceClick"/>
                             </StackPanel>
                             
                             <!-- Equipment Section -->
@@ -634,6 +611,29 @@
                                            BorderThickness="0"
                                            Click="OnEditablePriceServiceClick"
                                            Tag="Sec. Camera|EQUIPMENT"/>
+                                </StackPanel>
+                                
+                                <!-- VHS Convert Section -->
+                                <StackPanel Margin="0,5,0,0">
+                                    <Button Content="VHS Convert" 
+                                           Background="#E53E3E" 
+                                           Foreground="White"
+                                           FontFamily="{StaticResource EzraBoldFont}"
+                                           FontSize="22"
+                                           Height="50"
+                                           HorizontalAlignment="Stretch"
+                                           Click="OnServiceClick"
+                                           Tag="VHS Convert - Small|10"/>
+                                    <Button Content="VHS Convert" 
+                                           Background="#3182CE" 
+                                           Foreground="White"
+                                           FontFamily="{StaticResource EzraBoldFont}"
+                                           FontSize="22"
+                                           Height="50"
+                                           HorizontalAlignment="Stretch"
+                                           Margin="0,2,0,0"
+                                           Click="OnServiceClick"
+                                           Tag="VHS Convert - Bulk|5"/>
                                 </StackPanel>
                             </StackPanel>
                             
