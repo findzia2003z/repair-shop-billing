@@ -22,7 +22,10 @@
         <PublishProfile>win-$(Platform).pubxml</PublishProfile>
         <RuntimeIdentifiers Condition="$([MSBuild]::GetTargetFrameworkVersion('$(TargetFramework)')) &gt;= 8">win-x86;win-x64;win-arm64</RuntimeIdentifiers>
         <RuntimeIdentifiers Condition="$([MSBuild]::GetTargetFrameworkVersion('$(TargetFramework)')) &lt; 8">win10-x86;win10-x64;win10-arm64</RuntimeIdentifiers>
+        <SelfContained>true</SelfContained>
         <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
+        <WindowsPackageType>MSIX</WindowsPackageType>
+        <WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
         <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
         <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
         <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
@@ -31,7 +34,9 @@
         <AppxBundle>Never</AppxBundle>
         <AppInstallerUri>C:\Users\PMLS\Desktop\Bill Viewer app\installer</AppInstallerUri>
         <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
-        <PackageCertificateKeyFile>RepairShopBilling_TemporaryKey.pfx</PackageCertificateKeyFile>
+        <PackageCertificateThumbprint>906CB1474B1275BBD0844967F343B1FF7FCF1E47</PackageCertificateThumbprint>
+        <AppxPackageDir>C:\Users\PMLS\Desktop\Solid State Dave\</AppxPackageDir>
+        <ApplicationIcon>MyIcon.ico</ApplicationIcon>
     </PropertyGroup>
 
     <ItemGroup>
@@ -40,15 +45,18 @@
         <Content Include="Assets\Square150x150Logo.scale-200.png" />
         <Content Include="Assets\Square44x44Logo.scale-200.png" />
         <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
-        <Content Include="Assets\StoreLogo.png" />
         <Content Include="Assets\Wide310x150Logo.scale-200.png" />
+        <Content Include="MyIcon.ico" />
     </ItemGroup>
 
     <ItemGroup>
         <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
         <PackageReference Include="Microsoft.Data.Sqlite" Version="7.0.20" />
         <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.4.231008000" />
-        <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.2210.55" />
+        <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.2210.55">
+            <ExcludeAssets>all</ExcludeAssets>
+            <PrivateAssets>all</PrivateAssets>
+        </PackageReference>
         <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.2428" />
         <PackageReference Include="PDFsharp" Version="6.1.1" />
 
@@ -74,4 +82,11 @@
     <PropertyGroup Condition="'$(DisableHasPackageAndPublishMenuAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
         <HasPackageAndPublishMenu>true</HasPackageAndPublishMenu>
     </PropertyGroup>
+
+    <!-- Exclude WebView2 files from MSIX package -->
+    <Target Name="RemoveWebView2Files" BeforeTargets="_ConvertItems">
+        <ItemGroup>
+            <ResolvedFileToPublish Remove="@(ResolvedFileToPublish)" Condition="$([System.String]::Copy('%(Filename)').Contains('WebView2'))" />
+        </ItemGroup>
+    </Target>
 </Project>

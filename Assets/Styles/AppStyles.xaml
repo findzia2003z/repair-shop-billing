@@ -87,10 +87,10 @@
 
     <!-- Input Field Styles -->
     <Style x:Key="RoundedTextBox" TargetType="TextBox">
-        <Setter Property="Background" Value="{StaticResource InputBackgroundBrush}" />
-        <Setter Property="Foreground" Value="{StaticResource InputTextBrush}" />
-        <Setter Property="FontFamily" Value="Segoe UI" />
-        <Setter Property="FontSize" Value="14" />
+        <Setter Property="Background" Value="#333333" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="FontFamily" Value="{StaticResource EzraExtraBoldFont}" />
+        <Setter Property="FontSize" Value="20" />
         <Setter Property="Padding" Value="12,8" />
         <Setter Property="MinHeight" Value="36" />
         <Setter Property="CornerRadius" Value="8" />
@@ -98,13 +98,52 @@
         <Setter Property="BorderBrush" Value="{StaticResource LightGreyTextBrush}" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Grid>
+                        <Border x:Name="BorderElement"
+                                Background="#333333"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="{TemplateBinding CornerRadius}">
+                            <ScrollViewer x:Name="ContentElement"
+                                          Padding="{TemplateBinding Padding}"
+                                          HorizontalScrollBarVisibility="Hidden"
+                                          VerticalScrollBarVisibility="Hidden"
+                                          IsTabStop="False" />
+                        </Border>
+                        <TextBlock x:Name="PlaceholderTextContentPresenter"
+                                   Text="{TemplateBinding PlaceholderText}"
+                                   Foreground="#808080"
+                                   Margin="{TemplateBinding Padding}"
+                                   IsHitTestVisible="False"
+                                   Visibility="Collapsed" />
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal" />
+                                <VisualState x:Name="PointerOver" />
+                                <VisualState x:Name="Focused" />
+                                <VisualState x:Name="Disabled">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="BorderElement" Storyboard.TargetProperty="Background">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="#2a2a2a" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <Style x:Key="RoundedDatePicker" TargetType="DatePicker">
-        <Setter Property="Background" Value="{StaticResource InputBackgroundBrush}" />
-        <Setter Property="Foreground" Value="{StaticResource InputTextBrush}" />
-        <Setter Property="FontFamily" Value="Segoe UI" />
-        <Setter Property="FontSize" Value="14" />
+        <Setter Property="Background" Value="#333333" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="FontFamily" Value="{StaticResource EzraExtraBoldFont}" />
+        <Setter Property="FontSize" Value="20" />
         <Setter Property="Padding" Value="12,8" />
         <Setter Property="MinHeight" Value="36" />
         <Setter Property="CornerRadius" Value="8" />

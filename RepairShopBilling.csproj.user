@@ -7,8 +7,16 @@
     <ActiveDebugProfile>RepairShopBilling (Package)</ActiveDebugProfile>
     <UapAppxPackageBuildMode>SideloadOnly</UapAppxPackageBuildMode>
     <AppxShowAllApps>False</AppxShowAllApps>
-    <AppxBuildConfigurationSelection>x86|x64</AppxBuildConfigurationSelection>
+    <AppxBuildConfigurationSelection>x64</AppxBuildConfigurationSelection>
     <PackageOptionalProjectsInIdeBuilds>False</PackageOptionalProjectsInIdeBuilds>
-    <_LastSelectedProfileId>C:\Users\PMLS\Desktop\Bill Viewer app\Properties\PublishProfiles\FolderProfile1.pubxml</_LastSelectedProfileId>
+    <_LastSelectedProfileId>D:\Bill Viewer App\repair-shop-billing\Properties\PublishProfiles\FolderProfile1.pubxml</_LastSelectedProfileId>
+    <Source>D:\Bill Viewer App\repair-shop-billing\Assets\MyIcon.png</Source>
+    <SmallTileSource>D:\Bill Viewer App\repair-shop-billing\Assets\MyIcon.png</SmallTileSource>
+    <MediumTileSource>D:\Bill Viewer App\repair-shop-billing\Assets\MyIcon.png</MediumTileSource>
+    <WideTileSource>D:\Bill Viewer App\repair-shop-billing\Assets\MyIcon.png</WideTileSource>
+    <LargeTileSource>D:\Bill Viewer App\repair-shop-billing\Assets\MyIcon.png</LargeTileSource>
+    <AppIconSource>D:\Bill Viewer App\repair-shop-billing\Assets\MyIcon.png</AppIconSource>
+    <SplashScreenSource>D:\Bill Viewer App\repair-shop-billing\Assets\MyIcon.png</SplashScreenSource>
+    <PackageLogoSource>D:\Bill Viewer App\repair-shop-billing\Assets\MyIcon.png</PackageLogoSource>
   </PropertyGroup>
 </Project>

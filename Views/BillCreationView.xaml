@@ -37,12 +37,6 @@
             <!-- Customer Information Section -->
             <Border Grid.Row="1" Style="{StaticResource BillCard}" Margin="0,0,0,20">
                 <StackPanel Spacing="16">
-                    <TextBlock 
-                        Text="Customer Information" 
-                        Foreground="{StaticResource WhiteTextBrush}"
-                        FontSize="28"
-                        FontFamily="{StaticResource EzraBoldFont}" />
-                    
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
@@ -70,12 +64,12 @@
                                 FontSize="22"
                                 FontFamily="{StaticResource EzraBoldFont}" />
                             <Border 
-                                Background="{StaticResource InputBackgroundBrush}"
+                                Background="#333333"
                                 BorderBrush="{StaticResource LightGreyTextBrush}"
                                 BorderThickness="1"
                                 CornerRadius="8"
-                                Padding="0,2,0,2"
-                                MinHeight="36"
+                                Padding="12,4,12,4"
+                                Height="38"
                                 Margin="0,0,0,0">
                                 <DatePicker 
                                     x:Name="BillDatePicker"
@@ -83,7 +77,10 @@
                                     HorizontalAlignment="Stretch"
                                     VerticalAlignment="Center"
                                     Background="Transparent"
-                                    BorderThickness="0" />
+                                    BorderThickness="0"
+                                    Foreground="White"
+                                    FontFamily="{StaticResource EzraExtraBoldFont}"
+                                    FontSize="20" />
                             </Border>
                         </StackPanel>
                     </Grid>
@@ -94,12 +91,6 @@
             <Border Grid.Row="2" Style="{StaticResource BillCard}" Margin="0,0,0,20">
                 <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
                     <StackPanel Spacing="16">
-                        <TextBlock 
-                            Text="Service Categories" 
-                            Foreground="{StaticResource WhiteTextBrush}"
-                            FontSize="28"
-                            FontFamily="{StaticResource EzraBoldFont}" />
-                        
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
